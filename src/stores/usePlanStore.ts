@@ -26,7 +26,6 @@ export const DEFAULT_PLAN: PlanData = {
     'Unlimited employees',
     'Full payroll processing with overtime & night differential',
     'SSS, PhilHealth, Pag-IBIG computation',
-    'BIR withholding tax & form 2316 generation',
     'Employee 201 files & document storage',
     'Attendance & time tracking with tardiness reports',
     'Leave management with approval workflow',

@@ -339,7 +339,6 @@ export function LandingPage() {
                   { title: 'SSS Contributions', desc: 'Auto-computed based on latest SSS contribution table' },
                   { title: 'PhilHealth Premium', desc: 'Accurate computation following PhilHealth guidelines' },
                   { title: 'Pag-IBIG Fund', desc: 'Automatic HDMF contribution calculation' },
-                  { title: 'BIR Withholding Tax', desc: 'Updated tax tables with automated 2316 generation' },
                 ].map((item, index) => (
                   <div key={index} className="flex items-start gap-4 p-4 bg-white rounded-xl border border-neutral-100">
                     <div className="w-8 h-8 rounded-lg bg-emerald-100 flex items-center justify-center shrink-0">
@@ -506,7 +505,7 @@ export function LandingPage() {
             {[
               { Icon: Users, color: 'text-blue-600 bg-blue-50 dark:bg-blue-900/30 dark:text-blue-400', title: 'Employee Mgmt', items: ['201 Files & Profiles', 'Org Charts', 'Onboarding'] },
               { Icon: Calculator, color: 'text-emerald-600 bg-emerald-50 dark:bg-emerald-900/30 dark:text-emerald-400', title: 'Payroll', items: ['Overtime & Holiday', '13th Month Pay', 'Loans & Deductions'] },
-              { Icon: Shield, color: 'text-amber-600 bg-amber-50 dark:bg-amber-900/30 dark:text-amber-400', title: 'Government', items: ['SSS / PhilHealth', 'Pag-IBIG / BIR', 'Form 2316'] },
+              { Icon: Shield, color: 'text-amber-600 bg-amber-50 dark:bg-amber-900/30 dark:text-amber-400', title: 'Government', items: ['SSS / PhilHealth', 'Pag-IBIG / BIR'] },
               { Icon: Clock, color: 'text-purple-600 bg-purple-50 dark:bg-purple-900/30 dark:text-purple-400', title: 'Attendance & Leave', items: ['Daily Time Logs', 'Leave Approvals', 'Tardiness Reports'] },
             ].map(({ Icon, color, title, items }, i) => (
               <div key={i} className="p-5 bg-white dark:bg-slate-900 rounded-2xl border border-neutral-100 dark:border-slate-800 hover:border-primary-200 dark:hover:border-primary-700 hover:shadow-md transition-all text-center group">

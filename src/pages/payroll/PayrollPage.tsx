@@ -646,7 +646,6 @@ export function PayrollPage() {
               { name: 'SSS R-3', desc: 'Monthly contribution report', color: 'text-blue-600 bg-blue-100', icon: Shield },
               { name: 'PhilHealth RF-1', desc: 'Member remittance report', color: 'text-emerald-600 bg-emerald-100', icon: Heart },
               { name: 'Pag-IBIG', desc: 'Membership savings report', color: 'text-amber-600 bg-amber-100', icon: Home },
-              { name: 'BIR 2316', desc: 'Certificate of compensation payment', color: 'text-purple-600 bg-purple-100', icon: FileText },
               { name: 'Payroll Summary', desc: 'Detailed payroll breakdown', color: 'text-indigo-600 bg-indigo-100', icon: BarChart3 },
               { name: '13th Month Pay', desc: 'Annual bonus calculation', color: 'text-pink-600 bg-pink-100', icon: Award },
             ].map((report) => {
