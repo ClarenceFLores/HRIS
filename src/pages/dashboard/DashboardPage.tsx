@@ -144,8 +144,8 @@ export function DashboardPage() {
     .filter(l => l.status === 'pending')
     .map(l => ({
       id: l.id,
-      employee: l.employeeName,
-      avatar: l.employeeName.split(' ').map((n: string) => n[0]).join('').toUpperCase().slice(0, 2),
+      employee: l.employee,
+      avatar: l.employee.split(' ').map((n: string) => n[0]).join('').toUpperCase().slice(0, 2),
       type: l.type,
       days: l.days,
       urgency: l.type === 'Emergency' || l.type === 'Bereavement' ? 'urgent' : 'normal',

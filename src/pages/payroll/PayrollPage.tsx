@@ -79,7 +79,7 @@ export function PayrollPage() {
     allowances: r.allowances,
     sss: r.sss,
     philHealth: r.philHealth,
-    pagibig: r.pagIbig,
+    pagibig: r.pagibig,
     tax: r.tax,
   }));
 

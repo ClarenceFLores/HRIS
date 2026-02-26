@@ -185,8 +185,8 @@ export function LeaveListPage() {
   // Map store leaves to display shape
   const allLeaves = leaveRequests.map(l => ({
     ...l,
-    employee: l.employeeName,
-    avatar: l.employeeName.split(' ').map((n: string) => n[0]).join('').toUpperCase().slice(0, 2),
+    employee: l.employee,
+    avatar: l.employee.split(' ').map((n: string) => n[0]).join('').toUpperCase().slice(0, 2),
   }));
 
   const filteredLeaves = allLeaves.filter(leave => {

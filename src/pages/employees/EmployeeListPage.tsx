@@ -10,7 +10,7 @@ import {
   Eye, Edit2, Trash2, Mail, Phone, UserCheck, 
   ChevronLeft, ChevronRight, Users, X, RefreshCw
 } from 'lucide-react';
-import { useHRStore } from '@/stores/useHRStore';
+import { useHRStore, HREmployee } from '@/stores/useHRStore';
 import { useAppStore } from '@/stores/useAppStore';
 
 export function EmployeeListPage() {
@@ -51,7 +51,7 @@ export function EmployeeListPage() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const filteredEmployees = mockEmployees.filter(emp => {
+  const filteredEmployees = employees.filter((emp: HREmployee) => {
     const matchesSearch = emp.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          emp.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          emp.position.toLowerCase().includes(searchTerm.toLowerCase());
@@ -65,7 +65,7 @@ export function EmployeeListPage() {
   const startIndex = (currentPage - 1) * itemsPerPage;
   const paginatedEmployees = filteredEmployees.slice(startIndex, startIndex + itemsPerPage);
 
-  const departments = [...new Set(mockEmployees.map(e => e.department))];
+  const departments = [...new Set(employees.map((e: HREmployee) => e.department))];
 
   const clearFilters = () => {
     setSearchTerm('');
@@ -144,7 +144,7 @@ export function EmployeeListPage() {
               <Users className="w-5 h-5 text-blue-600" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-neutral-900">{mockEmployees.length}</p>
+              <p className="text-2xl font-bold text-neutral-900">{employees.length}</p>
               <p className="text-xs text-neutral-500">Total Employees</p>
             </div>
           </div>
@@ -155,7 +155,7 @@ export function EmployeeListPage() {
               <UserCheck className="w-5 h-5 text-emerald-600" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-neutral-900">{mockEmployees.filter(e => e.status === 'active').length}</p>
+              <p className="text-2xl font-bold text-neutral-900">{employees.filter((e: HREmployee) => e.status === 'active').length}</p>
               <p className="text-xs text-neutral-500">Active</p>
             </div>
           </div>
@@ -232,7 +232,7 @@ export function EmployeeListPage() {
                 className="input w-auto min-w-[150px] bg-white"
               >
                 <option value="">All Departments</option>
-                {departments.map(dept => (
+                {departments.map((dept: string) => (
                   <option key={dept} value={dept}>{dept}</option>
                 ))}
               </select>
@@ -303,7 +303,7 @@ export function EmployeeListPage() {
               </tr>
             </thead>
             <tbody>
-              {paginatedEmployees.map((employee) => (
+              {paginatedEmployees.map((employee: HREmployee) => (
                 <tr key={employee.id} className="group hover:bg-primary-50/30 transition-colors">
                   <td>
                     <div className="flex items-center gap-3">
