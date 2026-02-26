@@ -1,0 +1,46 @@
+# Dependencies
+node_modules/
+/vendor/
+/bin/
+
+# Build outputs
+dist/
+build/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.log*
+app/logs/*
+
+# IDE
+.idea
+.project
+.buildpath
+.settings/
+.vscode/
+*.swp
+*~*
+
+# Cache
+app/cache/*
+.cache
+
+# Testing
+phpunit.xml
+coverage/
+
+# Misc
+web/bundles/
+app/bootstrap.php.cache
+/composer.phar
+app/config/parameters.yml
+autoload.php
+composer.lock
+*.local
+.DS_Store
+Thumbs.db

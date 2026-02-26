@@ -1,0 +1,38 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "presence": {
+      "$uid": {
+        ".read": "auth != null && auth.uid === $uid",
+        ".write": "auth != null && auth.uid === $uid"
+      }
+    },
+    "companies": {
+      "$companyId": {
+        ".read": "auth != null",
+        ".write": "auth != null",
+        "attendance_live": {
+          "$employeeId": {
+            ".read": "auth != null",
+            ".write": "auth != null && auth.uid === $employeeId"
+          }
+        },
+        "notifications": {
+          "$notificationId": {
+            ".read": "auth != null",
+            ".write": "auth != null"
+          }
+        },
+        "payroll_status": {
+          ".read": "auth != null",
+          ".write": "auth != null"
+        }
+      }
+    },
+    "system": {
+      ".read": "auth != null && auth.token.email === 'clarenceflores082001@gmail.com'",
+      ".write": "auth != null && auth.token.email === 'clarenceflores082001@gmail.com'"
+    }
+  }
+}

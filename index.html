@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="SAHOD - Human Resource Information System by DevSpot" />
+    <meta name="author" content="© 2026 DevSpot" />
+    <meta name="copyright" content="© 2026 DevSpot. All rights reserved." />
+    <title>SAHOD - Human Resource Information System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  </head>
+  <body class="antialiased">
+    <!-- Apply dark mode before React loads to prevent flash -->
+    <script>
+      (function() {
+        try {
+          var stored = localStorage.getItem('sahod-app');
+          if (stored) {
+            var parsed = JSON.parse(stored);
+            if (parsed && parsed.state && parsed.state.darkMode) {
+              document.documentElement.classList.add('dark');
+            }
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

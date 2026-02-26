@@ -1,0 +1,23 @@
+# Vercel ignore file
+node_modules
+.git
+.env.local
+.env.*.local
+*.log
+coverage
+.nyc_output
+.cache
+dist-ssr
+*.local
+app/
+web/
+bin/
+hris-react/
+scripts/
+composer.json
+.travis.yml
+.htaccess
+firebase.json
+firestore.indexes.json
+firestore.rules
+storage.rules
