@@ -207,7 +207,7 @@ export function LandingPage() {
               </p>
               <p className="text-lg text-neutral-600 mb-8 max-w-lg">
                 The all-in-one HRIS platform designed for Philippine businesses. Automate payroll, 
-                manage employees, and stay compliant with government requirementsâ€”effortlessly.
+                manage employees, and stay compliant with government requirements—effortlessly.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link 
