@@ -211,10 +211,10 @@ export function DashboardPage() {
             <Sparkles className="w-5 h-5 text-amber-500" />
             <span className="text-sm font-medium text-amber-600">{greeting}</span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-heading font-bold text-neutral-900">
+          <h1 className="text-2xl sm:text-3xl font-heading font-bold text-neutral-900 dark:text-white">
             Welcome back, {user?.displayName?.split(' ')[0] || 'User'}!
           </h1>
-          <p className="text-neutral-500 mt-1">
+          <p className="text-neutral-500 dark:text-slate-400 mt-1">
             Here's what's happening with your team today.
           </p>
         </div>
@@ -251,7 +251,7 @@ export function DashboardPage() {
               </div>
             </div>
             <div>
-              <p className="text-3xl font-bold text-neutral-900 group-hover:text-primary-600 transition-colors">{stat.value}</p>
+              <p className="text-3xl font-bold text-neutral-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">{stat.value}</p>
               <p className="text-sm font-medium text-neutral-700 mt-1">{stat.name}</p>
               <p className="text-xs text-neutral-400 mt-0.5">{stat.description}</p>
             </div>
@@ -270,7 +270,7 @@ export function DashboardPage() {
                   <Building2 className="w-5 h-5 text-primary-600" />
                 </div>
                 <div>
-                  <h2 className="text-lg font-semibold text-neutral-900">Department Overview</h2>
+                  <h2 className="text-lg font-semibold text-neutral-900 dark:text-white">Department Overview</h2>
                   <p className="text-sm text-neutral-500">Employee distribution by department</p>
                 </div>
               </div>
@@ -292,7 +292,7 @@ export function DashboardPage() {
                   <div className={`w-12 h-12 ${dept.color} rounded-xl flex items-center justify-center mx-auto mb-3`}>
                     <span className="text-white font-bold text-lg">{dept.count}</span>
                   </div>
-                  <h3 className="font-semibold text-neutral-900 text-sm">{dept.name}</h3>
+                  <h3 className="font-semibold text-neutral-900 dark:text-white text-sm">{dept.name}</h3>
                   <p className="text-xs text-neutral-500 mt-1">
                     {((dept.count / (liveStats.totalEmployees || 1)) * 100).toFixed(1)}%
                   </p>
@@ -311,7 +311,7 @@ export function DashboardPage() {
                   <Activity className="w-5 h-5 text-blue-600" />
                 </div>
                 <div>
-                  <h2 className="text-lg font-semibold text-neutral-900">Recent Activities</h2>
+                  <h2 className="text-lg font-semibold text-neutral-900 dark:text-white">Recent Activities</h2>
                   <p className="text-sm text-neutral-500">Latest HR actions</p>
                 </div>
               </div>
@@ -374,7 +374,7 @@ export function DashboardPage() {
                   <Users className="w-5 h-5 text-primary-600" />
                 </div>
                 <div>
-                  <h2 className="text-lg font-semibold text-neutral-900">Recent Employees</h2>
+                  <h2 className="text-lg font-semibold text-neutral-900 dark:text-white">Recent Employees</h2>
                   <p className="text-sm text-neutral-500">Newly hired team members</p>
                 </div>
               </div>
@@ -400,7 +400,7 @@ export function DashboardPage() {
                     <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-emerald-500 rounded-full border-2 border-white"></div>
                   </div>
                   <div>
-                    <p className="font-semibold text-neutral-900 group-hover:text-primary-600 transition-colors">{employee.name}</p>
+                    <p className="font-semibold text-neutral-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">{employee.name}</p>
                     <p className="text-sm text-neutral-500">{employee.position}</p>
                   </div>
                 </div>
@@ -430,7 +430,7 @@ export function DashboardPage() {
                   <AlertTriangle className="w-5 h-5 text-amber-600" />
                 </div>
                 <div>
-                  <h2 className="text-lg font-semibold text-neutral-900">Pending Leaves</h2>
+                  <h2 className="text-lg font-semibold text-neutral-900 dark:text-white">Pending Leaves</h2>
                   <p className="text-sm text-neutral-500">Awaiting approval</p>
                 </div>
               </div>
@@ -451,7 +451,7 @@ export function DashboardPage() {
                       <span className="text-white font-medium text-xs">{leave.avatar}</span>
                     </div>
                     <div>
-                      <p className="font-medium text-neutral-900 text-sm">{leave.employee}</p>
+                      <p className="font-medium text-neutral-900 dark:text-white text-sm">{leave.employee}</p>
                       <p className="text-xs text-neutral-500">{leave.type} Leave</p>
                     </div>
                   </div>
@@ -495,7 +495,7 @@ export function DashboardPage() {
                   <Clock className="w-5 h-5 text-emerald-600" />
                 </div>
                 <div>
-                  <h2 className="text-base font-semibold text-neutral-900">Today's Attendance</h2>
+                  <h2 className="text-base font-semibold text-neutral-900 dark:text-white">Today's Attendance</h2>
                   <p className="text-xs text-neutral-500">Live check-in status</p>
                 </div>
               </div>
@@ -537,7 +537,7 @@ export function DashboardPage() {
                   <CalendarCheck className="w-5 h-5 text-purple-600" />
                 </div>
                 <div>
-                  <h2 className="text-base font-semibold text-neutral-900">Upcoming Payroll</h2>
+                  <h2 className="text-base font-semibold text-neutral-900 dark:text-white">Upcoming Payroll</h2>
                   <p className="text-xs text-neutral-500">Next pay schedule</p>
                 </div>
               </div>
@@ -582,7 +582,7 @@ export function DashboardPage() {
             <Activity className="w-5 h-5 text-primary-600" />
           </div>
           <div>
-            <h2 className="text-lg font-semibold text-neutral-900">Quick Actions</h2>
+            <h2 className="text-lg font-semibold text-neutral-900 dark:text-white">Quick Actions</h2>
             <p className="text-sm text-neutral-500">Frequently used operations</p>
           </div>
         </div>
@@ -596,7 +596,7 @@ export function DashboardPage() {
               <div className={`w-14 h-14 mx-auto mb-3 rounded-xl bg-gradient-to-br ${action.color} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}>
                 <action.icon className="w-7 h-7 text-white" />
               </div>
-              <span className="text-sm font-semibold text-neutral-700 group-hover:text-neutral-900 transition-colors">{action.label}</span>
+              <span className="text-sm font-semibold text-neutral-700 dark:text-slate-300 group-hover:text-neutral-900 dark:group-hover:text-white transition-colors">{action.label}</span>
             </Link>
           ))}
         </div>
@@ -610,7 +610,7 @@ export function DashboardPage() {
               <BarChart3 className="w-5 h-5 text-blue-600" />
             </div>
             <div>
-              <h2 className="text-lg font-semibold text-neutral-900">Monthly Overview</h2>
+              <h2 className="text-lg font-semibold text-neutral-900 dark:text-white">Monthly Overview</h2>
               <p className="text-sm text-neutral-500">Key metrics at a glance</p>
             </div>
           </div>

@@ -447,29 +447,31 @@ export function LandingPage() {
 
                 {/* Price */}
                 <div className="mb-8 pb-8 border-b border-neutral-100 dark:border-slate-800">
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-6xl font-bold text-neutral-900 dark:text-white">
-                      ₱{(billingYearly
-                        ? Math.round(plan.yearlyPrice / 12)
-                        : plan.monthlyPrice
-                      ).toLocaleString('en-PH')}
-                    </span>
-                    <div>
-                      <div className="text-neutral-500 dark:text-slate-400 text-lg">/month</div>
-                      {billingYearly && (
-                        <div className="text-emerald-600 dark:text-emerald-400 text-xs font-semibold">billed annually</div>
-                      )}
+                  <div className="flex flex-col items-center text-center">
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-6xl font-bold text-neutral-900 dark:text-white">
+                        ₱{(billingYearly
+                          ? Math.round(plan.yearlyPrice / 12)
+                          : plan.monthlyPrice
+                        ).toLocaleString('en-PH')}
+                      </span>
+                      <div>
+                        <div className="text-neutral-500 dark:text-slate-400 text-lg">/month</div>
+                        {billingYearly && (
+                          <div className="text-emerald-600 dark:text-emerald-400 text-xs font-semibold">billed annually</div>
+                        )}
+                      </div>
                     </div>
+                    {billingYearly ? (
+                      <p className="text-emerald-600 dark:text-emerald-400 text-sm mt-3 font-medium">
+                        ₱{plan.yearlyPrice.toLocaleString('en-PH')}/year — save ₱{((plan.monthlyPrice * 12) - plan.yearlyPrice).toLocaleString('en-PH')}
+                      </p>
+                    ) : (
+                      <p className="text-neutral-400 dark:text-slate-500 text-sm mt-3">
+                        Switch to yearly and save {Math.round((1 - plan.yearlyPrice / (plan.monthlyPrice * 12)) * 100)}%
+                      </p>
+                    )}
                   </div>
-                  {billingYearly ? (
-                    <p className="text-emerald-600 dark:text-emerald-400 text-sm mt-2 font-medium">
-                      ₱{plan.yearlyPrice.toLocaleString('en-PH')}/year — save ₱{((plan.monthlyPrice * 12) - plan.yearlyPrice).toLocaleString('en-PH')}
-                    </p>
-                  ) : (
-                    <p className="text-neutral-400 dark:text-slate-500 text-sm mt-2">
-                      Switch to yearly and save {Math.round((1 - plan.yearlyPrice / (plan.monthlyPrice * 12)) * 100)}%
-                    </p>
-                  )}
                 </div>
 
                 {/* Features 2-column grid */}
