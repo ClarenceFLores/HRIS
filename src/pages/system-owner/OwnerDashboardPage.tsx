@@ -429,7 +429,7 @@ export function OwnerDashboardPage() {
           </div>
           <div className="divide-y divide-neutral-100">
             {pendingApprovals.map((approval) => (
-              <div key={approval.id} className="p-5 hover:bg-neutral-50 transition-colors">
+              <div key={approval.id} className="p-5 hover:bg-neutral-50 dark:hover:bg-slate-800 transition-colors">
                 <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center text-white font-bold text-lg">
@@ -499,7 +499,7 @@ export function OwnerDashboardPage() {
             <CheckCircle2 className="w-8 h-8 text-neutral-400" />
           </div>
           <h3 className="font-semibold text-neutral-700 dark:text-slate-300 mb-1">No Pending Registrations</h3>
-          <p className="text-sm text-neutral-500 max-w-md mx-auto">
+          <p className="text-sm text-neutral-500 dark:text-slate-400 max-w-md mx-auto">
             All company registrations have been reviewed. New registrations from HR accounts will appear here for your approval.
           </p>
         </div>
@@ -511,12 +511,12 @@ export function OwnerDashboardPage() {
         <div className="card p-5 hover:shadow-lg transition-shadow">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-sm font-medium text-neutral-500">Monthly Revenue</p>
+              <p className="text-sm font-medium text-neutral-500 dark:text-slate-400">Monthly Revenue</p>
               <p className="text-3xl font-bold text-neutral-900 dark:text-white mt-1">
                 {formatCurrency(stats.monthlyRevenue)}
               </p>
               <div className="flex items-center gap-1 mt-2">
-                <span className="text-sm text-neutral-400">from active subscriptions</span>
+                <span className="text-sm text-neutral-400 dark:text-slate-500">from active subscriptions</span>
               </div>
             </div>
             <div className="w-12 h-12 rounded-xl bg-green-100 flex items-center justify-center">
@@ -601,39 +601,10 @@ export function OwnerDashboardPage() {
         </div>
       </div>
 
-      {/* Plan Distribution & Alerts Row */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Plan Distribution */}
-        <div className="card p-6">
-          <h3 className="font-semibold text-neutral-900 dark:text-white mb-4">Subscription Distribution</h3>
-          <div className="space-y-4">
-            {planDistribution.map((plan, index) => (
-              <div key={index}>
-                <div className="flex items-center justify-between mb-1">
-                  <span className="text-sm font-medium text-neutral-700 dark:text-slate-300">{plan.plan}</span>
-                  <span className="text-sm text-neutral-500">{plan.count} ({plan.percentage}%)</span>
-                </div>
-                <div className="w-full h-2 bg-neutral-100 rounded-full overflow-hidden">
-                  <div 
-                    className={`h-full ${plan.color} rounded-full transition-all duration-500`}
-                    style={{ width: `${plan.percentage}%` }}
-                  ></div>
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="mt-6 pt-4 border-t border-neutral-100">
-            <div className="flex items-center justify-between text-sm">
-              <span className="text-neutral-500">Total Active</span>
-              <span className="font-semibold text-neutral-900">{stats.activeCompanies} companies</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Alerts Section */}
-        <div className="card p-6 lg:col-span-2">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="font-semibold text-neutral-900">Recent Alerts</h3>
+      {/* Alerts Section - Full Width */}
+      <div className="card p-6">
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="font-semibold text-neutral-900 dark:text-white">Recent Alerts</h3>
             <button className="text-sm text-primary-600 hover:text-primary-700 font-medium">
               View All
             </button>
@@ -649,8 +620,8 @@ export function OwnerDashboardPage() {
               >
                 {getAlertIcon(alert.type)}
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-neutral-800">{alert.message}</p>
-                  <p className="text-xs text-neutral-500 mt-0.5">{alert.time}</p>
+                  <p className="text-sm font-medium text-neutral-800 dark:text-slate-200">{alert.message}</p>
+                  <p className="text-xs text-neutral-500 dark:text-slate-400 mt-0.5">{alert.time}</p>
                 </div>
                 <button className="text-xs text-neutral-500 hover:text-neutral-700 dark:text-slate-400 dark:hover:text-slate-200 font-medium">
                   Dismiss
@@ -738,16 +709,16 @@ export function OwnerDashboardPage() {
                 </h4>
                 <div className="bg-neutral-50 rounded-xl p-4 space-y-2 text-sm">
                   <div className="flex justify-between">
-                    <span className="text-neutral-500">Industry</span>
-                    <span className="font-medium text-neutral-900">{selectedApproval.industryType}</span>
+                    <span className="text-neutral-500 dark:text-slate-400">Industry</span>
+                    <span className="font-medium text-neutral-900 dark:text-white">{selectedApproval.industryType}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-neutral-500">Company Size</span>
-                    <span className="font-medium text-neutral-900">{selectedApproval.companySize} employees</span>
+                    <span className="text-neutral-500 dark:text-slate-400">Company Size</span>
+                    <span className="font-medium text-neutral-900 dark:text-white">{selectedApproval.companySize} employees</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-neutral-500">Address</span>
-                    <span className="font-medium text-neutral-900">{selectedApproval.address}</span>
+                    <span className="text-neutral-500 dark:text-slate-400">Address</span>
+                    <span className="font-medium text-neutral-900 dark:text-white">{selectedApproval.address}</span>
                   </div>
                 </div>
               </div>
@@ -760,16 +731,16 @@ export function OwnerDashboardPage() {
                 </h4>
                 <div className="bg-neutral-50 rounded-xl p-4 space-y-2 text-sm">
                   <div className="flex justify-between">
-                    <span className="text-neutral-500">Name</span>
-                    <span className="font-medium text-neutral-900">{selectedApproval.hrAdminName}</span>
+                    <span className="text-neutral-500 dark:text-slate-400">Name</span>
+                    <span className="font-medium text-neutral-900 dark:text-white">{selectedApproval.hrAdminName}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-neutral-500">Email</span>
-                    <span className="font-medium text-neutral-900">{selectedApproval.email}</span>
+                    <span className="text-neutral-500 dark:text-slate-400">Email</span>
+                    <span className="font-medium text-neutral-900 dark:text-white">{selectedApproval.email}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-neutral-500">Phone</span>
-                    <span className="font-medium text-neutral-900">{selectedApproval.phone}</span>
+                    <span className="text-neutral-500 dark:text-slate-400">Phone</span>
+                    <span className="font-medium text-neutral-900 dark:text-white">{selectedApproval.phone}</span>
                   </div>
                 </div>
               </div>
@@ -782,12 +753,12 @@ export function OwnerDashboardPage() {
                 </h4>
                 <div className="bg-neutral-50 rounded-xl p-4 space-y-2 text-sm">
                   <div className="flex justify-between">
-                    <span className="text-neutral-500">Date Registered</span>
-                    <span className="font-medium text-neutral-900">{formatDate(selectedApproval.dateRegistered)}</span>
+                    <span className="text-neutral-500 dark:text-slate-400">Date Registered</span>
+                    <span className="font-medium text-neutral-900 dark:text-white">{formatDate(selectedApproval.dateRegistered)}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-neutral-500">Requested Plan</span>
-                    <span className="font-medium text-neutral-900">{selectedApproval.requestedPlan}</span>
+                    <span className="text-neutral-500 dark:text-slate-400">Requested Plan</span>
+                    <span className="font-medium text-neutral-900 dark:text-white">{selectedApproval.requestedPlan}</span>
                   </div>
                 </div>
               </div>

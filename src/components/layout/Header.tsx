@@ -18,7 +18,7 @@ export function Header() {
 
   const handleLogout = async () => {
     await logout();
-    navigate('/', { replace: true });
+    navigate('/?logout=success', { replace: true });
   };
   const [searchFocused, setSearchFocused] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
