@@ -120,10 +120,10 @@ export function SystemConfigPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-heading font-bold text-neutral-900">
+          <h1 className="text-2xl font-heading font-bold text-neutral-900 dark:text-white">
             System Configuration
           </h1>
-          <p className="text-neutral-500 mt-1">
+          <p className="text-neutral-500 dark:text-slate-400 mt-1">
             Global settings for payroll computation, taxes, and security
           </p>
         </div>
@@ -159,14 +159,14 @@ export function SystemConfigPage() {
       </div>
 
       {/* Tabs */}
-      <div className="border-b border-neutral-200">
+      <div className="border-b border-neutral-200 dark:border-slate-700">
         <nav className="flex gap-8 overflow-x-auto">
           <button
             onClick={() => setActiveTab('payroll')}
             className={`pb-4 px-1 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
               activeTab === 'payroll'
                 ? 'border-primary-500 text-primary-600'
-                : 'border-transparent text-neutral-500 hover:text-neutral-700'
+                : 'border-transparent text-neutral-500 dark:text-slate-400 hover:text-neutral-700 dark:hover:text-slate-300'
             }`}
           >
             <div className="flex items-center gap-2">
@@ -179,7 +179,7 @@ export function SystemConfigPage() {
             className={`pb-4 px-1 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
               activeTab === 'tax'
                 ? 'border-primary-500 text-primary-600'
-                : 'border-transparent text-neutral-500 hover:text-neutral-700'
+                : 'border-transparent text-neutral-500 dark:text-slate-400 hover:text-neutral-700 dark:hover:text-slate-300'
             }`}
           >
             <div className="flex items-center gap-2">
@@ -192,7 +192,7 @@ export function SystemConfigPage() {
             className={`pb-4 px-1 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
               activeTab === 'contributions'
                 ? 'border-primary-500 text-primary-600'
-                : 'border-transparent text-neutral-500 hover:text-neutral-700'
+                : 'border-transparent text-neutral-500 dark:text-slate-400 hover:text-neutral-700 dark:hover:text-slate-300'
             }`}
           >
             <div className="flex items-center gap-2">
@@ -205,7 +205,7 @@ export function SystemConfigPage() {
             className={`pb-4 px-1 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
               activeTab === 'security'
                 ? 'border-primary-500 text-primary-600'
-                : 'border-transparent text-neutral-500 hover:text-neutral-700'
+                : 'border-transparent text-neutral-500 dark:text-slate-400 hover:text-neutral-700 dark:hover:text-slate-300'
             }`}
           >
             <div className="flex items-center gap-2">
@@ -226,8 +226,8 @@ export function SystemConfigPage() {
                 <Clock className="w-5 h-5 text-purple-600" />
               </div>
               <div>
-                <h3 className="font-semibold text-neutral-900">Overtime Computation</h3>
-                <p className="text-sm text-neutral-500">Configure overtime rates and rules</p>
+                <h3 className="font-semibold text-neutral-900 dark:text-white">Overtime Computation</h3>
+                <p className="text-sm text-neutral-500 dark:text-slate-400">Configure overtime rates and rules</p>
               </div>
             </div>
 
@@ -242,9 +242,9 @@ export function SystemConfigPage() {
                     onChange={(e) => setOvertimeSettings({...overtimeSettings, regularOT: parseFloat(e.target.value)})}
                     className="input pr-12"
                   />
-                  <span className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-400 text-sm">×</span>
+                  <span className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-400 dark:text-slate-500 text-sm">×</span>
                 </div>
-                <p className="text-xs text-neutral-500 mt-1">Multiplier for regular OT hours</p>
+                <p className="text-xs text-neutral-500 dark:text-slate-400 mt-1">Multiplier for regular OT hours</p>
               </div>
 
               <div>
@@ -257,7 +257,7 @@ export function SystemConfigPage() {
                     onChange={(e) => setOvertimeSettings({...overtimeSettings, restDayOT: parseFloat(e.target.value)})}
                     className="input pr-12"
                   />
-                  <span className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-400 text-sm">×</span>
+                  <span className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-400 dark:text-slate-500 text-sm">×</span>
                 </div>
               </div>
 
@@ -271,7 +271,7 @@ export function SystemConfigPage() {
                     onChange={(e) => setOvertimeSettings({...overtimeSettings, holidayOT: parseFloat(e.target.value)})}
                     className="input pr-12"
                   />
-                  <span className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-400 text-sm">×</span>
+                  <span className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-400 dark:text-slate-500 text-sm">×</span>
                 </div>
               </div>
 
@@ -285,7 +285,7 @@ export function SystemConfigPage() {
                     onChange={(e) => setOvertimeSettings({...overtimeSettings, specialHolidayOT: parseFloat(e.target.value)})}
                     className="input pr-12"
                   />
-                  <span className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-400 text-sm">×</span>
+                  <span className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-400 dark:text-slate-500 text-sm">×</span>
                 </div>
               </div>
             </div>
@@ -298,8 +298,8 @@ export function SystemConfigPage() {
                 <Clock className="w-5 h-5 text-indigo-600" />
               </div>
               <div>
-                <h3 className="font-semibold text-neutral-900">Night Differential</h3>
-                <p className="text-sm text-neutral-500">Configure night shift premium</p>
+                <h3 className="font-semibold text-neutral-900 dark:text-white">Night Differential</h3>
+                <p className="text-sm text-neutral-500 dark:text-slate-400">Configure night shift premium</p>
               </div>
             </div>
 
@@ -314,9 +314,9 @@ export function SystemConfigPage() {
                     onChange={(e) => setOvertimeSettings({...overtimeSettings, nightDiffRate: parseFloat(e.target.value) / 100})}
                     className="input pr-12"
                   />
-                  <span className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-400 text-sm">%</span>
+                  <span className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-400 dark:text-slate-500 text-sm">%</span>
                 </div>
-                <p className="text-xs text-neutral-500 mt-1">Additional pay percentage</p>
+                <p className="text-xs text-neutral-500 dark:text-slate-400 mt-1">Additional pay percentage</p>
               </div>
 
               <div>
@@ -348,8 +348,8 @@ export function SystemConfigPage() {
                 <Calendar className="w-5 h-5 text-emerald-600" />
               </div>
               <div>
-                <h3 className="font-semibold text-neutral-900">Payroll Cycle Defaults</h3>
-                <p className="text-sm text-neutral-500">Default settings for new companies</p>
+                <h3 className="font-semibold text-neutral-900 dark:text-white">Payroll Cycle Defaults</h3>
+                <p className="text-sm text-neutral-500 dark:text-slate-400">Default settings for new companies</p>
               </div>
             </div>
 
@@ -397,11 +397,11 @@ export function SystemConfigPage() {
                   <FileText className="w-5 h-5 text-red-600" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-neutral-900">Income Tax Brackets (BIR)</h3>
-                  <p className="text-sm text-neutral-500">Annual tax brackets based on TRAIN Law</p>
+                  <h3 className="font-semibold text-neutral-900 dark:text-white">Income Tax Brackets (BIR)</h3>
+                  <p className="text-sm text-neutral-500 dark:text-slate-400">Annual tax brackets based on TRAIN Law</p>
                 </div>
               </div>
-              <span className="text-xs bg-neutral-100 text-neutral-600 px-2 py-1 rounded-full">
+              <span className="text-xs bg-neutral-100 dark:bg-slate-700 text-neutral-600 dark:text-slate-400 px-2 py-1 rounded-full">
                 Effective: Jan 2023
               </span>
             </div>
@@ -409,31 +409,31 @@ export function SystemConfigPage() {
             <div className="overflow-x-auto">
               <table className="w-full min-w-[500px]">
                 <thead>
-                  <tr className="bg-neutral-50 border-y border-neutral-200">
-                    <th className="px-4 py-3 text-left text-xs font-semibold text-neutral-600 uppercase">
+                  <tr className="bg-neutral-50 dark:bg-slate-800 border-y border-neutral-200 dark:border-slate-700">
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-neutral-600 dark:text-slate-400 uppercase">
                       Annual Income From
                     </th>
-                    <th className="px-4 py-3 text-left text-xs font-semibold text-neutral-600 uppercase">
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-neutral-600 dark:text-slate-400 uppercase">
                       To
                     </th>
-                    <th className="px-4 py-3 text-left text-xs font-semibold text-neutral-600 uppercase">
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-neutral-600 dark:text-slate-400 uppercase">
                       Tax Rate
                     </th>
-                    <th className="px-4 py-3 text-left text-xs font-semibold text-neutral-600 uppercase">
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-neutral-600 dark:text-slate-400 uppercase">
                       Base Tax
                     </th>
-                    <th className="px-4 py-3 text-left text-xs font-semibold text-neutral-600 uppercase">
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-neutral-600 dark:text-slate-400 uppercase">
                       Plus % of Excess
                     </th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-neutral-100">
+                <tbody className="divide-y divide-neutral-100 dark:divide-slate-700">
                   {taxBrackets.map((bracket, index) => (
-                    <tr key={index} className="hover:bg-neutral-50">
-                      <td className="px-4 py-3 font-medium text-neutral-900">
+                    <tr key={index} className="hover:bg-neutral-50 dark:hover:bg-slate-800">
+                      <td className="px-4 py-3 font-medium text-neutral-900 dark:text-white">
                         {formatCurrency(bracket.min)}
                       </td>
-                      <td className="px-4 py-3 text-neutral-600">
+                      <td className="px-4 py-3 text-neutral-600 dark:text-slate-400">
                         {bracket.max === Infinity ? 'Above' : formatCurrency(bracket.max)}
                       </td>
                       <td className="px-4 py-3">
@@ -446,10 +446,10 @@ export function SystemConfigPage() {
                           {bracket.rate}%
                         </span>
                       </td>
-                      <td className="px-4 py-3 text-neutral-600">
+                      <td className="px-4 py-3 text-neutral-600 dark:text-slate-400">
                         {formatCurrency(bracket.baseTax)}
                       </td>
-                      <td className="px-4 py-3 text-neutral-600">
+                      <td className="px-4 py-3 text-neutral-600 dark:text-slate-400">
                         {bracket.rate}% over {formatCurrency(bracket.min)}
                       </td>
                     </tr>
@@ -471,10 +471,10 @@ export function SystemConfigPage() {
 
           {/* Withholding Tax Formula */}
           <div className="card p-6">
-            <h3 className="font-semibold text-neutral-900 mb-4">Withholding Tax Computation</h3>
-            <div className="bg-neutral-50 rounded-xl p-4 font-mono text-sm">
-              <p className="text-neutral-600">// Monthly Withholding Tax Formula</p>
-              <p className="text-neutral-800 mt-2">
+            <h3 className="font-semibold text-neutral-900 dark:text-white mb-4">Withholding Tax Computation</h3>
+            <div className="bg-neutral-50 dark:bg-slate-800 rounded-xl p-4 font-mono text-sm">
+              <p className="text-neutral-600 dark:text-slate-400">// Monthly Withholding Tax Formula</p>
+              <p className="text-neutral-800 dark:text-slate-200 mt-2">
                 <span className="text-purple-600">monthlyTax</span> = (<span className="text-purple-600">baseTax</span> / 12) + 
                 ((<span className="text-purple-600">monthlyIncome</span> - (<span className="text-purple-600">bracketMin</span> / 12)) × <span className="text-purple-600">rate</span>)
               </p>
@@ -493,8 +493,8 @@ export function SystemConfigPage() {
                 <Building2 className="w-5 h-5 text-blue-600" />
               </div>
               <div>
-                <h3 className="font-semibold text-neutral-900">SSS Contribution</h3>
-                <p className="text-sm text-neutral-500">Social Security System rates</p>
+                <h3 className="font-semibold text-neutral-900 dark:text-white">SSS Contribution</h3>
+                <p className="text-sm text-neutral-500 dark:text-slate-400">Social Security System rates</p>
               </div>
             </div>
 
@@ -512,7 +512,7 @@ export function SystemConfigPage() {
                     })}
                     className="input pr-12"
                   />
-                  <span className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-400 text-sm">%</span>
+                  <span className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-400 dark:text-slate-500 text-sm">%</span>
                 </div>
               </div>
 
@@ -529,7 +529,7 @@ export function SystemConfigPage() {
                     })}
                     className="input pr-12"
                   />
-                  <span className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-400 text-sm">%</span>
+                  <span className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-400 dark:text-slate-500 text-sm">%</span>
                 </div>
               </div>
 
@@ -568,8 +568,8 @@ export function SystemConfigPage() {
                 <Shield className="w-5 h-5 text-emerald-600" />
               </div>
               <div>
-                <h3 className="font-semibold text-neutral-900">PhilHealth Contribution</h3>
-                <p className="text-sm text-neutral-500">Philippine Health Insurance rates</p>
+                <h3 className="font-semibold text-neutral-900 dark:text-white">PhilHealth Contribution</h3>
+                <p className="text-sm text-neutral-500 dark:text-slate-400">Philippine Health Insurance rates</p>
               </div>
             </div>
 
@@ -587,9 +587,9 @@ export function SystemConfigPage() {
                     })}
                     className="input pr-12"
                   />
-                  <span className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-400 text-sm">%</span>
+                  <span className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-400 dark:text-slate-500 text-sm">%</span>
                 </div>
-                <p className="text-xs text-neutral-500 mt-1">Split 50/50 EE/ER</p>
+                <p className="text-xs text-neutral-500 dark:text-slate-400 mt-1">Split 50/50 EE/ER</p>
               </div>
 
               <div>
@@ -599,10 +599,10 @@ export function SystemConfigPage() {
                     type="number"
                     step="0.1"
                     value={contributions.philhealth.employeeShare}
-                    className="input pr-12 bg-neutral-50"
+                    className="input pr-12 bg-neutral-50 dark:bg-slate-800"
                     disabled
                   />
-                  <span className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-400 text-sm">%</span>
+                  <span className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-400 dark:text-slate-500 text-sm">%</span>
                 </div>
               </div>
 
@@ -613,10 +613,10 @@ export function SystemConfigPage() {
                     type="number"
                     step="0.1"
                     value={contributions.philhealth.employerShare}
-                    className="input pr-12 bg-neutral-50"
+                    className="input pr-12 bg-neutral-50 dark:bg-slate-800"
                     disabled
                   />
-                  <span className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-400 text-sm">%</span>
+                  <span className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-400 dark:text-slate-500 text-sm">%</span>
                 </div>
               </div>
 
@@ -642,8 +642,8 @@ export function SystemConfigPage() {
                 <DollarSign className="w-5 h-5 text-amber-600" />
               </div>
               <div>
-                <h3 className="font-semibold text-neutral-900">Pag-IBIG Contribution</h3>
-                <p className="text-sm text-neutral-500">Home Development Mutual Fund rates</p>
+                <h3 className="font-semibold text-neutral-900 dark:text-white">Pag-IBIG Contribution</h3>
+                <p className="text-sm text-neutral-500 dark:text-slate-400">Home Development Mutual Fund rates</p>
               </div>
             </div>
 
@@ -661,7 +661,7 @@ export function SystemConfigPage() {
                     })}
                     className="input pr-12"
                   />
-                  <span className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-400 text-sm">%</span>
+                  <span className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-400 dark:text-slate-500 text-sm">%</span>
                 </div>
               </div>
 
@@ -678,7 +678,7 @@ export function SystemConfigPage() {
                     })}
                     className="input pr-12"
                   />
-                  <span className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-400 text-sm">%</span>
+                  <span className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-400 dark:text-slate-500 text-sm">%</span>
                 </div>
               </div>
 
@@ -709,8 +709,8 @@ export function SystemConfigPage() {
                 <Key className="w-5 h-5 text-red-600" />
               </div>
               <div>
-                <h3 className="font-semibold text-neutral-900">Password Policy</h3>
-                <p className="text-sm text-neutral-500">Configure password requirements</p>
+                <h3 className="font-semibold text-neutral-900 dark:text-white">Password Policy</h3>
+                <p className="text-sm text-neutral-500 dark:text-slate-400">Configure password requirements</p>
               </div>
             </div>
 
@@ -735,7 +735,7 @@ export function SystemConfigPage() {
                   onChange={(e) => setSecuritySettings({...securitySettings, passwordExpireDays: parseInt(e.target.value)})}
                   className="input"
                 />
-                <p className="text-xs text-neutral-500 mt-1">0 = Never expires</p>
+                <p className="text-xs text-neutral-500 dark:text-slate-400 mt-1">0 = Never expires</p>
               </div>
             </div>
 
@@ -747,7 +747,7 @@ export function SystemConfigPage() {
                   onChange={(e) => setSecuritySettings({...securitySettings, passwordRequireUppercase: e.target.checked})}
                   className="w-4 h-4 text-primary-600 rounded"
                 />
-                <span className="text-sm text-neutral-700">Require uppercase letter (A-Z)</span>
+                <span className="text-sm text-neutral-700 dark:text-slate-300">Require uppercase letter (A-Z)</span>
               </label>
 
               <label className="flex items-center gap-3 cursor-pointer">
@@ -757,7 +757,7 @@ export function SystemConfigPage() {
                   onChange={(e) => setSecuritySettings({...securitySettings, passwordRequireLowercase: e.target.checked})}
                   className="w-4 h-4 text-primary-600 rounded"
                 />
-                <span className="text-sm text-neutral-700">Require lowercase letter (a-z)</span>
+                <span className="text-sm text-neutral-700 dark:text-slate-300">Require lowercase letter (a-z)</span>
               </label>
 
               <label className="flex items-center gap-3 cursor-pointer">
@@ -767,7 +767,7 @@ export function SystemConfigPage() {
                   onChange={(e) => setSecuritySettings({...securitySettings, passwordRequireNumber: e.target.checked})}
                   className="w-4 h-4 text-primary-600 rounded"
                 />
-                <span className="text-sm text-neutral-700">Require number (0-9)</span>
+                <span className="text-sm text-neutral-700 dark:text-slate-300">Require number (0-9)</span>
               </label>
 
               <label className="flex items-center gap-3 cursor-pointer">
@@ -777,7 +777,7 @@ export function SystemConfigPage() {
                   onChange={(e) => setSecuritySettings({...securitySettings, passwordRequireSpecial: e.target.checked})}
                   className="w-4 h-4 text-primary-600 rounded"
                 />
-                <span className="text-sm text-neutral-700">Require special character (!@#$%^&*)</span>
+                <span className="text-sm text-neutral-700 dark:text-slate-300">Require special character (!@#$%^&*)</span>
               </label>
             </div>
           </div>
@@ -790,8 +790,8 @@ export function SystemConfigPage() {
                   <Shield className="w-5 h-5 text-purple-600" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-neutral-900">Two-Factor Authentication</h3>
-                  <p className="text-sm text-neutral-500">Require 2FA for all users</p>
+                  <h3 className="font-semibold text-neutral-900 dark:text-white">Two-Factor Authentication</h3>
+                  <p className="text-sm text-neutral-500 dark:text-slate-400">Require 2FA for all users</p>
                 </div>
               </div>
               <label className="relative inline-flex items-center cursor-pointer">
@@ -801,7 +801,7 @@ export function SystemConfigPage() {
                   onChange={(e) => setSecuritySettings({...securitySettings, twoFactorEnabled: e.target.checked})}
                   className="sr-only peer"
                 />
-                <div className="w-11 h-6 bg-neutral-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-neutral-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"></div>
+                <div className="w-11 h-6 bg-neutral-200 dark:bg-slate-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-neutral-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"></div>
               </label>
             </div>
           </div>
@@ -813,8 +813,8 @@ export function SystemConfigPage() {
                 <Lock className="w-5 h-5 text-amber-600" />
               </div>
               <div>
-                <h3 className="font-semibold text-neutral-900">Login Security</h3>
-                <p className="text-sm text-neutral-500">Configure login attempt limits</p>
+                <h3 className="font-semibold text-neutral-900 dark:text-white">Login Security</h3>
+                <p className="text-sm text-neutral-500 dark:text-slate-400">Configure login attempt limits</p>
               </div>
             </div>
 

@@ -217,7 +217,7 @@ export function LeaveListPage() {
       case 'pending':
         return { icon: Clock, color: 'text-amber-600', bg: 'bg-amber-100', badge: 'bg-amber-100 text-amber-700' };
       default:
-        return { icon: Clock, color: 'text-neutral-600', bg: 'bg-neutral-100', badge: 'bg-neutral-100 text-neutral-700' };
+        return { icon: Clock, color: 'text-neutral-600 dark:text-slate-400', bg: 'bg-neutral-100 dark:bg-slate-700', badge: 'bg-neutral-100 dark:bg-slate-700 text-neutral-700 dark:text-slate-300' };
     }
   };
 
@@ -249,8 +249,8 @@ export function LeaveListPage() {
             <Calendar className="w-6 h-6 text-primary-600" />
           </div>
           <div>
-            <h1 className="text-2xl font-heading font-bold text-neutral-900">Leave Requests</h1>
-            <p className="text-neutral-500 text-sm">Manage and approve employee leave requests</p>
+            <h1 className="text-2xl font-heading font-bold text-neutral-900 dark:text-white">Leave Requests</h1>
+            <p className="text-neutral-500 dark:text-slate-400 text-sm">Manage and approve employee leave requests</p>
           </div>
         </div>
         <Link to="/app/leaves/new" className="btn btn-primary shadow-lg shadow-primary-500/25">
@@ -267,8 +267,8 @@ export function LeaveListPage() {
               <Clock className="w-5 h-5 text-amber-600" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-neutral-900">{pendingCount}</p>
-              <p className="text-xs text-neutral-500">Pending Requests</p>
+              <p className="text-2xl font-bold text-neutral-900 dark:text-white">{pendingCount}</p>
+              <p className="text-xs text-neutral-500 dark:text-slate-400">Pending Requests</p>
             </div>
           </div>
         </div>
@@ -278,8 +278,8 @@ export function LeaveListPage() {
               <CheckCircle className="w-5 h-5 text-emerald-600" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-neutral-900">{approvedCount}</p>
-              <p className="text-xs text-neutral-500">Approved This Month</p>
+              <p className="text-2xl font-bold text-neutral-900 dark:text-white">{approvedCount}</p>
+              <p className="text-xs text-neutral-500 dark:text-slate-400">Approved This Month</p>
             </div>
           </div>
         </div>
@@ -289,8 +289,8 @@ export function LeaveListPage() {
               <XCircle className="w-5 h-5 text-red-600" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-neutral-900">{rejectedCount}</p>
-              <p className="text-xs text-neutral-500">Rejected This Month</p>
+              <p className="text-2xl font-bold text-neutral-900 dark:text-white">{rejectedCount}</p>
+              <p className="text-xs text-neutral-500 dark:text-slate-400">Rejected This Month</p>
             </div>
           </div>
         </div>
@@ -300,8 +300,8 @@ export function LeaveListPage() {
               <TrendingUp className="w-5 h-5 text-blue-600" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-neutral-900">{totalDays}</p>
-              <p className="text-xs text-neutral-500">Total Leave Days</p>
+              <p className="text-2xl font-bold text-neutral-900 dark:text-white">{totalDays}</p>
+              <p className="text-xs text-neutral-500 dark:text-slate-400">Total Leave Days</p>
             </div>
           </div>
         </div>
@@ -310,23 +310,23 @@ export function LeaveListPage() {
       {/* Main Card */}
       <div className={`card overflow-hidden transition-all duration-500 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
         {/* Filters */}
-        <div className="p-4 border-b border-neutral-100 bg-neutral-50/50">
+        <div className="p-4 border-b border-neutral-100 dark:border-slate-700 bg-neutral-50/50">
           <div className="flex flex-col lg:flex-row gap-4">
             <div className="relative flex-1">
-              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-neutral-400" size={18} />
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-neutral-400 dark:text-slate-500" size={18} />
               <input
                 type="text"
                 placeholder="Search by employee or department..."
                 value={searchTerm}
                 onChange={(e) => { setSearchTerm(e.target.value); setCurrentPage(1); }}
-                className="input pl-10 bg-white"
+                className="input pl-10 bg-white dark:bg-slate-800"
               />
             </div>
             <div className="flex flex-wrap gap-2">
               <select
                 value={statusFilter}
                 onChange={(e) => { setStatusFilter(e.target.value); setCurrentPage(1); }}
-                className="input w-auto min-w-[130px] bg-white"
+                className="input w-auto min-w-[130px] bg-white dark:bg-slate-800"
               >
                 <option value="">All Status</option>
                 <option value="pending">Pending</option>
@@ -336,7 +336,7 @@ export function LeaveListPage() {
               <select
                 value={typeFilter}
                 onChange={(e) => { setTypeFilter(e.target.value); setCurrentPage(1); }}
-                className="input w-auto min-w-[150px] bg-white"
+                className="input w-auto min-w-[150px] bg-white dark:bg-slate-800"
               >
                 <option value="">All Leave Types</option>
                 {leaveTypes.map(type => (
@@ -351,7 +351,7 @@ export function LeaveListPage() {
         <div className="overflow-x-auto">
           <table className="table">
             <thead>
-              <tr className="bg-neutral-50">
+              <tr className="bg-neutral-50 dark:bg-slate-800">
                 <th className="font-semibold">Employee</th>
                 <th className="font-semibold">Leave Type</th>
                 <th className="font-semibold hidden sm:table-cell">Duration</th>
@@ -366,15 +366,15 @@ export function LeaveListPage() {
                 const StatusIcon = statusConfig.icon;
                 
                 return (
-                  <tr key={leave.id} className="group hover:bg-neutral-50 transition-colors">
+                  <tr key={leave.id} className="group hover:bg-neutral-50 dark:hover:bg-slate-800 transition-colors">
                     <td>
                       <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center shadow-sm">
                           <span className="text-white font-semibold text-sm">{leave.avatar}</span>
                         </div>
                         <div>
-                          <p className="font-medium text-neutral-900">{leave.employee}</p>
-                          <p className="text-xs text-neutral-500">{leave.department}</p>
+                          <p className="font-medium text-neutral-900 dark:text-white">{leave.employee}</p>
+                          <p className="text-xs text-neutral-500 dark:text-slate-400">{leave.department}</p>
                         </div>
                       </div>
                     </td>
@@ -385,12 +385,12 @@ export function LeaveListPage() {
                     </td>
                     <td className="hidden sm:table-cell">
                       <div className="text-sm">
-                        <p className="text-neutral-900">{formatDate(leave.startDate)} - {formatDate(leave.endDate)}</p>
-                        <p className="text-xs text-neutral-500">Requested: {formatDate(leave.requestDate)}</p>
+                        <p className="text-neutral-900 dark:text-white">{formatDate(leave.startDate)} - {formatDate(leave.endDate)}</p>
+                        <p className="text-xs text-neutral-500 dark:text-slate-400">Requested: {formatDate(leave.requestDate)}</p>
                       </div>
                     </td>
                     <td className="text-center">
-                      <span className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-neutral-100 text-neutral-700 font-semibold text-sm">
+                      <span className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-neutral-100 dark:bg-slate-700 text-neutral-700 dark:text-slate-300 font-semibold text-sm">
                         {leave.days}
                       </span>
                     </td>
@@ -404,8 +404,8 @@ export function LeaveListPage() {
                     </td>
                     <td>
                       <div className="flex items-center justify-end gap-2">
-                        <button className="p-2 hover:bg-neutral-100 rounded-lg transition-colors" title="View details">
-                          <Eye size={16} className="text-neutral-400" />
+                        <button className="p-2 hover:bg-neutral-100 dark:hover:bg-slate-700 rounded-lg transition-colors" title="View details">
+                          <Eye size={16} className="text-neutral-400 dark:text-slate-500" />
                         </button>
                         {leave.status === 'pending' && (
                           <>
@@ -437,11 +437,11 @@ export function LeaveListPage() {
         {/* Empty State */}
         {filteredLeaves.length === 0 && (
           <div className="p-12 text-center">
-            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-neutral-100 flex items-center justify-center">
-              <Calendar className="w-8 h-8 text-neutral-400" />
+            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-neutral-100 dark:bg-slate-700 flex items-center justify-center">
+              <Calendar className="w-8 h-8 text-neutral-400 dark:text-slate-500" />
             </div>
-            <h3 className="text-lg font-semibold text-neutral-900 mb-1">No leave requests found</h3>
-            <p className="text-neutral-500 mb-4">
+            <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-1">No leave requests found</h3>
+            <p className="text-neutral-500 dark:text-slate-400 mb-4">
               No requests match your current filters
             </p>
             <button 
@@ -455,9 +455,9 @@ export function LeaveListPage() {
 
         {/* Pagination */}
         {filteredLeaves.length > 0 && (
-          <div className="p-4 border-t border-neutral-100 bg-neutral-50/50">
+          <div className="p-4 border-t border-neutral-100 dark:border-slate-700 bg-neutral-50/50">
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-              <p className="text-sm text-neutral-500">
+              <p className="text-sm text-neutral-500 dark:text-slate-400">
                 Showing {startIndex + 1} to {Math.min(startIndex + itemsPerPage, filteredLeaves.length)} of {filteredLeaves.length} requests
               </p>
               <div className="flex items-center gap-2">

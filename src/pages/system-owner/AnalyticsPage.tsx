@@ -85,10 +85,10 @@ export function AnalyticsPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-heading font-bold text-neutral-900">
+          <h1 className="text-2xl font-heading font-bold text-neutral-900 dark:text-white">
             Platform Analytics
           </h1>
-          <p className="text-neutral-500 mt-1">
+          <p className="text-neutral-500 dark:text-slate-400 mt-1">
             Business metrics, usage insights, and risk monitoring
           </p>
         </div>
@@ -112,14 +112,14 @@ export function AnalyticsPage() {
       </div>
 
       {/* Tabs */}
-      <div className="border-b border-neutral-200">
+      <div className="border-b border-neutral-200 dark:border-slate-700">
         <nav className="flex gap-8 overflow-x-auto">
           <button
             onClick={() => setActiveTab('business')}
             className={`pb-4 px-1 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
               activeTab === 'business'
                 ? 'border-primary-500 text-primary-600'
-                : 'border-transparent text-neutral-500 hover:text-neutral-700'
+                : 'border-transparent text-neutral-500 dark:text-slate-400 hover:text-neutral-700 dark:hover:text-slate-300'
             }`}
           >
             <div className="flex items-center gap-2">
@@ -132,7 +132,7 @@ export function AnalyticsPage() {
             className={`pb-4 px-1 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
               activeTab === 'usage'
                 ? 'border-primary-500 text-primary-600'
-                : 'border-transparent text-neutral-500 hover:text-neutral-700'
+                : 'border-transparent text-neutral-500 dark:text-slate-400 hover:text-neutral-700 dark:hover:text-slate-300'
             }`}
           >
             <div className="flex items-center gap-2">
@@ -145,7 +145,7 @@ export function AnalyticsPage() {
             className={`pb-4 px-1 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
               activeTab === 'risk'
                 ? 'border-primary-500 text-primary-600'
-                : 'border-transparent text-neutral-500 hover:text-neutral-700'
+                : 'border-transparent text-neutral-500 dark:text-slate-400 hover:text-neutral-700 dark:hover:text-slate-300'
             }`}
           >
             <div className="flex items-center gap-2">
@@ -167,68 +167,68 @@ export function AnalyticsPage() {
             {/* MRR */}
             <div className="card p-5">
               <div className="flex items-center justify-between mb-3">
-                <span className="text-neutral-500 text-sm font-medium">Monthly Recurring Revenue</span>
+                <span className="text-neutral-500 dark:text-slate-400 text-sm font-medium">Monthly Recurring Revenue</span>
                 <div className="w-8 h-8 rounded-lg bg-emerald-100 flex items-center justify-center">
                   <DollarSign className="w-4 h-4 text-emerald-600" />
                 </div>
               </div>
-              <p className="text-2xl font-bold text-neutral-900">{formatCurrency(businessMetrics.mrr)}</p>
+              <p className="text-2xl font-bold text-neutral-900 dark:text-white">{formatCurrency(businessMetrics.mrr)}</p>
               <div className="flex items-center gap-1 mt-2">
                 <div className="flex items-center gap-1 text-emerald-600">
                   <ArrowUpRight className="w-4 h-4" />
                   <span className="text-sm font-medium">{businessMetrics.mrrGrowth}%</span>
                 </div>
-                <span className="text-xs text-neutral-400">vs last month</span>
+                <span className="text-xs text-neutral-400 dark:text-slate-500">vs last month</span>
               </div>
             </div>
 
             {/* ARR */}
             <div className="card p-5">
               <div className="flex items-center justify-between mb-3">
-                <span className="text-neutral-500 text-sm font-medium">Annual Recurring Revenue</span>
+                <span className="text-neutral-500 dark:text-slate-400 text-sm font-medium">Annual Recurring Revenue</span>
                 <div className="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center">
                   <TrendingUp className="w-4 h-4 text-blue-600" />
                 </div>
               </div>
-              <p className="text-2xl font-bold text-neutral-900">{formatCurrency(businessMetrics.arr)}</p>
+              <p className="text-2xl font-bold text-neutral-900 dark:text-white">{formatCurrency(businessMetrics.arr)}</p>
               <div className="flex items-center gap-1 mt-2">
                 <div className="flex items-center gap-1 text-emerald-600">
                   <ArrowUpRight className="w-4 h-4" />
                   <span className="text-sm font-medium">{businessMetrics.arrGrowth}%</span>
                 </div>
-                <span className="text-xs text-neutral-400">vs last year</span>
+                <span className="text-xs text-neutral-400 dark:text-slate-500">vs last year</span>
               </div>
             </div>
 
             {/* Churn Rate */}
             <div className="card p-5">
               <div className="flex items-center justify-between mb-3">
-                <span className="text-neutral-500 text-sm font-medium">Churn Rate</span>
+                <span className="text-neutral-500 dark:text-slate-400 text-sm font-medium">Churn Rate</span>
                 <div className="w-8 h-8 rounded-lg bg-amber-100 flex items-center justify-center">
                   <TrendingDown className="w-4 h-4 text-amber-600" />
                 </div>
               </div>
-              <p className="text-2xl font-bold text-neutral-900">{businessMetrics.churnRate}%</p>
+              <p className="text-2xl font-bold text-neutral-900 dark:text-white">{businessMetrics.churnRate}%</p>
               <div className="flex items-center gap-1 mt-2">
                 <div className="flex items-center gap-1 text-emerald-600">
                   <ArrowDownRight className="w-4 h-4" />
                   <span className="text-sm font-medium">{Math.abs(businessMetrics.churnChange)}%</span>
                 </div>
-                <span className="text-xs text-neutral-400">better than target</span>
+                <span className="text-xs text-neutral-400 dark:text-slate-500">better than target</span>
               </div>
             </div>
 
             {/* Growth Rate */}
             <div className="card p-5">
               <div className="flex items-center justify-between mb-3">
-                <span className="text-neutral-500 text-sm font-medium">Growth Rate</span>
+                <span className="text-neutral-500 dark:text-slate-400 text-sm font-medium">Growth Rate</span>
                 <div className="w-8 h-8 rounded-lg bg-purple-100 flex items-center justify-center">
                   <Target className="w-4 h-4 text-purple-600" />
                 </div>
               </div>
-              <p className="text-2xl font-bold text-neutral-900">{businessMetrics.growthRate}%</p>
+              <p className="text-2xl font-bold text-neutral-900 dark:text-white">{businessMetrics.growthRate}%</p>
               <div className="flex items-center gap-1 mt-2">
-                <span className="text-xs text-neutral-400">MoM customer growth</span>
+                <span className="text-xs text-neutral-400 dark:text-slate-500">MoM customer growth</span>
               </div>
             </div>
           </div>
@@ -238,8 +238,8 @@ export function AnalyticsPage() {
             {/* Revenue Trend */}
             <div className="card p-6">
               <div className="flex items-center justify-between mb-6">
-                <h3 className="font-semibold text-neutral-900">Revenue Trend</h3>
-                <LineChart className="w-5 h-5 text-neutral-400" />
+                <h3 className="font-semibold text-neutral-900 dark:text-white">Revenue Trend</h3>
+                <LineChart className="w-5 h-5 text-neutral-400 dark:text-slate-500" />
               </div>
               <div className="h-48 flex items-end justify-between gap-2">
                 {monthlyRevenue.map((month, index) => (
@@ -251,12 +251,12 @@ export function AnalyticsPage() {
                         animationDelay: `${index * 100}ms`
                       }}
                     />
-                    <span className="text-xs text-neutral-500">{month.month}</span>
+                    <span className="text-xs text-neutral-500 dark:text-slate-400">{month.month}</span>
                   </div>
                 ))}
               </div>
-              <div className="mt-4 pt-4 border-t border-neutral-100 flex justify-between text-sm">
-                <span className="text-neutral-500">Total: {formatCurrency(monthlyRevenue.reduce((a, b) => a + b.revenue, 0))}</span>
+              <div className="mt-4 pt-4 border-t border-neutral-100 dark:border-slate-700 flex justify-between text-sm">
+                <span className="text-neutral-500 dark:text-slate-400">Total: {formatCurrency(monthlyRevenue.reduce((a, b) => a + b.revenue, 0))}</span>
                 <span className="text-emerald-600 font-medium">+27.6% growth</span>
               </div>
             </div>
@@ -264,21 +264,21 @@ export function AnalyticsPage() {
             {/* Churn Trend */}
             <div className="card p-6">
               <div className="flex items-center justify-between mb-6">
-                <h3 className="font-semibold text-neutral-900">Churn Rate Trend</h3>
-                <TrendingDown className="w-5 h-5 text-neutral-400" />
+                <h3 className="font-semibold text-neutral-900 dark:text-white">Churn Rate Trend</h3>
+                <TrendingDown className="w-5 h-5 text-neutral-400 dark:text-slate-500" />
               </div>
               <div className="h-48">
                 <div className="relative h-full">
                   {/* Target line */}
                   <div className="absolute left-0 right-0 top-1/2 border-t-2 border-dashed border-red-300 z-0">
-                    <span className="absolute -top-5 right-0 text-xs text-red-500 bg-white px-1">Target: 3%</span>
+                    <span className="absolute -top-5 right-0 text-xs text-red-500 bg-white dark:bg-slate-800 px-1">Target: 3%</span>
                   </div>
                   
                   {/* Churn bars */}
                   <div className="flex items-end justify-between gap-4 h-full">
                     {churnData.map((data, index) => (
                       <div key={data.month} className="flex-1 flex flex-col items-center gap-2 relative z-10">
-                        <span className="text-xs text-neutral-600 font-medium">{data.rate}%</span>
+                        <span className="text-xs text-neutral-600 dark:text-slate-400 font-medium">{data.rate}%</span>
                         <div 
                           className={`w-full rounded-t transition-all duration-500 ${
                             data.rate > 3 ? 'bg-red-400' : data.rate > 2.5 ? 'bg-amber-400' : 'bg-emerald-400'
@@ -288,14 +288,14 @@ export function AnalyticsPage() {
                             animationDelay: `${index * 100}ms`
                           }}
                         />
-                        <span className="text-xs text-neutral-500">{data.month}</span>
+                        <span className="text-xs text-neutral-500 dark:text-slate-400">{data.month}</span>
                       </div>
                     ))}
                   </div>
                 </div>
               </div>
-              <div className="mt-4 pt-4 border-t border-neutral-100 flex justify-between text-sm">
-                <span className="text-neutral-500">Current: {businessMetrics.churnRate}%</span>
+              <div className="mt-4 pt-4 border-t border-neutral-100 dark:border-slate-700 flex justify-between text-sm">
+                <span className="text-neutral-500 dark:text-slate-400">Current: {businessMetrics.churnRate}%</span>
                 <span className="text-emerald-600 font-medium">Below target ✓</span>
               </div>
             </div>
@@ -303,17 +303,17 @@ export function AnalyticsPage() {
 
           {/* Unit Economics */}
           <div className="card p-6">
-            <h3 className="font-semibold text-neutral-900 mb-6">Unit Economics</h3>
+            <h3 className="font-semibold text-neutral-900 dark:text-white mb-6">Unit Economics</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="text-center p-4 bg-neutral-50 rounded-xl">
-                <p className="text-sm text-neutral-500 mb-2">Customer Lifetime Value</p>
-                <p className="text-3xl font-bold text-neutral-900">{formatCurrency(businessMetrics.ltv)}</p>
-                <p className="text-xs text-neutral-400 mt-1">Average revenue per customer</p>
+              <div className="text-center p-4 bg-neutral-50 dark:bg-slate-800 rounded-xl">
+                <p className="text-sm text-neutral-500 dark:text-slate-400 mb-2">Customer Lifetime Value</p>
+                <p className="text-3xl font-bold text-neutral-900 dark:text-white">{formatCurrency(businessMetrics.ltv)}</p>
+                <p className="text-xs text-neutral-400 dark:text-slate-500 mt-1">Average revenue per customer</p>
               </div>
-              <div className="text-center p-4 bg-neutral-50 rounded-xl">
-                <p className="text-sm text-neutral-500 mb-2">Customer Acquisition Cost</p>
-                <p className="text-3xl font-bold text-neutral-900">{formatCurrency(businessMetrics.cac)}</p>
-                <p className="text-xs text-neutral-400 mt-1">Marketing + Sales cost</p>
+              <div className="text-center p-4 bg-neutral-50 dark:bg-slate-800 rounded-xl">
+                <p className="text-sm text-neutral-500 dark:text-slate-400 mb-2">Customer Acquisition Cost</p>
+                <p className="text-3xl font-bold text-neutral-900 dark:text-white">{formatCurrency(businessMetrics.cac)}</p>
+                <p className="text-xs text-neutral-400 dark:text-slate-500 mt-1">Marketing + Sales cost</p>
               </div>
               <div className="text-center p-4 bg-emerald-50 rounded-xl">
                 <p className="text-sm text-emerald-600 mb-2">LTV:CAC Ratio</p>
@@ -332,34 +332,34 @@ export function AnalyticsPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <div className="card p-5">
               <div className="flex items-center justify-between mb-3">
-                <span className="text-neutral-500 text-sm font-medium">Avg Employees / Company</span>
+                <span className="text-neutral-500 dark:text-slate-400 text-sm font-medium">Avg Employees / Company</span>
                 <Users className="w-5 h-5 text-blue-500" />
               </div>
-              <p className="text-2xl font-bold text-neutral-900">{usageMetrics.avgEmployeesPerCompany}</p>
+              <p className="text-2xl font-bold text-neutral-900 dark:text-white">{usageMetrics.avgEmployeesPerCompany}</p>
             </div>
 
             <div className="card p-5">
               <div className="flex items-center justify-between mb-3">
-                <span className="text-neutral-500 text-sm font-medium">Daily Active Users</span>
+                <span className="text-neutral-500 dark:text-slate-400 text-sm font-medium">Daily Active Users</span>
                 <Activity className="w-5 h-5 text-emerald-500" />
               </div>
-              <p className="text-2xl font-bold text-neutral-900">{usageMetrics.avgDailyActiveUsers.toLocaleString()}</p>
+              <p className="text-2xl font-bold text-neutral-900 dark:text-white">{usageMetrics.avgDailyActiveUsers.toLocaleString()}</p>
             </div>
 
             <div className="card p-5">
               <div className="flex items-center justify-between mb-3">
-                <span className="text-neutral-500 text-sm font-medium">Avg Session Duration</span>
+                <span className="text-neutral-500 dark:text-slate-400 text-sm font-medium">Avg Session Duration</span>
                 <Clock className="w-5 h-5 text-purple-500" />
               </div>
-              <p className="text-2xl font-bold text-neutral-900">{usageMetrics.avgSessionDuration} min</p>
+              <p className="text-2xl font-bold text-neutral-900 dark:text-white">{usageMetrics.avgSessionDuration} min</p>
             </div>
 
             <div className="card p-5">
               <div className="flex items-center justify-between mb-3">
-                <span className="text-neutral-500 text-sm font-medium">Total Logins (30d)</span>
+                <span className="text-neutral-500 dark:text-slate-400 text-sm font-medium">Total Logins (30d)</span>
                 <UserCheck className="w-5 h-5 text-amber-500" />
               </div>
-              <p className="text-2xl font-bold text-neutral-900">{usageMetrics.totalLogins.toLocaleString()}</p>
+              <p className="text-2xl font-bold text-neutral-900 dark:text-white">{usageMetrics.totalLogins.toLocaleString()}</p>
             </div>
           </div>
 
@@ -368,21 +368,21 @@ export function AnalyticsPage() {
             {/* Feature Usage */}
             <div className="card p-6">
               <div className="flex items-center justify-between mb-6">
-                <h3 className="font-semibold text-neutral-900">Most Used Features</h3>
-                <BarChart3 className="w-5 h-5 text-neutral-400" />
+                <h3 className="font-semibold text-neutral-900 dark:text-white">Most Used Features</h3>
+                <BarChart3 className="w-5 h-5 text-neutral-400 dark:text-slate-500" />
               </div>
               <div className="space-y-4">
                 {featureUsage.map((feature, index) => (
                   <div key={feature.name}>
                     <div className="flex items-center justify-between mb-1">
-                      <span className="text-sm text-neutral-700">{feature.name}</span>
+                      <span className="text-sm text-neutral-700 dark:text-slate-300">{feature.name}</span>
                       <div className="flex items-center gap-2">
-                        <span className="text-sm font-medium text-neutral-900">{feature.usage}%</span>
+                        <span className="text-sm font-medium text-neutral-900 dark:text-white">{feature.usage}%</span>
                         {feature.trend === 'up' && <TrendingUp className="w-3 h-3 text-emerald-500" />}
                         {feature.trend === 'down' && <TrendingDown className="w-3 h-3 text-red-500" />}
                       </div>
                     </div>
-                    <div className="h-2 bg-neutral-100 rounded-full overflow-hidden">
+                    <div className="h-2 bg-neutral-100 dark:bg-slate-700 rounded-full overflow-hidden">
                       <div 
                         className={`h-full rounded-full transition-all duration-700 ${
                           feature.usage >= 80 ? 'bg-primary-500' :
@@ -403,8 +403,8 @@ export function AnalyticsPage() {
             {/* Device Distribution */}
             <div className="card p-6">
               <div className="flex items-center justify-between mb-6">
-                <h3 className="font-semibold text-neutral-900">Device Distribution</h3>
-                <PieChart className="w-5 h-5 text-neutral-400" />
+                <h3 className="font-semibold text-neutral-900 dark:text-white">Device Distribution</h3>
+                <PieChart className="w-5 h-5 text-neutral-400 dark:text-slate-500" />
               </div>
               
               <div className="flex items-center justify-center mb-6">
@@ -432,24 +432,24 @@ export function AnalyticsPage() {
                     />
                   </svg>
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-lg font-bold text-neutral-900">{usageMetrics.totalLogins.toLocaleString()}</span>
+                    <span className="text-lg font-bold text-neutral-900 dark:text-white">{usageMetrics.totalLogins.toLocaleString()}</span>
                   </div>
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
-                <div className="flex items-center gap-3 p-3 bg-neutral-50 rounded-xl">
+                <div className="flex items-center gap-3 p-3 bg-neutral-50 dark:bg-slate-800 rounded-xl">
                   <div className="w-3 h-3 bg-primary-500 rounded-full" />
                   <div>
-                    <p className="text-sm font-medium text-neutral-900">Desktop</p>
-                    <p className="text-lg font-bold text-neutral-700">{usageMetrics.desktopUsage}%</p>
+                    <p className="text-sm font-medium text-neutral-900 dark:text-white">Desktop</p>
+                    <p className="text-lg font-bold text-neutral-700 dark:text-slate-300">{usageMetrics.desktopUsage}%</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-3 p-3 bg-neutral-50 rounded-xl">
+                <div className="flex items-center gap-3 p-3 bg-neutral-50 dark:bg-slate-800 rounded-xl">
                   <div className="w-3 h-3 bg-emerald-500 rounded-full" />
                   <div>
-                    <p className="text-sm font-medium text-neutral-900">Mobile</p>
-                    <p className="text-lg font-bold text-neutral-700">{usageMetrics.mobileUsage}%</p>
+                    <p className="text-sm font-medium text-neutral-900 dark:text-white">Mobile</p>
+                    <p className="text-lg font-bold text-neutral-700 dark:text-slate-300">{usageMetrics.mobileUsage}%</p>
                   </div>
                 </div>
               </div>
@@ -458,7 +458,7 @@ export function AnalyticsPage() {
 
           {/* Activity Heatmap */}
           <div className="card p-6">
-            <h3 className="font-semibold text-neutral-900 mb-6">Peak Usage Hours</h3>
+            <h3 className="font-semibold text-neutral-900 dark:text-white mb-6">Peak Usage Hours</h3>
             <div className="overflow-x-auto">
               <div className="flex gap-1 min-w-[600px]">
                 {Array.from({ length: 24 }, (_, hour) => {
@@ -474,7 +474,7 @@ export function AnalyticsPage() {
                           backgroundColor: `rgba(79, 70, 229, ${activity / 100})`,
                         }}
                       />
-                      <span className="text-xs text-neutral-400">
+                      <span className="text-xs text-neutral-400 dark:text-slate-500">
                         {hour.toString().padStart(2, '0')}
                       </span>
                     </div>
@@ -482,7 +482,7 @@ export function AnalyticsPage() {
                 })}
               </div>
             </div>
-            <div className="mt-4 flex items-center justify-center gap-4 text-xs text-neutral-500">
+            <div className="mt-4 flex items-center justify-center gap-4 text-xs text-neutral-500 dark:text-slate-400">
               <div className="flex items-center gap-2">
                 <div className="w-4 h-4 bg-primary-100 rounded" />
                 <span>Low</span>
@@ -512,7 +512,7 @@ export function AnalyticsPage() {
             <div className="card p-5 border-l-4 border-l-red-500">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-neutral-500">High Risk</p>
+                  <p className="text-sm text-neutral-500 dark:text-slate-400">High Risk</p>
                   <p className="text-2xl font-bold text-red-600">
                     {riskAlerts.filter(a => a.risk === 'high').length}
                   </p>
@@ -526,7 +526,7 @@ export function AnalyticsPage() {
             <div className="card p-5 border-l-4 border-l-amber-500">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-neutral-500">Medium Risk</p>
+                  <p className="text-sm text-neutral-500 dark:text-slate-400">Medium Risk</p>
                   <p className="text-2xl font-bold text-amber-600">
                     {riskAlerts.filter(a => a.risk === 'medium').length}
                   </p>
@@ -540,7 +540,7 @@ export function AnalyticsPage() {
             <div className="card p-5 border-l-4 border-l-blue-500">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-neutral-500">Low Risk</p>
+                  <p className="text-sm text-neutral-500 dark:text-slate-400">Low Risk</p>
                   <p className="text-2xl font-bold text-blue-600">
                     {riskAlerts.filter(a => a.risk === 'low').length}
                   </p>
@@ -554,48 +554,48 @@ export function AnalyticsPage() {
 
           {/* Risk Alerts Table */}
           <div className="card overflow-hidden">
-            <div className="p-4 border-b border-neutral-200">
-              <h3 className="font-semibold text-neutral-900">Active Risk Alerts</h3>
-              <p className="text-sm text-neutral-500 mt-1">Companies requiring attention</p>
+            <div className="p-4 border-b border-neutral-200 dark:border-slate-700">
+              <h3 className="font-semibold text-neutral-900 dark:text-white">Active Risk Alerts</h3>
+              <p className="text-sm text-neutral-500 dark:text-slate-400 mt-1">Companies requiring attention</p>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full min-w-[600px]">
                 <thead>
-                  <tr className="bg-neutral-50 border-b border-neutral-200">
-                    <th className="px-4 py-3 text-left text-xs font-semibold text-neutral-600 uppercase">
+                  <tr className="bg-neutral-50 dark:bg-slate-800 border-b border-neutral-200 dark:border-slate-700">
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-neutral-600 dark:text-slate-400 uppercase">
                       Company
                     </th>
-                    <th className="px-4 py-3 text-left text-xs font-semibold text-neutral-600 uppercase">
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-neutral-600 dark:text-slate-400 uppercase">
                       Risk Type
                     </th>
-                    <th className="px-4 py-3 text-left text-xs font-semibold text-neutral-600 uppercase">
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-neutral-600 dark:text-slate-400 uppercase">
                       Severity
                     </th>
-                    <th className="px-4 py-3 text-left text-xs font-semibold text-neutral-600 uppercase">
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-neutral-600 dark:text-slate-400 uppercase">
                       Details
                     </th>
-                    <th className="px-4 py-3 text-right text-xs font-semibold text-neutral-600 uppercase">
+                    <th className="px-4 py-3 text-right text-xs font-semibold text-neutral-600 dark:text-slate-400 uppercase">
                       Action
                     </th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-neutral-100">
+                <tbody className="divide-y divide-neutral-100 dark:divide-slate-700">
                   {riskAlerts.map((alert, index) => (
-                    <tr key={index} className="hover:bg-neutral-50">
+                    <tr key={index} className="hover:bg-neutral-50 dark:hover:bg-slate-800">
                       <td className="px-4 py-4">
                         <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-lg bg-neutral-100 flex items-center justify-center">
-                            <Building2 className="w-4 h-4 text-neutral-600" />
+                          <div className="w-8 h-8 rounded-lg bg-neutral-100 dark:bg-slate-700 flex items-center justify-center">
+                            <Building2 className="w-4 h-4 text-neutral-600 dark:text-slate-400" />
                           </div>
-                          <span className="font-medium text-neutral-900">{alert.company}</span>
+                          <span className="font-medium text-neutral-900 dark:text-white">{alert.company}</span>
                         </div>
                       </td>
                       <td className="px-4 py-4">
                         <div className="flex items-center gap-2">
-                          {alert.type === 'payment' && <CreditCard className="w-4 h-4 text-neutral-400" />}
-                          {alert.type === 'limit' && <Zap className="w-4 h-4 text-neutral-400" />}
-                          {alert.type === 'inactive' && <Clock className="w-4 h-4 text-neutral-400" />}
-                          <span className="capitalize text-neutral-700">{alert.type}</span>
+                          {alert.type === 'payment' && <CreditCard className="w-4 h-4 text-neutral-400 dark:text-slate-500" />}
+                          {alert.type === 'limit' && <Zap className="w-4 h-4 text-neutral-400 dark:text-slate-500" />}
+                          {alert.type === 'inactive' && <Clock className="w-4 h-4 text-neutral-400 dark:text-slate-500" />}
+                          <span className="capitalize text-neutral-700 dark:text-slate-300">{alert.type}</span>
                         </div>
                       </td>
                       <td className="px-4 py-4">
@@ -608,14 +608,14 @@ export function AnalyticsPage() {
                         </span>
                       </td>
                       <td className="px-4 py-4">
-                        <p className="text-sm text-neutral-700">{alert.detail}</p>
+                        <p className="text-sm text-neutral-700 dark:text-slate-300">{alert.detail}</p>
                         {alert.amount && (
-                          <p className="text-xs text-neutral-500 mt-1">
+                          <p className="text-xs text-neutral-500 dark:text-slate-400 mt-1">
                             Amount: {formatCurrency(alert.amount)}
                           </p>
                         )}
                         {alert.usage && (
-                          <p className="text-xs text-neutral-500 mt-1">
+                          <p className="text-xs text-neutral-500 dark:text-slate-400 mt-1">
                             Usage: {alert.usage}
                           </p>
                         )}
@@ -641,22 +641,22 @@ export function AnalyticsPage() {
                   <CreditCard className="w-5 h-5 text-red-600" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-neutral-900">Payment Risk</h4>
-                  <p className="text-xs text-neutral-500">Overdue & failed payments</p>
+                  <h4 className="font-semibold text-neutral-900 dark:text-white">Payment Risk</h4>
+                  <p className="text-xs text-neutral-500 dark:text-slate-400">Overdue & failed payments</p>
                 </div>
               </div>
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
-                  <span className="text-neutral-600">Overdue (15+ days)</span>
+                  <span className="text-neutral-600 dark:text-slate-400">Overdue (15+ days)</span>
                   <span className="font-medium text-red-600">1</span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-neutral-600">Card Declined</span>
+                  <span className="text-neutral-600 dark:text-slate-400">Card Declined</span>
                   <span className="font-medium text-amber-600">1</span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-neutral-600">Due Next 7 Days</span>
-                  <span className="font-medium text-neutral-900">8</span>
+                  <span className="text-neutral-600 dark:text-slate-400">Due Next 7 Days</span>
+                  <span className="font-medium text-neutral-900 dark:text-white">8</span>
                 </div>
               </div>
             </div>
@@ -668,22 +668,22 @@ export function AnalyticsPage() {
                   <Zap className="w-5 h-5 text-amber-600" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-neutral-900">Limit Risk</h4>
-                  <p className="text-xs text-neutral-500">Near plan limits</p>
+                  <h4 className="font-semibold text-neutral-900 dark:text-white">Limit Risk</h4>
+                  <p className="text-xs text-neutral-500 dark:text-slate-400">Near plan limits</p>
                 </div>
               </div>
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
-                  <span className="text-neutral-600">Employee Limit (90%+)</span>
+                  <span className="text-neutral-600 dark:text-slate-400">Employee Limit (90%+)</span>
                   <span className="font-medium text-amber-600">2</span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-neutral-600">Storage Limit (80%+)</span>
+                  <span className="text-neutral-600 dark:text-slate-400">Storage Limit (80%+)</span>
                   <span className="font-medium text-blue-600">1</span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-neutral-600">API Limit (75%+)</span>
-                  <span className="font-medium text-neutral-900">0</span>
+                  <span className="text-neutral-600 dark:text-slate-400">API Limit (75%+)</span>
+                  <span className="font-medium text-neutral-900 dark:text-white">0</span>
                 </div>
               </div>
             </div>
@@ -695,22 +695,22 @@ export function AnalyticsPage() {
                   <Clock className="w-5 h-5 text-blue-600" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-neutral-900">Activity Risk</h4>
-                  <p className="text-xs text-neutral-500">Inactive accounts</p>
+                  <h4 className="font-semibold text-neutral-900 dark:text-white">Activity Risk</h4>
+                  <p className="text-xs text-neutral-500 dark:text-slate-400">Inactive accounts</p>
                 </div>
               </div>
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
-                  <span className="text-neutral-600">No Login (14+ days)</span>
+                  <span className="text-neutral-600 dark:text-slate-400">No Login (14+ days)</span>
                   <span className="font-medium text-amber-600">1</span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-neutral-600">No Login (7-14 days)</span>
+                  <span className="text-neutral-600 dark:text-slate-400">No Login (7-14 days)</span>
                   <span className="font-medium text-blue-600">3</span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-neutral-600">Low Engagement</span>
-                  <span className="font-medium text-neutral-900">5</span>
+                  <span className="text-neutral-600 dark:text-slate-400">Low Engagement</span>
+                  <span className="font-medium text-neutral-900 dark:text-white">5</span>
                 </div>
               </div>
             </div>

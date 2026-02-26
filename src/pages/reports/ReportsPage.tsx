@@ -91,13 +91,13 @@ export function ReportsPage() {
             <FileText className="w-6 h-6 text-primary-600" />
           </div>
           <div>
-            <h1 className="text-2xl font-heading font-bold text-neutral-900">Reports</h1>
-            <p className="text-neutral-500 text-sm">Generate and download HR reports</p>
+            <h1 className="text-2xl font-heading font-bold text-neutral-900 dark:text-white">Reports</h1>
+            <p className="text-neutral-500 dark:text-slate-400 text-sm">Generate and download HR reports</p>
           </div>
         </div>
         
         {/* Format Selector */}
-        <div className="flex items-center gap-2 bg-neutral-100 rounded-lg p-1">
+        <div className="flex items-center gap-2 bg-neutral-100 dark:bg-slate-700 rounded-lg p-1">
           {(['pdf', 'excel', 'csv'] as FileFormat[]).map((format) => {
             const FormatIcon = getFormatIcon(format);
             return (
@@ -107,7 +107,7 @@ export function ReportsPage() {
                 className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-all ${
                   selectedFormat === format
                     ? 'bg-white text-primary-600 shadow-sm'
-                    : 'text-neutral-600 hover:text-neutral-900'
+                    : 'text-neutral-600 dark:text-slate-400 hover:text-neutral-900 dark:hover:text-white'
                 }`}
               >
                 <FormatIcon size={16} />
@@ -123,7 +123,7 @@ export function ReportsPage() {
         <div className="flex flex-col sm:flex-row gap-4">
           {/* Search */}
           <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400 dark:text-slate-500" />
             <input
               type="text"
               value={searchQuery}
@@ -134,16 +134,16 @@ export function ReportsPage() {
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 p-1 hover:bg-neutral-100 rounded-full"
+                className="absolute right-3 top-1/2 -translate-y-1/2 p-1 hover:bg-neutral-100 dark:hover:bg-slate-700 rounded-full"
               >
-                <X size={16} className="text-neutral-400" />
+                <X size={16} className="text-neutral-400 dark:text-slate-500" />
               </button>
             )}
           </div>
           
           {/* Category Filter */}
           <div className="flex items-center gap-2">
-            <Filter size={18} className="text-neutral-400 hidden sm:block" />
+            <Filter size={18} className="text-neutral-400 dark:text-slate-500 hidden sm:block" />
             <div className="flex flex-wrap gap-2">
               {categories.map((category) => {
                 const Icon = category.icon;
@@ -154,7 +154,7 @@ export function ReportsPage() {
                     className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-all ${
                       selectedCategory === category.value
                         ? 'bg-primary-100 text-primary-700 ring-2 ring-primary-500/20'
-                        : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'
+                        : 'bg-neutral-100 dark:bg-slate-700 text-neutral-600 dark:text-slate-400 hover:bg-neutral-200 dark:hover:bg-slate-600'
                     }`}
                   >
                     <Icon size={16} />
@@ -162,7 +162,7 @@ export function ReportsPage() {
                     <span className={`text-xs px-1.5 py-0.5 rounded ${
                       selectedCategory === category.value 
                         ? 'bg-primary-200 text-primary-800' 
-                        : 'bg-neutral-200 text-neutral-600'
+                        : 'bg-neutral-200 dark:bg-slate-600 text-neutral-600 dark:text-slate-400'
                     }`}>
                       {categoryCounts[category.value]}
                     </span>
@@ -176,8 +176,8 @@ export function ReportsPage() {
 
       {/* Results Summary */}
       <div className={`flex items-center justify-between text-sm transition-all duration-500 delay-150 ${mounted ? 'opacity-100' : 'opacity-0'}`}>
-        <p className="text-neutral-500">
-          Showing <span className="font-medium text-neutral-700">{filteredReports.length}</span> of {reports.length} reports
+        <p className="text-neutral-500 dark:text-slate-400">
+          Showing <span className="font-medium text-neutral-700 dark:text-slate-300">{filteredReports.length}</span> of {reports.length} reports
           {selectedCategory !== 'All' && (
             <span className="ml-2">
               in <span className={`badge ${categoryColors[selectedCategory]}`}>{selectedCategory}</span>
@@ -208,18 +208,18 @@ export function ReportsPage() {
                     <report.icon className="w-6 h-6 text-white" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-semibold text-neutral-900 group-hover:text-primary-600 transition-colors">
+                    <h3 className="font-semibold text-neutral-900 dark:text-white group-hover:text-primary-600 transition-colors">
                       {report.name}
                     </h3>
-                    <p className="text-sm text-neutral-500 mt-1 line-clamp-2">{report.description}</p>
+                    <p className="text-sm text-neutral-500 dark:text-slate-400 mt-1 line-clamp-2">{report.description}</p>
                     <span className={`inline-block mt-3 text-xs px-2.5 py-1 rounded-full font-medium ${categoryColors[report.category]}`}>
                       {report.category}
                     </span>
                   </div>
                 </div>
                 
-                <div className="mt-6 pt-4 border-t border-neutral-100 flex gap-2">
-                  <button className="btn btn-ghost btn-sm flex-1 text-neutral-600 hover:text-primary-600">
+                <div className="mt-6 pt-4 border-t border-neutral-100 dark:border-slate-700 flex gap-2">
+                  <button className="btn btn-ghost btn-sm flex-1 text-neutral-600 dark:text-slate-400 hover:text-primary-600">
                     <Eye size={16} />
                     Preview
                   </button>
@@ -247,11 +247,11 @@ export function ReportsPage() {
         </div>
       ) : (
         <div className={`card p-12 text-center transition-all duration-500 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-          <div className="w-16 h-16 bg-neutral-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Search className="w-8 h-8 text-neutral-400" />
+          <div className="w-16 h-16 bg-neutral-100 dark:bg-slate-700 rounded-full flex items-center justify-center mx-auto mb-4">
+            <Search className="w-8 h-8 text-neutral-400 dark:text-slate-500" />
           </div>
-          <h3 className="text-lg font-semibold text-neutral-900 mb-2">No reports found</h3>
-          <p className="text-neutral-500 mb-4">
+          <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-2">No reports found</h3>
+          <p className="text-neutral-500 dark:text-slate-400 mb-4">
             No reports match your search criteria. Try adjusting your filters.
           </p>
           <button 

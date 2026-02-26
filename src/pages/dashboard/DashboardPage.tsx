@@ -253,7 +253,7 @@ export function DashboardPage() {
             <div>
               <p className="text-3xl font-bold text-neutral-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">{stat.value}</p>
               <p className="text-sm font-medium text-neutral-700 dark:text-slate-300 mt-1">{stat.name}</p>
-              <p className="text-xs text-neutral-400 mt-0.5">{stat.description}</p>
+              <p className="text-xs text-neutral-400 dark:text-slate-500 mt-0.5">{stat.description}</p>
             </div>
           </div>
         ))}
@@ -263,7 +263,7 @@ export function DashboardPage() {
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
         {/* Department Overview - Takes 2 columns */}
         <div className={`xl:col-span-2 card overflow-hidden transition-all duration-500 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{ transitionDelay: '400ms' }}>
-          <div className="p-6 border-b border-neutral-100 bg-gradient-to-r from-neutral-50 to-white">
+          <div className="p-6 border-b border-neutral-100 dark:border-slate-700 bg-gradient-to-r from-neutral-50 dark:from-slate-800 to-white dark:to-slate-800">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-primary-100 rounded-xl">
@@ -271,7 +271,7 @@ export function DashboardPage() {
                 </div>
                 <div>
                   <h2 className="text-lg font-semibold text-neutral-900 dark:text-white">Department Overview</h2>
-                  <p className="text-sm text-neutral-500">Employee distribution by department</p>
+                  <p className="text-sm text-neutral-500 dark:text-slate-400">Employee distribution by department</p>
                 </div>
               </div>
               <Link 
@@ -287,13 +287,13 @@ export function DashboardPage() {
               {liveDepartments.map((dept, index) => (
                 <div 
                   key={dept.name}
-                  className="text-center p-4 bg-neutral-50 rounded-xl hover:bg-neutral-100 transition-colors cursor-pointer"
+                  className="text-center p-4 bg-neutral-50 dark:bg-slate-800 rounded-xl hover:bg-neutral-100 dark:hover:bg-slate-700 transition-colors cursor-pointer"
                 >
                   <div className={`w-12 h-12 ${dept.color} rounded-xl flex items-center justify-center mx-auto mb-3`}>
                     <span className="text-white font-bold text-lg">{dept.count}</span>
                   </div>
                   <h3 className="font-semibold text-neutral-900 dark:text-white text-sm">{dept.name}</h3>
-                  <p className="text-xs text-neutral-500 mt-1">
+                  <p className="text-xs text-neutral-500 dark:text-slate-400 mt-1">
                     {((dept.count / (liveStats.totalEmployees || 1)) * 100).toFixed(1)}%
                   </p>
                 </div>
@@ -304,7 +304,7 @@ export function DashboardPage() {
 
         {/* Recent Activities Panel */}
         <div className={`card overflow-hidden transition-all duration-500 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{ transitionDelay: '500ms' }}>
-          <div className="p-6 border-b border-neutral-100 bg-gradient-to-r from-blue-50 to-white">
+          <div className="p-6 border-b border-neutral-100 dark:border-slate-700 bg-gradient-to-r from-blue-50 dark:from-slate-800 to-white dark:to-slate-800">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-blue-100 rounded-xl">
@@ -312,7 +312,7 @@ export function DashboardPage() {
                 </div>
                 <div>
                   <h2 className="text-lg font-semibold text-neutral-900 dark:text-white">Recent Activities</h2>
-                  <p className="text-sm text-neutral-500">Latest HR actions</p>
+                  <p className="text-sm text-neutral-500 dark:text-slate-400">Latest HR actions</p>
                 </div>
               </div>
               <span className="px-2.5 py-1 bg-blue-100 text-blue-700 text-xs font-semibold rounded-full">
@@ -320,7 +320,7 @@ export function DashboardPage() {
               </span>
             </div>
           </div>
-          <div className="divide-y divide-neutral-100">
+          <div className="divide-y divide-neutral-100 dark:divide-slate-700">
             {mockRecentActivities.map((activity) => (
               <div 
                 key={activity.id} 
@@ -343,15 +343,15 @@ export function DashboardPage() {
                     } />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-neutral-800">{activity.action}</p>
+                    <p className="text-sm font-medium text-neutral-800 dark:text-slate-200">{activity.action}</p>
                     <p className="text-sm text-primary-600 font-medium">{activity.employee}</p>
-                    <p className="text-xs text-neutral-400 mt-1">{activity.time}</p>
+                    <p className="text-xs text-neutral-400 dark:text-slate-500 mt-1">{activity.time}</p>
                   </div>
                 </div>
               </div>
             ))}
           </div>
-          <div className="p-4 bg-neutral-50 border-t border-neutral-100">
+          <div className="p-4 bg-neutral-50 dark:bg-slate-800 border-t border-neutral-100 dark:border-slate-700">
             <Link 
               to="/app/reports" 
               className="w-full btn btn-secondary btn-sm justify-center"
@@ -367,7 +367,7 @@ export function DashboardPage() {
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
         {/* Recent Employees */}
         <div className={`xl:col-span-2 card overflow-hidden transition-all duration-500 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{ transitionDelay: '600ms' }}>
-          <div className="p-6 border-b border-neutral-100 bg-gradient-to-r from-neutral-50 to-white">
+          <div className="p-6 border-b border-neutral-100 dark:border-slate-700 bg-gradient-to-r from-neutral-50 dark:from-slate-800 to-white dark:to-slate-800">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-primary-100 rounded-xl">
@@ -375,7 +375,7 @@ export function DashboardPage() {
                 </div>
                 <div>
                   <h2 className="text-lg font-semibold text-neutral-900 dark:text-white">Recent Employees</h2>
-                  <p className="text-sm text-neutral-500">Newly hired team members</p>
+                  <p className="text-sm text-neutral-500 dark:text-slate-400">Newly hired team members</p>
                 </div>
               </div>
               <Link 
@@ -386,7 +386,7 @@ export function DashboardPage() {
               </Link>
             </div>
           </div>
-          <div className="divide-y divide-neutral-100">
+          <div className="divide-y divide-neutral-100 dark:divide-slate-700">
             {liveRecentEmployees.map((employee, index) => (
               <div 
                 key={employee.id} 
@@ -401,14 +401,14 @@ export function DashboardPage() {
                   </div>
                   <div>
                     <p className="font-semibold text-neutral-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">{employee.name}</p>
-                    <p className="text-sm text-neutral-500">{employee.position}</p>
+                    <p className="text-sm text-neutral-500 dark:text-slate-400">{employee.position}</p>
                   </div>
                 </div>
                 <div className="text-right hidden sm:block">
-                  <span className="inline-flex items-center px-2.5 py-1 rounded-lg bg-neutral-100 text-xs font-medium text-neutral-600">
+                  <span className="inline-flex items-center px-2.5 py-1 rounded-lg bg-neutral-100 dark:bg-slate-700 text-xs font-medium text-neutral-600 dark:text-slate-400">
                     {employee.department}
                   </span>
-                  <p className="text-xs text-neutral-400 mt-1.5">Hired {formatDate(employee.hireDate)}</p>
+                  <p className="text-xs text-neutral-400 dark:text-slate-500 mt-1.5">Hired {formatDate(employee.hireDate)}</p>
                 </div>
               </div>
             ))}
@@ -416,14 +416,14 @@ export function DashboardPage() {
           {liveRecentEmployees.length === 0 && (
             <div className="p-12 text-center">
               <Users className="w-12 h-12 mx-auto text-neutral-300 mb-3" />
-              <p className="text-neutral-500">No recent employees</p>
+              <p className="text-neutral-500 dark:text-slate-400">No recent employees</p>
             </div>
           )}
         </div>
 
         {/* Pending Leaves */}
         <div className={`card overflow-hidden transition-all duration-500 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{ transitionDelay: '500ms' }}>
-          <div className="p-6 border-b border-neutral-100 bg-gradient-to-r from-amber-50 to-white">
+          <div className="p-6 border-b border-neutral-100 dark:border-slate-700 bg-gradient-to-r from-amber-50 dark:from-slate-800 to-white dark:to-slate-800">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-amber-100 rounded-xl">
@@ -431,7 +431,7 @@ export function DashboardPage() {
                 </div>
                 <div>
                   <h2 className="text-lg font-semibold text-neutral-900 dark:text-white">Pending Leaves</h2>
-                  <p className="text-sm text-neutral-500">Awaiting approval</p>
+                  <p className="text-sm text-neutral-500 dark:text-slate-400">Awaiting approval</p>
                 </div>
               </div>
               <span className="px-2.5 py-1 bg-amber-100 text-amber-700 text-xs font-semibold rounded-full">
@@ -439,7 +439,7 @@ export function DashboardPage() {
               </span>
             </div>
           </div>
-          <div className="divide-y divide-neutral-100">
+          <div className="divide-y divide-neutral-100 dark:divide-slate-700">
             {livePendingLeaves.map((leave) => (
               <div 
                 key={leave.id} 
@@ -452,10 +452,10 @@ export function DashboardPage() {
                     </div>
                     <div>
                       <p className="font-medium text-neutral-900 dark:text-white text-sm">{leave.employee}</p>
-                      <p className="text-xs text-neutral-500">{leave.type} Leave</p>
+                      <p className="text-xs text-neutral-500 dark:text-slate-400">{leave.type} Leave</p>
                     </div>
                   </div>
-                  <span className="text-xs font-medium text-neutral-600 bg-white px-2 py-1 rounded-md shadow-sm">
+                  <span className="text-xs font-medium text-neutral-600 dark:text-slate-400 bg-white dark:bg-slate-800 px-2 py-1 rounded-md shadow-sm">
                     {leave.days} day{leave.days > 1 ? 's' : ''}
                   </span>
                 </div>
@@ -464,7 +464,7 @@ export function DashboardPage() {
                     <CheckCircle size={14} />
                     Approve
                   </button>
-                  <button onClick={() => { rejectLeave(String(leave.id), 'Declined from dashboard'); }} className="flex-1 btn btn-sm bg-neutral-200 hover:bg-neutral-300 text-neutral-700 text-xs py-1.5">
+                  <button onClick={() => { rejectLeave(String(leave.id), 'Declined from dashboard'); }} className="flex-1 btn btn-sm bg-neutral-200 dark:bg-slate-600 hover:bg-neutral-300 dark:hover:bg-slate-500 text-neutral-700 dark:text-slate-300 text-xs py-1.5">
                     <XCircle size={14} />
                     Decline
                   </button>
@@ -472,7 +472,7 @@ export function DashboardPage() {
               </div>
             ))}
           </div>
-          <div className="p-4 bg-neutral-50 border-t border-neutral-100">
+          <div className="p-4 bg-neutral-50 dark:bg-slate-800 border-t border-neutral-100 dark:border-slate-700">
             <Link 
               to="/app/leaves" 
               className="w-full btn btn-secondary btn-sm justify-center"
@@ -488,7 +488,7 @@ export function DashboardPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Today's Attendance */}
         <div className={`card overflow-hidden transition-all duration-500 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{ transitionDelay: '550ms' }}>
-          <div className="p-5 border-b border-neutral-100 bg-gradient-to-r from-emerald-50 to-white">
+          <div className="p-5 border-b border-neutral-100 dark:border-slate-700 bg-gradient-to-r from-emerald-50 dark:from-slate-800 to-white dark:to-slate-800">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-emerald-100 rounded-xl">
@@ -496,22 +496,22 @@ export function DashboardPage() {
                 </div>
                 <div>
                   <h2 className="text-base font-semibold text-neutral-900 dark:text-white">Today's Attendance</h2>
-                  <p className="text-xs text-neutral-500">Live check-in status</p>
+                  <p className="text-xs text-neutral-500 dark:text-slate-400">Live check-in status</p>
                 </div>
               </div>
             </div>
           </div>
-          <div className="divide-y divide-neutral-100 max-h-60 overflow-y-auto">
+          <div className="divide-y divide-neutral-100 dark:divide-slate-700 max-h-60 overflow-y-auto">
             {liveTodayAttendance.map((att) => (
-              <div key={att.id} className="px-4 py-3 flex items-center justify-between hover:bg-neutral-50">
+              <div key={att.id} className="px-4 py-3 flex items-center justify-between hover:bg-neutral-50 dark:hover:bg-slate-800">
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary-400 to-primary-500 flex items-center justify-center">
                     <span className="text-white font-medium text-xs">{att.avatar}</span>
                   </div>
-                  <span className="text-sm font-medium text-neutral-800">{att.name.split(' ')[0]}</span>
+                  <span className="text-sm font-medium text-neutral-800 dark:text-slate-200">{att.name.split(' ')[0]}</span>
                 </div>
                 <div className="flex items-center gap-2">
-              <span className="text-xs text-neutral-500">{att.timeIn}</span>
+              <span className="text-xs text-neutral-500 dark:text-slate-400">{att.timeIn}</span>
                   <span className={`w-2 h-2 rounded-full ${
                     att.status === 'on-time' ? 'bg-emerald-500' :
                     att.status === 'early' ? 'bg-blue-500' :
@@ -521,7 +521,7 @@ export function DashboardPage() {
               </div>
             ))}
           </div>
-          <div className="p-3 bg-neutral-50 border-t border-neutral-100">
+          <div className="p-3 bg-neutral-50 dark:bg-slate-800 border-t border-neutral-100 dark:border-slate-700">
             <Link to="/app/attendance" className="w-full btn btn-secondary btn-sm justify-center text-xs">
               View Full Attendance
             </Link>
@@ -530,7 +530,7 @@ export function DashboardPage() {
 
         {/* Upcoming Payroll Schedule */}
         <div className={`card overflow-hidden transition-all duration-500 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{ transitionDelay: '600ms' }}>
-          <div className="p-5 border-b border-neutral-100 bg-gradient-to-r from-purple-50 to-white">
+          <div className="p-5 border-b border-neutral-100 dark:border-slate-700 bg-gradient-to-r from-purple-50 dark:from-slate-800 to-white dark:to-slate-800">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-purple-100 rounded-xl">
@@ -538,7 +538,7 @@ export function DashboardPage() {
                 </div>
                 <div>
                   <h2 className="text-base font-semibold text-neutral-900 dark:text-white">Upcoming Payroll</h2>
-                  <p className="text-xs text-neutral-500">Next pay schedule</p>
+                  <p className="text-xs text-neutral-500 dark:text-slate-400">Next pay schedule</p>
                 </div>
               </div>
             </div>
@@ -546,28 +546,28 @@ export function DashboardPage() {
           <div className="p-5">
             <div className="text-center mb-4">
               <p className="text-3xl font-bold text-purple-600">{liveUpcomingPayroll.nextPayDate}</p>
-              <p className="text-sm text-neutral-500 mt-1">Next Pay Date</p>
+              <p className="text-sm text-neutral-500 dark:text-slate-400 mt-1">Next Pay Date</p>
             </div>
             <div className="space-y-3">
               <div className="flex items-center justify-between text-sm">
-                <span className="text-neutral-500">Cutoff Date</span>
-                <span className="font-medium text-neutral-800">{liveUpcomingPayroll.cutoffDate}</span>
+                <span className="text-neutral-500 dark:text-slate-400">Cutoff Date</span>
+                <span className="font-medium text-neutral-800 dark:text-slate-200">{liveUpcomingPayroll.cutoffDate}</span>
               </div>
               <div className="flex items-center justify-between text-sm">
-                <span className="text-neutral-500">Employees</span>
-                <span className="font-medium text-neutral-800">{liveUpcomingPayroll.employeesCount}</span>
+                <span className="text-neutral-500 dark:text-slate-400">Employees</span>
+                <span className="font-medium text-neutral-800 dark:text-slate-200">{liveUpcomingPayroll.employeesCount}</span>
               </div>
               <div className="flex items-center justify-between text-sm">
-                <span className="text-neutral-500">Est. Amount</span>
-                <span className="font-medium text-neutral-800">{liveUpcomingPayroll.estimatedAmount}</span>
+                <span className="text-neutral-500 dark:text-slate-400">Est. Amount</span>
+                <span className="font-medium text-neutral-800 dark:text-slate-200">{liveUpcomingPayroll.estimatedAmount}</span>
               </div>
               <div className="flex items-center justify-between text-sm">
-                <span className="text-neutral-500">Status</span>
+                <span className="text-neutral-500 dark:text-slate-400">Status</span>
                 <span className="px-2 py-1 bg-amber-100 text-amber-700 text-xs font-medium rounded-full">{liveUpcomingPayroll.status}</span>
               </div>
             </div>
           </div>
-          <div className="p-3 bg-neutral-50 border-t border-neutral-100">
+          <div className="p-3 bg-neutral-50 dark:bg-slate-800 border-t border-neutral-100 dark:border-slate-700">
             <Link to="/app/payroll" className="w-full btn btn-primary btn-sm justify-center text-xs">
               Process Payroll
             </Link>
@@ -583,7 +583,7 @@ export function DashboardPage() {
           </div>
           <div>
             <h2 className="text-lg font-semibold text-neutral-900 dark:text-white">Quick Actions</h2>
-            <p className="text-sm text-neutral-500">Frequently used operations</p>
+            <p className="text-sm text-neutral-500 dark:text-slate-400">Frequently used operations</p>
           </div>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -591,7 +591,7 @@ export function DashboardPage() {
             <Link 
               key={action.label}
               to={action.to} 
-              className={`group p-5 rounded-2xl border-2 border-neutral-100 ${action.hoverBg} hover:border-neutral-200 transition-all duration-300 text-center hover:shadow-md hover:-translate-y-1`}
+              className={`group p-5 rounded-2xl border-2 border-neutral-100 dark:border-slate-700 ${action.hoverBg} hover:border-neutral-200 dark:hover:border-slate-600 transition-all duration-300 text-center hover:shadow-md hover:-translate-y-1`}
             >
               <div className={`w-14 h-14 mx-auto mb-3 rounded-xl bg-gradient-to-br ${action.color} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}>
                 <action.icon className="w-7 h-7 text-white" />
@@ -611,26 +611,26 @@ export function DashboardPage() {
             </div>
             <div>
               <h2 className="text-lg font-semibold text-neutral-900 dark:text-white">Monthly Overview</h2>
-              <p className="text-sm text-neutral-500">Key metrics at a glance</p>
+              <p className="text-sm text-neutral-500 dark:text-slate-400">Key metrics at a glance</p>
             </div>
           </div>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           <div className="text-center p-4 bg-neutral-50 dark:bg-slate-800 rounded-xl">
             <p className="text-3xl font-bold text-emerald-600 dark:text-emerald-400">98%</p>
-            <p className="text-sm text-neutral-600 dark:text-slate-300 mt-1">Avg. Attendance</p>
+            <p className="text-sm text-neutral-600 dark:text-slate-400 dark:text-slate-300 mt-1">Avg. Attendance</p>
           </div>
           <div className="text-center p-4 bg-neutral-50 dark:bg-slate-800 rounded-xl">
             <p className="text-3xl font-bold text-blue-600 dark:text-blue-400">12</p>
-            <p className="text-sm text-neutral-600 dark:text-slate-300 mt-1">New Hires</p>
+            <p className="text-sm text-neutral-600 dark:text-slate-400 dark:text-slate-300 mt-1">New Hires</p>
           </div>
           <div className="text-center p-4 bg-neutral-50 dark:bg-slate-800 rounded-xl">
             <p className="text-3xl font-bold text-amber-600 dark:text-amber-400">45</p>
-            <p className="text-sm text-neutral-600 dark:text-slate-300 mt-1">Leaves Approved</p>
+            <p className="text-sm text-neutral-600 dark:text-slate-400 dark:text-slate-300 mt-1">Leaves Approved</p>
           </div>
           <div className="text-center p-4 bg-neutral-50 dark:bg-slate-800 rounded-xl">
             <p className="text-3xl font-bold text-purple-600 dark:text-purple-400">₱2.4M</p>
-            <p className="text-sm text-neutral-600 dark:text-slate-300 mt-1">Total Payroll</p>
+            <p className="text-sm text-neutral-600 dark:text-slate-400 dark:text-slate-300 mt-1">Total Payroll</p>
           </div>
         </div>
       </div>

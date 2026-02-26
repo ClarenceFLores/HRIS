@@ -128,14 +128,14 @@ export function LeaveRequestPage() {
       <div className={`flex items-center gap-4 transition-all duration-500 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'}`}>
         <button 
           onClick={() => navigate('/leaves')} 
-          className="p-2.5 hover:bg-neutral-100 rounded-xl transition-colors"
+          className="p-2.5 hover:bg-neutral-100 dark:hover:bg-slate-700 rounded-xl transition-colors"
           aria-label="Go back"
         >
-          <ArrowLeft size={20} className="text-neutral-600" />
+          <ArrowLeft size={20} className="text-neutral-600 dark:text-slate-400" />
         </button>
         <div className="flex-1">
-          <h1 className="text-2xl font-heading font-bold text-neutral-900">File Leave Request</h1>
-          <p className="text-neutral-500 text-sm mt-1">Submit your leave request for approval</p>
+          <h1 className="text-2xl font-heading font-bold text-neutral-900 dark:text-white">File Leave Request</h1>
+          <p className="text-neutral-500 dark:text-slate-400 text-sm mt-1">Submit your leave request for approval</p>
         </div>
       </div>
 
@@ -165,8 +165,8 @@ export function LeaveRequestPage() {
               <FileText className="w-5 h-5 text-blue-600" />
             </div>
             <div>
-              <h2 className="font-semibold text-neutral-900">Leave Type</h2>
-              <p className="text-sm text-neutral-500">Select the type of leave you want to apply for</p>
+              <h2 className="font-semibold text-neutral-900 dark:text-white">Leave Type</h2>
+              <p className="text-sm text-neutral-500 dark:text-slate-400">Select the type of leave you want to apply for</p>
             </div>
           </div>
           
@@ -177,7 +177,7 @@ export function LeaveRequestPage() {
                 className={`relative flex items-start gap-3 p-4 rounded-xl border-2 cursor-pointer transition-all hover:shadow-sm ${
                   formData.leaveType === type.value
                     ? 'border-primary-500 bg-primary-50'
-                    : 'border-neutral-200 hover:border-neutral-300'
+                    : 'border-neutral-200 dark:border-slate-700 hover:border-neutral-300 dark:hover:border-slate-500'
                 }`}
               >
                 <input
@@ -191,8 +191,8 @@ export function LeaveRequestPage() {
                 />
                 <span className="text-2xl">{type.icon}</span>
                 <div className="flex-1">
-                  <p className="font-medium text-neutral-900">{type.label}</p>
-                  <p className="text-xs text-neutral-500 mt-0.5">{type.description}</p>
+                  <p className="font-medium text-neutral-900 dark:text-white">{type.label}</p>
+                  <p className="text-xs text-neutral-500 dark:text-slate-400 mt-0.5">{type.description}</p>
                   <p className="text-xs text-primary-600 mt-1 font-medium">Max {type.days} days/year</p>
                 </div>
                 {formData.leaveType === type.value && (
@@ -216,8 +216,8 @@ export function LeaveRequestPage() {
               <Calendar className="w-5 h-5 text-amber-600" />
             </div>
             <div>
-              <h2 className="font-semibold text-neutral-900">Leave Duration</h2>
-              <p className="text-sm text-neutral-500">Select start and end dates</p>
+              <h2 className="font-semibold text-neutral-900 dark:text-white">Leave Duration</h2>
+              <p className="text-sm text-neutral-500 dark:text-slate-400">Select start and end dates</p>
             </div>
           </div>
 
@@ -225,7 +225,7 @@ export function LeaveRequestPage() {
             <div>
               <label className="label">Start Date <span className="text-red-500">*</span></label>
               <div className="relative">
-                <CalendarDays className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400" size={18} />
+                <CalendarDays className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400 dark:text-slate-500" size={18} />
                 <input
                   type="date"
                   value={formData.startDate}
@@ -245,7 +245,7 @@ export function LeaveRequestPage() {
             <div>
               <label className="label">End Date <span className="text-red-500">*</span></label>
               <div className="relative">
-                <CalendarDays className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400" size={18} />
+                <CalendarDays className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400 dark:text-slate-500" size={18} />
                 <input
                   type="date"
                   value={formData.endDate}
@@ -285,8 +285,8 @@ export function LeaveRequestPage() {
               <FileText className="w-5 h-5 text-emerald-600" />
             </div>
             <div>
-              <h2 className="font-semibold text-neutral-900">Reason for Leave</h2>
-              <p className="text-sm text-neutral-500">Provide details for your leave request</p>
+              <h2 className="font-semibold text-neutral-900 dark:text-white">Reason for Leave</h2>
+              <p className="text-sm text-neutral-500 dark:text-slate-400">Provide details for your leave request</p>
             </div>
           </div>
 
@@ -307,7 +307,7 @@ export function LeaveRequestPage() {
                   {errors.reason}
                 </p>
               ) : (
-                <span className="text-xs text-neutral-400">Minimum 10 characters</span>
+                <span className="text-xs text-neutral-400 dark:text-slate-500">Minimum 10 characters</span>
               )}
               <span className={`text-xs ${formData.reason.length < 10 ? 'text-neutral-400' : 'text-emerald-600'}`}>
                 {formData.reason.length} / 500
@@ -318,7 +318,7 @@ export function LeaveRequestPage() {
 
         {/* Actions */}
         <div className="card p-4 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-neutral-500">
+          <p className="text-sm text-neutral-500 dark:text-slate-400">
             Your request will be sent to your supervisor for approval
           </p>
           <div className="flex gap-3 w-full sm:w-auto">

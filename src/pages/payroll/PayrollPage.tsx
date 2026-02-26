@@ -136,7 +136,7 @@ export function PayrollPage() {
       case 'processing':
         return { icon: Clock, color: 'text-amber-600', bg: 'bg-amber-100', badge: 'bg-amber-100 text-amber-700', label: 'Processing' };
       default:
-        return { icon: AlertCircle, color: 'text-neutral-600', bg: 'bg-neutral-100', badge: 'bg-neutral-100 text-neutral-700', label: status };
+        return { icon: AlertCircle, color: 'text-neutral-600 dark:text-slate-400', bg: 'bg-neutral-100 dark:bg-slate-700', badge: 'bg-neutral-100 dark:bg-slate-700 text-neutral-700 dark:text-slate-300', label: status };
     }
   };
 
@@ -149,9 +149,9 @@ export function PayrollPage() {
 
     return (
       <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-        <div className="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+        <div className="bg-white dark:bg-slate-800 rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
           {/* Payslip Header */}
-          <div className="p-6 border-b border-neutral-200 bg-gradient-to-r from-primary-50 to-primary-100">
+          <div className="p-6 border-b border-neutral-200 dark:border-slate-700 bg-gradient-to-r from-primary-50 to-primary-100">
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-xl font-bold text-primary-900">Payslip</h2>
@@ -167,54 +167,54 @@ export function PayrollPage() {
           </div>
 
           {/* Employee Info */}
-          <div className="p-6 border-b border-neutral-200">
+          <div className="p-6 border-b border-neutral-200 dark:border-slate-700">
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <h3 className="font-semibold text-neutral-900 mb-2">Employee Information</h3>
+                <h3 className="font-semibold text-neutral-900 dark:text-white mb-2">Employee Information</h3>
                 <div className="space-y-1">
-                  <p><span className="text-neutral-500">Name:</span> {selectedEmployee.name}</p>
-                  <p><span className="text-neutral-500">Department:</span> {selectedEmployee.department}</p>
-                  <p><span className="text-neutral-500">Position:</span> {selectedEmployee.position}</p>
-                  <p><span className="text-neutral-500">Employee ID:</span> EMP-{selectedEmployee.id.toString().padStart(4, '0')}</p>
+                  <p><span className="text-neutral-500 dark:text-slate-400">Name:</span> {selectedEmployee.name}</p>
+                  <p><span className="text-neutral-500 dark:text-slate-400">Department:</span> {selectedEmployee.department}</p>
+                  <p><span className="text-neutral-500 dark:text-slate-400">Position:</span> {selectedEmployee.position}</p>
+                  <p><span className="text-neutral-500 dark:text-slate-400">Employee ID:</span> EMP-{selectedEmployee.id.toString().padStart(4, '0')}</p>
                 </div>
               </div>
               <div>
-                <h3 className="font-semibold text-neutral-900 mb-2">Pay Period</h3>
+                <h3 className="font-semibold text-neutral-900 dark:text-white mb-2">Pay Period</h3>
                 <div className="space-y-1">
-                  <p><span className="text-neutral-500">Period:</span> January 1-31, 2024</p>
-                  <p><span className="text-neutral-500">Pay Date:</span> January 31, 2024</p>
-                  <p><span className="text-neutral-500">Working Days:</span> 22</p>
-                  <p><span className="text-neutral-500">Status:</span> <span className="badge bg-emerald-100 text-emerald-700">Paid</span></p>
+                  <p><span className="text-neutral-500 dark:text-slate-400">Period:</span> January 1-31, 2024</p>
+                  <p><span className="text-neutral-500 dark:text-slate-400">Pay Date:</span> January 31, 2024</p>
+                  <p><span className="text-neutral-500 dark:text-slate-400">Working Days:</span> 22</p>
+                  <p><span className="text-neutral-500 dark:text-slate-400">Status:</span> <span className="badge bg-emerald-100 text-emerald-700">Paid</span></p>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Earnings */}
-          <div className="p-6 border-b border-neutral-200">
-            <h3 className="font-semibold text-neutral-900 mb-4">Earnings</h3>
+          <div className="p-6 border-b border-neutral-200 dark:border-slate-700">
+            <h3 className="font-semibold text-neutral-900 dark:text-white mb-4">Earnings</h3>
             <div className="space-y-3">
               <div className="flex justify-between">
-                <span className="text-neutral-600">Basic Salary</span>
+                <span className="text-neutral-600 dark:text-slate-400">Basic Salary</span>
                 <span className="font-medium">₱{selectedEmployee.basicSalary.toLocaleString()}</span>
               </div>
               {selectedEmployee.overtime > 0 && (
                 <div className="flex justify-between">
-                  <span className="text-neutral-600">Overtime Pay</span>
+                  <span className="text-neutral-600 dark:text-slate-400">Overtime Pay</span>
                   <span className="font-medium">₱{selectedEmployee.overtime.toLocaleString()}</span>
                 </div>
               )}
               {selectedEmployee.holiday > 0 && (
                 <div className="flex justify-between">
-                  <span className="text-neutral-600">Holiday Pay</span>
+                  <span className="text-neutral-600 dark:text-slate-400">Holiday Pay</span>
                   <span className="font-medium">₱{selectedEmployee.holiday.toLocaleString()}</span>
                 </div>
               )}
               <div className="flex justify-between">
-                <span className="text-neutral-600">Allowances</span>
+                <span className="text-neutral-600 dark:text-slate-400">Allowances</span>
                 <span className="font-medium">₱{selectedEmployee.allowances.toLocaleString()}</span>
               </div>
-              <div className="pt-2 border-t border-neutral-200 flex justify-between">
+              <div className="pt-2 border-t border-neutral-200 dark:border-slate-700 flex justify-between">
                 <span className="font-semibold">Gross Pay</span>
                 <span className="font-semibold text-lg">₱{grossPay.toLocaleString()}</span>
               </div>
@@ -222,26 +222,26 @@ export function PayrollPage() {
           </div>
 
           {/* Deductions */}
-          <div className="p-6 border-b border-neutral-200">
-            <h3 className="font-semibold text-neutral-900 mb-4">Deductions</h3>
+          <div className="p-6 border-b border-neutral-200 dark:border-slate-700">
+            <h3 className="font-semibold text-neutral-900 dark:text-white mb-4">Deductions</h3>
             <div className="space-y-3">
               <div className="flex justify-between">
-                <span className="text-neutral-600">SSS Contribution</span>
+                <span className="text-neutral-600 dark:text-slate-400">SSS Contribution</span>
                 <span className="font-medium text-red-600">-₱{selectedEmployee.sss.toLocaleString()}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-neutral-600">PhilHealth</span>
+                <span className="text-neutral-600 dark:text-slate-400">PhilHealth</span>
                 <span className="font-medium text-red-600">-₱{selectedEmployee.philHealth.toLocaleString()}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-neutral-600">Pag-IBIG</span>
+                <span className="text-neutral-600 dark:text-slate-400">Pag-IBIG</span>
                 <span className="font-medium text-red-600">-₱{selectedEmployee.pagibig.toLocaleString()}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-neutral-600">Withholding Tax</span>
+                <span className="text-neutral-600 dark:text-slate-400">Withholding Tax</span>
                 <span className="font-medium text-red-600">-₱{selectedEmployee.tax.toLocaleString()}</span>
               </div>
-              <div className="pt-2 border-t border-neutral-200 flex justify-between">
+              <div className="pt-2 border-t border-neutral-200 dark:border-slate-700 flex justify-between">
                 <span className="font-semibold">Total Deductions</span>
                 <span className="font-semibold text-lg text-red-600">-₱{totalDeductions.toLocaleString()}</span>
               </div>
@@ -281,16 +281,16 @@ export function PayrollPage() {
             <Wallet className="w-6 h-6 text-primary-600" />
           </div>
           <div>
-            <h1 className="text-2xl font-heading font-bold text-neutral-900">Payroll Management</h1>
-            <p className="text-neutral-500 text-sm">Process and manage employee compensation</p>
+            <h1 className="text-2xl font-heading font-bold text-neutral-900 dark:text-white">Payroll Management</h1>
+            <p className="text-neutral-500 dark:text-slate-400 text-sm">Process and manage employee compensation</p>
           </div>
         </div>
         <div className="flex gap-3">
-          <div className="flex gap-1 p-1 bg-neutral-100 rounded-lg">
+          <div className="flex gap-1 p-1 bg-neutral-100 dark:bg-slate-700 rounded-lg">
             <button 
               onClick={() => setViewMode('overview')}
               className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                viewMode === 'overview' ? 'bg-white text-primary-600 shadow-sm' : 'text-neutral-600 hover:text-neutral-900'
+                viewMode === 'overview' ? 'bg-white text-primary-600 shadow-sm' : 'text-neutral-600 dark:text-slate-400 hover:text-neutral-900 dark:hover:text-white'
               }`}
             >
               Overview
@@ -298,7 +298,7 @@ export function PayrollPage() {
             <button 
               onClick={() => setViewMode('employees')}
               className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                viewMode === 'employees' ? 'bg-white text-primary-600 shadow-sm' : 'text-neutral-600 hover:text-neutral-900'
+                viewMode === 'employees' ? 'bg-white text-primary-600 shadow-sm' : 'text-neutral-600 dark:text-slate-400 hover:text-neutral-900 dark:hover:text-white'
               }`}
             >
               Employees
@@ -306,7 +306,7 @@ export function PayrollPage() {
             <button 
               onClick={() => setViewMode('reports')}
               className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                viewMode === 'reports' ? 'bg-white text-primary-600 shadow-sm' : 'text-neutral-600 hover:text-neutral-900'
+                viewMode === 'reports' ? 'bg-white text-primary-600 shadow-sm' : 'text-neutral-600 dark:text-slate-400 hover:text-neutral-900 dark:hover:text-white'
               }`}
             >
               Reports
@@ -355,8 +355,8 @@ export function PayrollPage() {
               <Users className="w-6 h-6 text-white" />
             </div>
             <div>
-              <p className="text-3xl font-bold text-neutral-900">{payrollEmployees.length}</p>
-              <p className="text-sm text-neutral-500">Active Employees</p>
+              <p className="text-3xl font-bold text-neutral-900 dark:text-white">{payrollEmployees.length}</p>
+              <p className="text-sm text-neutral-500 dark:text-slate-400">Active Employees</p>
             </div>
           </div>
         </div>
@@ -366,8 +366,8 @@ export function PayrollPage() {
               <Banknote className="w-6 h-6 text-white" />
             </div>
             <div>
-              <p className="text-3xl font-bold text-neutral-900">₱{Math.round(totalGross/1000)}K</p>
-              <p className="text-sm text-neutral-500">Gross Payroll</p>
+              <p className="text-3xl font-bold text-neutral-900 dark:text-white">₱{Math.round(totalGross/1000)}K</p>
+              <p className="text-sm text-neutral-500 dark:text-slate-400">Gross Payroll</p>
             </div>
           </div>
         </div>
@@ -377,8 +377,8 @@ export function PayrollPage() {
               <Calculator className="w-6 h-6 text-white" />
             </div>
             <div>
-              <p className="text-3xl font-bold text-neutral-900">₱{Math.round(totalDeductions/1000)}K</p>
-              <p className="text-sm text-neutral-500">Total Deductions</p>
+              <p className="text-3xl font-bold text-neutral-900 dark:text-white">₱{Math.round(totalDeductions/1000)}K</p>
+              <p className="text-sm text-neutral-500 dark:text-slate-400">Total Deductions</p>
             </div>
           </div>
         </div>
@@ -388,8 +388,8 @@ export function PayrollPage() {
               <TrendingUp className="w-6 h-6 text-white" />
             </div>
             <div>
-              <p className="text-3xl font-bold text-neutral-900">₱{Math.round(totalNet/1000)}K</p>
-              <p className="text-sm text-neutral-500">Net Payroll</p>
+              <p className="text-3xl font-bold text-neutral-900 dark:text-white">₱{Math.round(totalNet/1000)}K</p>
+              <p className="text-sm text-neutral-500 dark:text-slate-400">Net Payroll</p>
             </div>
           </div>
         </div>
@@ -400,15 +400,15 @@ export function PayrollPage() {
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
           {/* Payroll History */}
           <div className={`xl:col-span-2 card overflow-hidden transition-all duration-500 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-            <div className="p-6 border-b border-neutral-100 bg-gradient-to-r from-neutral-50 to-white">
+            <div className="p-6 border-b border-neutral-100 dark:border-slate-700 bg-gradient-to-r from-neutral-50 dark:from-slate-800 to-white dark:to-slate-800">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div className="p-2 bg-primary-100 rounded-xl">
                     <Calendar className="w-5 h-5 text-primary-600" />
                   </div>
                   <div>
-                    <h2 className="text-lg font-semibold text-neutral-900">Payroll History</h2>
-                    <p className="text-sm text-neutral-500">Recent payroll runs and records</p>
+                    <h2 className="text-lg font-semibold text-neutral-900 dark:text-white">Payroll History</h2>
+                    <p className="text-sm text-neutral-500 dark:text-slate-400">Recent payroll runs and records</p>
                   </div>
                 </div>
                 <select 
@@ -426,7 +426,7 @@ export function PayrollPage() {
             <div className="overflow-x-auto">
               <table className="table">
                 <thead>
-                  <tr className="bg-neutral-50">
+                  <tr className="bg-neutral-50 dark:bg-slate-800">
                     <th className="font-semibold">Pay Period</th>
                     <th className="font-semibold text-center">Employees</th>
                     <th className="font-semibold text-right">Gross Pay</th>
@@ -441,26 +441,26 @@ export function PayrollPage() {
                     const StatusIcon = statusConfig.icon;
                     
                     return (
-                      <tr key={payroll.id} className="group hover:bg-neutral-50 transition-colors">
+                      <tr key={payroll.id} className="group hover:bg-neutral-50 dark:hover:bg-slate-800 transition-colors">
                         <td>
                           <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-lg bg-neutral-100 flex items-center justify-center">
-                              <FileText className="w-5 h-5 text-neutral-500" />
+                            <div className="w-10 h-10 rounded-lg bg-neutral-100 dark:bg-slate-700 flex items-center justify-center">
+                              <FileText className="w-5 h-5 text-neutral-500 dark:text-slate-400" />
                             </div>
                             <div>
-                              <p className="font-medium text-neutral-900">{payroll.period}</p>
+                              <p className="font-medium text-neutral-900 dark:text-white">{payroll.period}</p>
                               {payroll.processedDate && (
-                                <p className="text-xs text-neutral-500">Processed: {payroll.processedDate}</p>
+                                <p className="text-xs text-neutral-500 dark:text-slate-400">Processed: {payroll.processedDate}</p>
                               )}
                             </div>
                           </div>
                         </td>
                         <td className="text-center">
-                          <span className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-neutral-100 font-semibold text-neutral-700">
+                          <span className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-neutral-100 dark:bg-slate-700 font-semibold text-neutral-700 dark:text-slate-300">
                             {payroll.totalEmployees}
                           </span>
                         </td>
-                        <td className="text-right font-medium text-neutral-900">
+                        <td className="text-right font-medium text-neutral-900 dark:text-white">
                           ₱{payroll.grossPay.toLocaleString()}
                         </td>
                         <td className="text-right font-medium text-emerald-600 hidden sm:table-cell">
@@ -476,11 +476,11 @@ export function PayrollPage() {
                         </td>
                         <td>
                           <div className="flex items-center justify-end gap-1">
-                            <button className="p-2 hover:bg-neutral-100 rounded-lg transition-colors" title="View Details">
-                              <Eye size={16} className="text-neutral-400" />
+                            <button className="p-2 hover:bg-neutral-100 dark:hover:bg-slate-700 rounded-lg transition-colors" title="View Details">
+                              <Eye size={16} className="text-neutral-400 dark:text-slate-500" />
                             </button>
-                            <button className="p-2 hover:bg-neutral-100 rounded-lg transition-colors" title="Download">
-                              <Download size={16} className="text-neutral-400" />
+                            <button className="p-2 hover:bg-neutral-100 dark:hover:bg-slate-700 rounded-lg transition-colors" title="Download">
+                              <Download size={16} className="text-neutral-400 dark:text-slate-500" />
                             </button>
                           </div>
                         </td>
@@ -494,38 +494,38 @@ export function PayrollPage() {
 
           {/* Contributions Summary */}
           <div className={`card overflow-hidden transition-all duration-500 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-            <div className="p-6 border-b border-neutral-100 bg-gradient-to-r from-neutral-50 to-white">
+            <div className="p-6 border-b border-neutral-100 dark:border-slate-700 bg-gradient-to-r from-neutral-50 dark:from-slate-800 to-white dark:to-slate-800">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-emerald-100 rounded-xl">
                   <Building className="w-5 h-5 text-emerald-600" />
                 </div>
                 <div>
-                  <h2 className="text-lg font-semibold text-neutral-900">Contributions</h2>
-                  <p className="text-sm text-neutral-500">Government deductions</p>
+                  <h2 className="text-lg font-semibold text-neutral-900 dark:text-white">Contributions</h2>
+                  <p className="text-sm text-neutral-500 dark:text-slate-400">Government deductions</p>
                 </div>
               </div>
             </div>
             <div className="p-4 space-y-4">
               {contributionBreakdown.map((contribution) => (
-                <div key={contribution.name} className="p-4 bg-neutral-50 rounded-xl hover:bg-neutral-100 transition-colors">
+                <div key={contribution.name} className="p-4 bg-neutral-50 dark:bg-slate-800 rounded-xl hover:bg-neutral-100 dark:hover:bg-slate-700 transition-colors">
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-2">
                       <span className="text-xl">{contribution.icon}</span>
                       <div>
-                        <span className="font-semibold text-neutral-900">{contribution.name}</span>
-                        <p className="text-xs text-neutral-500">{contribution.rate} of salary</p>
+                        <span className="font-semibold text-neutral-900 dark:text-white">{contribution.name}</span>
+                        <p className="text-xs text-neutral-500 dark:text-slate-400">{contribution.rate} of salary</p>
                       </div>
                     </div>
-                    <span className="text-lg font-bold text-neutral-900">₱{contribution.total.toLocaleString()}</span>
+                    <span className="text-lg font-bold text-neutral-900 dark:text-white">₱{contribution.total.toLocaleString()}</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm">
-                    <div className="flex-1 flex items-center justify-between px-3 py-1.5 bg-white rounded-lg">
-                      <span className="text-neutral-500">Employee</span>
-                      <span className="font-medium text-neutral-700">₱{contribution.employee.toLocaleString()}</span>
+                    <div className="flex-1 flex items-center justify-between px-3 py-1.5 bg-white dark:bg-slate-800 rounded-lg">
+                      <span className="text-neutral-500 dark:text-slate-400">Employee</span>
+                      <span className="font-medium text-neutral-700 dark:text-slate-300">₱{contribution.employee.toLocaleString()}</span>
                     </div>
-                    <div className="flex-1 flex items-center justify-between px-3 py-1.5 bg-white rounded-lg">
-                      <span className="text-neutral-500">Employer</span>
-                      <span className="font-medium text-neutral-700">₱{contribution.employer.toLocaleString()}</span>
+                    <div className="flex-1 flex items-center justify-between px-3 py-1.5 bg-white dark:bg-slate-800 rounded-lg">
+                      <span className="text-neutral-500 dark:text-slate-400">Employer</span>
+                      <span className="font-medium text-neutral-700 dark:text-slate-300">₱{contribution.employer.toLocaleString()}</span>
                     </div>
                   </div>
                 </div>
@@ -550,7 +550,7 @@ export function PayrollPage() {
           <div className="card p-4">
             <div className="flex flex-col sm:flex-row gap-4">
               <div className="flex-1 relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral-400" size={20} />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral-400 dark:text-slate-500" size={20} />
                 <input
                   type="text"
                   placeholder="Search employees..."
@@ -574,7 +574,7 @@ export function PayrollPage() {
             <div className="overflow-x-auto">
               <table className="table">
                 <thead>
-                  <tr className="bg-neutral-50">
+                  <tr className="bg-neutral-50 dark:bg-slate-800">
                     <th className="font-semibold">Employee</th>
                     <th className="font-semibold text-right">Basic Salary</th>
                     <th className="font-semibold text-right">Overtime</th>
@@ -591,7 +591,7 @@ export function PayrollPage() {
                     const netPay = grossPay - totalDeductions;
                     
                     return (
-                      <tr key={employee.id} className="hover:bg-neutral-50 transition-colors">
+                      <tr key={employee.id} className="hover:bg-neutral-50 dark:hover:bg-slate-800 transition-colors">
                         <td>
                           <div className="flex items-center gap-3">
                             <div className="w-10 h-10 rounded-full bg-primary-100 flex items-center justify-center">
@@ -600,9 +600,9 @@ export function PayrollPage() {
                               </span>
                             </div>
                             <div>
-                              <p className="font-medium text-neutral-900">{employee.name}</p>
-                              <p className="text-sm text-neutral-500">{employee.position}</p>
-                              <p className="text-xs text-neutral-400">{employee.department}</p>
+                              <p className="font-medium text-neutral-900 dark:text-white">{employee.name}</p>
+                              <p className="text-sm text-neutral-500 dark:text-slate-400">{employee.position}</p>
+                              <p className="text-xs text-neutral-400 dark:text-slate-500">{employee.department}</p>
                             </div>
                           </div>
                         </td>
@@ -617,13 +617,13 @@ export function PayrollPage() {
                           <div className="flex items-center justify-end gap-1">
                             <button 
                               onClick={() => generatePayslip(employee)}
-                              className="p-2 hover:bg-neutral-100 rounded-lg transition-colors" 
+                              className="p-2 hover:bg-neutral-100 dark:hover:bg-slate-700 rounded-lg transition-colors" 
                               title="Generate Payslip"
                             >
-                              <FileText size={16} className="text-neutral-400" />
+                              <FileText size={16} className="text-neutral-400 dark:text-slate-500" />
                             </button>
-                            <button className="p-2 hover:bg-neutral-100 rounded-lg transition-colors" title="Edit">
-                              <Edit3 size={16} className="text-neutral-400" />
+                            <button className="p-2 hover:bg-neutral-100 dark:hover:bg-slate-700 rounded-lg transition-colors" title="Edit">
+                              <Edit3 size={16} className="text-neutral-400 dark:text-slate-500" />
                             </button>
                           </div>
                         </td>
@@ -640,7 +640,7 @@ export function PayrollPage() {
       {/* Reports View */}
       {viewMode === 'reports' && (
         <div className={`card p-6 transition-all duration-500 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-          <h2 className="text-lg font-semibold text-neutral-900 mb-4">Payroll & Compliance Reports</h2>
+          <h2 className="text-lg font-semibold text-neutral-900 dark:text-white mb-4">Payroll & Compliance Reports</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {[
               { name: 'SSS R-3', desc: 'Monthly contribution report', color: 'text-blue-600 bg-blue-100', icon: Shield },
@@ -653,14 +653,14 @@ export function PayrollPage() {
               return (
                 <button 
                   key={report.name}
-                  className="group flex items-center gap-4 p-4 rounded-xl border border-neutral-200 hover:border-primary-300 hover:bg-primary-50/50 transition-all text-left"
+                  className="group flex items-center gap-4 p-4 rounded-xl border border-neutral-200 dark:border-slate-700 hover:border-primary-300 hover:bg-primary-50/50 transition-all text-left"
                 >
                   <div className={`p-3 rounded-xl ${report.color}`}>
                     <IconComponent className="w-5 h-5" />
                   </div>
                   <div className="flex-1">
-                    <p className="font-semibold text-neutral-900 group-hover:text-primary-700 transition-colors">{report.name}</p>
-                    <p className="text-xs text-neutral-500">{report.desc}</p>
+                    <p className="font-semibold text-neutral-900 dark:text-white group-hover:text-primary-700 transition-colors">{report.name}</p>
+                    <p className="text-xs text-neutral-500 dark:text-slate-400">{report.desc}</p>
                   </div>
                   <ChevronRight className="w-5 h-5 text-neutral-300 group-hover:text-primary-500 group-hover:translate-x-1 transition-all" />
                 </button>

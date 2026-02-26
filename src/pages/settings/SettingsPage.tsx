@@ -56,8 +56,8 @@ export function SettingsPage() {
             <Settings className="w-6 h-6 text-primary-600" />
           </div>
           <div>
-            <h1 className="text-2xl font-heading font-bold text-neutral-900">Settings</h1>
-            <p className="text-neutral-500 text-sm">Manage organization settings and preferences</p>
+            <h1 className="text-2xl font-heading font-bold text-neutral-900 dark:text-white">Settings</h1>
+            <p className="text-neutral-500 dark:text-slate-400 text-sm">Manage organization settings and preferences</p>
           </div>
         </div>
       </div>
@@ -77,17 +77,17 @@ export function SettingsPage() {
                     className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left transition-all ${
                       isActive 
                         ? 'bg-primary-50 text-primary-600 shadow-sm' 
-                        : 'text-neutral-600 hover:bg-neutral-50'
+                        : 'text-neutral-600 dark:text-slate-400 hover:bg-neutral-50 dark:hover:bg-slate-800'
                     }`}
                   >
-                    <div className={`p-2 rounded-lg ${isActive ? 'bg-primary-100' : 'bg-neutral-100'}`}>
-                      <Icon size={18} className={isActive ? 'text-primary-600' : 'text-neutral-500'} />
+                    <div className={`p-2 rounded-lg ${isActive ? 'bg-primary-100' : 'bg-neutral-100 dark:bg-slate-700'}`}>
+                      <Icon size={18} className={isActive ? 'text-primary-600' : 'text-neutral-500 dark:text-slate-400'} />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className={`font-medium text-sm ${isActive ? 'text-primary-700' : 'text-neutral-900'}`}>
+                      <p className={`font-medium text-sm ${isActive ? 'text-primary-700' : 'text-neutral-900 dark:text-white'}`}>
                         {tab.label}
                       </p>
-                      <p className="text-xs text-neutral-500 truncate">{tab.description}</p>
+                      <p className="text-xs text-neutral-500 dark:text-slate-400 truncate">{tab.description}</p>
                     </div>
                     <ChevronRight size={16} className={`transition-transform ${isActive ? 'text-primary-500 rotate-90' : 'text-neutral-300'}`} />
                   </button>
@@ -102,14 +102,14 @@ export function SettingsPage() {
           {activeTab === 'company' && (
             <div className="space-y-6">
               <div className="card overflow-hidden">
-                <div className="p-6 border-b border-neutral-100 bg-gradient-to-r from-neutral-50 to-white">
+                <div className="p-6 border-b border-neutral-100 dark:border-slate-700 bg-gradient-to-r from-neutral-50 dark:from-slate-800 to-white dark:to-slate-800">
                   <div className="flex items-center gap-3">
                     <div className="p-2 bg-blue-100 rounded-xl">
                       <Building className="w-5 h-5 text-blue-600" />
                     </div>
                     <div>
-                      <h2 className="text-lg font-semibold text-neutral-900">Company Information</h2>
-                      <p className="text-sm text-neutral-500">Basic organization details</p>
+                      <h2 className="text-lg font-semibold text-neutral-900 dark:text-white">Company Information</h2>
+                      <p className="text-sm text-neutral-500 dark:text-slate-400">Basic organization details</p>
                     </div>
                   </div>
                 </div>
@@ -118,15 +118,15 @@ export function SettingsPage() {
                   <div>
                     <label className="label">Company Logo</label>
                     <div className="flex items-center gap-4">
-                      <div className="w-20 h-20 bg-neutral-100 rounded-xl flex items-center justify-center border-2 border-dashed border-neutral-200">
-                        <Building className="w-8 h-8 text-neutral-400" />
+                      <div className="w-20 h-20 bg-neutral-100 dark:bg-slate-700 rounded-xl flex items-center justify-center border-2 border-dashed border-neutral-200 dark:border-slate-700">
+                        <Building className="w-8 h-8 text-neutral-400 dark:text-slate-500" />
                       </div>
                       <div className="space-y-2">
                         <button className="btn btn-secondary btn-sm">
                           <Upload size={16} />
                           Upload Logo
                         </button>
-                        <p className="text-xs text-neutral-500">PNG or JPG, max 2MB</p>
+                        <p className="text-xs text-neutral-500 dark:text-slate-400">PNG or JPG, max 2MB</p>
                       </div>
                     </div>
                   </div>
@@ -162,14 +162,14 @@ export function SettingsPage() {
 
               {/* Business Hours */}
               <div className="card overflow-hidden">
-                <div className="p-6 border-b border-neutral-100 bg-gradient-to-r from-neutral-50 to-white">
+                <div className="p-6 border-b border-neutral-100 dark:border-slate-700 bg-gradient-to-r from-neutral-50 dark:from-slate-800 to-white dark:to-slate-800">
                   <div className="flex items-center gap-3">
                     <div className="p-2 bg-amber-100 rounded-xl">
                       <Clock className="w-5 h-5 text-amber-600" />
                     </div>
                     <div>
-                      <h2 className="text-lg font-semibold text-neutral-900">Business Hours</h2>
-                      <p className="text-sm text-neutral-500">Default work schedule</p>
+                      <h2 className="text-lg font-semibold text-neutral-900 dark:text-white">Business Hours</h2>
+                      <p className="text-sm text-neutral-500 dark:text-slate-400">Default work schedule</p>
                     </div>
                   </div>
                 </div>
@@ -216,15 +216,15 @@ export function SettingsPage() {
             <div className="space-y-6">
               {/* SSS */}
               <div className="card overflow-hidden">
-                <div className="p-6 border-b border-neutral-100 bg-gradient-to-r from-blue-50 to-white">
+                <div className="p-6 border-b border-neutral-100 dark:border-slate-700 bg-gradient-to-r from-blue-50 dark:from-slate-800 to-white dark:to-slate-800">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div className="p-2 bg-blue-100 rounded-xl">
                         <span className="text-xl">🏛️</span>
                       </div>
                       <div>
-                        <h2 className="text-lg font-semibold text-neutral-900">SSS Rates (2024)</h2>
-                        <p className="text-sm text-neutral-500">Social Security System contribution rates</p>
+                        <h2 className="text-lg font-semibold text-neutral-900 dark:text-white">SSS Rates (2024)</h2>
+                        <p className="text-sm text-neutral-500 dark:text-slate-400">Social Security System contribution rates</p>
                       </div>
                     </div>
                     <span className="badge bg-blue-100 text-blue-700">Updated</span>
@@ -232,9 +232,9 @@ export function SettingsPage() {
                 </div>
                 <div className="p-6">
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div className="p-4 bg-neutral-50 rounded-xl border border-neutral-100">
-                      <p className="text-xs text-neutral-500 uppercase tracking-wide mb-1">Salary Range</p>
-                      <p className="font-bold text-lg text-neutral-900">₱20K - ₱24,999</p>
+                    <div className="p-4 bg-neutral-50 dark:bg-slate-800 rounded-xl border border-neutral-100 dark:border-slate-700">
+                      <p className="text-xs text-neutral-500 dark:text-slate-400 uppercase tracking-wide mb-1">Salary Range</p>
+                      <p className="font-bold text-lg text-neutral-900 dark:text-white">₱20K - ₱24,999</p>
                     </div>
                     <div className="p-4 bg-blue-50 rounded-xl border border-blue-100">
                       <p className="text-xs text-blue-600 uppercase tracking-wide mb-1">Employee Share</p>
@@ -254,15 +254,15 @@ export function SettingsPage() {
 
               {/* PhilHealth */}
               <div className="card overflow-hidden">
-                <div className="p-6 border-b border-neutral-100 bg-gradient-to-r from-emerald-50 to-white">
+                <div className="p-6 border-b border-neutral-100 dark:border-slate-700 bg-gradient-to-r from-emerald-50 dark:from-slate-800 to-white dark:to-slate-800">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div className="p-2 bg-emerald-100 rounded-xl">
                         <span className="text-xl">🏥</span>
                       </div>
                       <div>
-                        <h2 className="text-lg font-semibold text-neutral-900">PhilHealth Rates (2024)</h2>
-                        <p className="text-sm text-neutral-500">Philippine Health Insurance Corporation</p>
+                        <h2 className="text-lg font-semibold text-neutral-900 dark:text-white">PhilHealth Rates (2024)</h2>
+                        <p className="text-sm text-neutral-500 dark:text-slate-400">Philippine Health Insurance Corporation</p>
                       </div>
                     </div>
                     <span className="badge bg-emerald-100 text-emerald-700">5% Total</span>
@@ -270,13 +270,13 @@ export function SettingsPage() {
                 </div>
                 <div className="p-6">
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div className="p-4 bg-neutral-50 rounded-xl border border-neutral-100">
-                      <p className="text-xs text-neutral-500 uppercase tracking-wide mb-1">Contribution Rate</p>
-                      <p className="font-bold text-lg text-neutral-900">5% <span className="text-sm font-normal">of basic salary</span></p>
+                    <div className="p-4 bg-neutral-50 dark:bg-slate-800 rounded-xl border border-neutral-100 dark:border-slate-700">
+                      <p className="text-xs text-neutral-500 dark:text-slate-400 uppercase tracking-wide mb-1">Contribution Rate</p>
+                      <p className="font-bold text-lg text-neutral-900 dark:text-white">5% <span className="text-sm font-normal">of basic salary</span></p>
                     </div>
-                    <div className="p-4 bg-neutral-50 rounded-xl border border-neutral-100">
-                      <p className="text-xs text-neutral-500 uppercase tracking-wide mb-1">Max Monthly Salary</p>
-                      <p className="font-bold text-lg text-neutral-900">₱100,000</p>
+                    <div className="p-4 bg-neutral-50 dark:bg-slate-800 rounded-xl border border-neutral-100 dark:border-slate-700">
+                      <p className="text-xs text-neutral-500 dark:text-slate-400 uppercase tracking-wide mb-1">Max Monthly Salary</p>
+                      <p className="font-bold text-lg text-neutral-900 dark:text-white">₱100,000</p>
                     </div>
                     <div className="p-4 bg-emerald-50 rounded-xl border border-emerald-100">
                       <p className="text-xs text-emerald-600 uppercase tracking-wide mb-1">Max Contribution</p>
@@ -292,15 +292,15 @@ export function SettingsPage() {
 
               {/* Pag-IBIG */}
               <div className="card overflow-hidden">
-                <div className="p-6 border-b border-neutral-100 bg-gradient-to-r from-amber-50 to-white">
+                <div className="p-6 border-b border-neutral-100 dark:border-slate-700 bg-gradient-to-r from-amber-50 dark:from-slate-800 to-white dark:to-slate-800">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div className="p-2 bg-amber-100 rounded-xl">
                         <span className="text-xl">🏠</span>
                       </div>
                       <div>
-                        <h2 className="text-lg font-semibold text-neutral-900">Pag-IBIG Rates (2024)</h2>
-                        <p className="text-sm text-neutral-500">Home Development Mutual Fund</p>
+                        <h2 className="text-lg font-semibold text-neutral-900 dark:text-white">Pag-IBIG Rates (2024)</h2>
+                        <p className="text-sm text-neutral-500 dark:text-slate-400">Home Development Mutual Fund</p>
                       </div>
                     </div>
                     <span className="badge bg-amber-100 text-amber-700">4% Total</span>
@@ -308,9 +308,9 @@ export function SettingsPage() {
                 </div>
                 <div className="p-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="p-4 bg-neutral-50 rounded-xl border border-neutral-100">
-                      <p className="text-xs text-neutral-500 uppercase tracking-wide mb-1">Contribution Rate</p>
-                      <p className="font-bold text-lg text-neutral-900">2% + 2% <span className="text-sm font-normal">(EE + ER)</span></p>
+                    <div className="p-4 bg-neutral-50 dark:bg-slate-800 rounded-xl border border-neutral-100 dark:border-slate-700">
+                      <p className="text-xs text-neutral-500 dark:text-slate-400 uppercase tracking-wide mb-1">Contribution Rate</p>
+                      <p className="font-bold text-lg text-neutral-900 dark:text-white">2% + 2% <span className="text-sm font-normal">(EE + ER)</span></p>
                     </div>
                     <div className="p-4 bg-amber-50 rounded-xl border border-amber-100">
                       <p className="text-xs text-amber-600 uppercase tracking-wide mb-1">Maximum</p>
@@ -341,14 +341,14 @@ export function SettingsPage() {
           {activeTab === 'notifications' && (
             <div className="space-y-6">
               <div className="card overflow-hidden">
-                <div className="p-6 border-b border-neutral-100 bg-gradient-to-r from-neutral-50 to-white">
+                <div className="p-6 border-b border-neutral-100 dark:border-slate-700 bg-gradient-to-r from-neutral-50 dark:from-slate-800 to-white dark:to-slate-800">
                   <div className="flex items-center gap-3">
                     <div className="p-2 bg-purple-100 rounded-xl">
                       <Bell className="w-5 h-5 text-purple-600" />
                     </div>
                     <div>
-                      <h2 className="text-lg font-semibold text-neutral-900">Notification Preferences</h2>
-                      <p className="text-sm text-neutral-500">Configure how you receive alerts</p>
+                      <h2 className="text-lg font-semibold text-neutral-900 dark:text-white">Notification Preferences</h2>
+                      <p className="text-sm text-neutral-500 dark:text-slate-400">Configure how you receive alerts</p>
                     </div>
                   </div>
                 </div>
@@ -362,14 +362,14 @@ export function SettingsPage() {
                   ].map((item, index) => {
                     const Icon = item.icon;
                     return (
-                      <label key={index} className="flex items-center justify-between p-4 bg-neutral-50 rounded-xl cursor-pointer hover:bg-neutral-100 transition-colors group">
+                      <label key={index} className="flex items-center justify-between p-4 bg-neutral-50 dark:bg-slate-800 rounded-xl cursor-pointer hover:bg-neutral-100 dark:hover:bg-slate-700 transition-colors group">
                         <div className="flex items-center gap-4">
-                          <div className="p-2 bg-white rounded-lg shadow-sm">
-                            <Icon size={18} className="text-neutral-500 group-hover:text-primary-500 transition-colors" />
+                          <div className="p-2 bg-white dark:bg-slate-800 rounded-lg shadow-sm">
+                            <Icon size={18} className="text-neutral-500 dark:text-slate-400 group-hover:text-primary-500 transition-colors" />
                           </div>
                           <div>
-                            <p className="font-medium text-neutral-900">{item.title}</p>
-                            <p className="text-sm text-neutral-500">{item.desc}</p>
+                            <p className="font-medium text-neutral-900 dark:text-white">{item.title}</p>
+                            <p className="text-sm text-neutral-500 dark:text-slate-400">{item.desc}</p>
                           </div>
                         </div>
                         <div className="relative">
@@ -378,8 +378,8 @@ export function SettingsPage() {
                             defaultChecked={item.defaultChecked} 
                             className="sr-only peer" 
                           />
-                          <div className="w-11 h-6 bg-neutral-200 rounded-full peer peer-checked:bg-primary-500 transition-colors"></div>
-                          <div className="absolute left-1 top-1 w-4 h-4 bg-white rounded-full shadow peer-checked:translate-x-5 transition-transform"></div>
+                          <div className="w-11 h-6 bg-neutral-200 dark:bg-slate-600 rounded-full peer peer-checked:bg-primary-500 transition-colors"></div>
+                          <div className="absolute left-1 top-1 w-4 h-4 bg-white dark:bg-slate-800 rounded-full shadow peer-checked:translate-x-5 transition-transform"></div>
                         </div>
                       </label>
                     );
@@ -389,14 +389,14 @@ export function SettingsPage() {
 
               {/* Email Settings */}
               <div className="card overflow-hidden">
-                <div className="p-6 border-b border-neutral-100 bg-gradient-to-r from-neutral-50 to-white">
+                <div className="p-6 border-b border-neutral-100 dark:border-slate-700 bg-gradient-to-r from-neutral-50 dark:from-slate-800 to-white dark:to-slate-800">
                   <div className="flex items-center gap-3">
                     <div className="p-2 bg-blue-100 rounded-xl">
                       <Mail className="w-5 h-5 text-blue-600" />
                     </div>
                     <div>
-                      <h2 className="text-lg font-semibold text-neutral-900">Email Settings</h2>
-                      <p className="text-sm text-neutral-500">Configure email notification delivery</p>
+                      <h2 className="text-lg font-semibold text-neutral-900 dark:text-white">Email Settings</h2>
+                      <p className="text-sm text-neutral-500 dark:text-slate-400">Configure email notification delivery</p>
                     </div>
                   </div>
                 </div>
@@ -404,7 +404,7 @@ export function SettingsPage() {
                   <div>
                     <label className="label">Notification Email</label>
                     <input type="email" className="input" defaultValue="hr@acmecorp.com" />
-                    <p className="text-xs text-neutral-500 mt-1">Email address for receiving notifications</p>
+                    <p className="text-xs text-neutral-500 dark:text-slate-400 mt-1">Email address for receiving notifications</p>
                   </div>
                   <div>
                     <label className="label">Email Frequency</label>
@@ -438,14 +438,14 @@ export function SettingsPage() {
           {activeTab === 'security' && (
             <div className="space-y-6">
               <div className="card overflow-hidden">
-                <div className="p-6 border-b border-neutral-100 bg-gradient-to-r from-neutral-50 to-white">
+                <div className="p-6 border-b border-neutral-100 dark:border-slate-700 bg-gradient-to-r from-neutral-50 dark:from-slate-800 to-white dark:to-slate-800">
                   <div className="flex items-center gap-3">
                     <div className="p-2 bg-red-100 rounded-xl">
                       <Lock className="w-5 h-5 text-red-600" />
                     </div>
                     <div>
-                      <h2 className="text-lg font-semibold text-neutral-900">Security Settings</h2>
-                      <p className="text-sm text-neutral-500">Manage access and authentication</p>
+                      <h2 className="text-lg font-semibold text-neutral-900 dark:text-white">Security Settings</h2>
+                      <p className="text-sm text-neutral-500 dark:text-slate-400">Manage access and authentication</p>
                     </div>
                   </div>
                 </div>
@@ -458,24 +458,24 @@ export function SettingsPage() {
                       <option value="120">2 hours</option>
                       <option value="480">8 hours</option>
                     </select>
-                    <p className="text-xs text-neutral-500 mt-1">Automatically log out after inactivity</p>
+                    <p className="text-xs text-neutral-500 dark:text-slate-400 mt-1">Automatically log out after inactivity</p>
                   </div>
                   
-                  <div className="p-4 bg-neutral-50 rounded-xl">
+                  <div className="p-4 bg-neutral-50 dark:bg-slate-800 rounded-xl">
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="font-medium text-neutral-900">Two-Factor Authentication</p>
-                        <p className="text-sm text-neutral-500">Add an extra layer of security</p>
+                        <p className="font-medium text-neutral-900 dark:text-white">Two-Factor Authentication</p>
+                        <p className="text-sm text-neutral-500 dark:text-slate-400">Add an extra layer of security</p>
                       </div>
                       <button className="btn btn-secondary btn-sm">Enable</button>
                     </div>
                   </div>
 
-                  <div className="p-4 bg-neutral-50 rounded-xl">
+                  <div className="p-4 bg-neutral-50 dark:bg-slate-800 rounded-xl">
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="font-medium text-neutral-900">Password Policy</p>
-                        <p className="text-sm text-neutral-500">Require strong passwords for all users</p>
+                        <p className="font-medium text-neutral-900 dark:text-white">Password Policy</p>
+                        <p className="text-sm text-neutral-500 dark:text-slate-400">Require strong passwords for all users</p>
                       </div>
                       <span className="badge bg-emerald-100 text-emerald-700">Enabled</span>
                     </div>
@@ -485,7 +485,7 @@ export function SettingsPage() {
 
               {/* Danger Zone */}
               <div className="card overflow-hidden border-red-200">
-                <div className="p-6 border-b border-red-100 bg-gradient-to-r from-red-50 to-white">
+                <div className="p-6 border-b border-red-100 bg-gradient-to-r from-red-50 to-white dark:to-slate-800">
                   <div className="flex items-center gap-3">
                     <div className="p-2 bg-red-100 rounded-xl">
                       <AlertCircle className="w-5 h-5 text-red-600" />
@@ -499,8 +499,8 @@ export function SettingsPage() {
                 <div className="p-6">
                   <div className="flex items-center justify-between p-4 border border-red-200 rounded-xl">
                     <div>
-                      <p className="font-medium text-neutral-900">Reset All Settings</p>
-                      <p className="text-sm text-neutral-500">Restore all settings to default values</p>
+                      <p className="font-medium text-neutral-900 dark:text-white">Reset All Settings</p>
+                      <p className="text-sm text-neutral-500 dark:text-slate-400">Restore all settings to default values</p>
                     </div>
                     <button className="btn btn-sm border-red-300 text-red-600 hover:bg-red-50">
                       <Trash2 size={16} />

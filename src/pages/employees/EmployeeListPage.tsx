@@ -115,8 +115,8 @@ export function EmployeeListPage() {
               <Users className="w-6 h-6 text-primary-600" />
             </div>
             <div>
-              <h1 className="text-2xl font-heading font-bold text-neutral-900">Employees</h1>
-              <p className="text-neutral-500 text-sm">Manage your organization's workforce</p>
+              <h1 className="text-2xl font-heading font-bold text-neutral-900 dark:text-white">Employees</h1>
+              <p className="text-neutral-500 dark:text-slate-400 text-sm">Manage your organization's workforce</p>
             </div>
           </div>
         </div>
@@ -144,8 +144,8 @@ export function EmployeeListPage() {
               <Users className="w-5 h-5 text-blue-600" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-neutral-900">{employees.length}</p>
-              <p className="text-xs text-neutral-500">Total Employees</p>
+              <p className="text-2xl font-bold text-neutral-900 dark:text-white">{employees.length}</p>
+              <p className="text-xs text-neutral-500 dark:text-slate-400">Total Employees</p>
             </div>
           </div>
         </div>
@@ -155,8 +155,8 @@ export function EmployeeListPage() {
               <UserCheck className="w-5 h-5 text-emerald-600" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-neutral-900">{employees.filter(e => e.status === 'active').length}</p>
-              <p className="text-xs text-neutral-500">Active</p>
+              <p className="text-2xl font-bold text-neutral-900 dark:text-white">{employees.filter(e => e.status === 'active').length}</p>
+              <p className="text-xs text-neutral-500 dark:text-slate-400">Active</p>
             </div>
           </div>
         </div>
@@ -166,8 +166,8 @@ export function EmployeeListPage() {
               <Users className="w-5 h-5 text-amber-600" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-neutral-900">{departments.length}</p>
-              <p className="text-xs text-neutral-500">Departments</p>
+              <p className="text-2xl font-bold text-neutral-900 dark:text-white">{departments.length}</p>
+              <p className="text-xs text-neutral-500 dark:text-slate-400">Departments</p>
             </div>
           </div>
         </div>
@@ -177,8 +177,8 @@ export function EmployeeListPage() {
               <Plus className="w-5 h-5 text-purple-600" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-neutral-900">12</p>
-              <p className="text-xs text-neutral-500">New This Month</p>
+              <p className="text-2xl font-bold text-neutral-900 dark:text-white">12</p>
+              <p className="text-xs text-neutral-500 dark:text-slate-400">New This Month</p>
             </div>
           </div>
         </div>
@@ -187,10 +187,10 @@ export function EmployeeListPage() {
       {/* Main Card */}
       <div className="card overflow-hidden">
         {/* Filters */}
-        <div className="p-4 border-b border-neutral-100 bg-neutral-50/50">
+        <div className="p-4 border-b border-neutral-100 dark:border-slate-700 bg-neutral-50/50">
           <div className="flex flex-col lg:flex-row gap-4">
             <div className="relative flex-1">
-              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-neutral-400" size={18} />
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-neutral-400 dark:text-slate-500" size={18} />
               <input
                 type="text"
                 placeholder="Search by name, email, or position..."
@@ -199,12 +199,12 @@ export function EmployeeListPage() {
                   setSearchTerm(e.target.value);
                   setCurrentPage(1);
                 }}
-                className="input pl-10 w-full bg-white"
+                className="input pl-10 w-full bg-white dark:bg-slate-800"
               />
               {searchTerm && (
                 <button 
                   onClick={() => setSearchTerm('')}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-neutral-600"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 dark:text-slate-500 hover:text-neutral-600"
                 >
                   <X size={16} />
                 </button>
@@ -229,7 +229,7 @@ export function EmployeeListPage() {
                   setDepartmentFilter(e.target.value);
                   setCurrentPage(1);
                 }}
-                className="input w-auto min-w-[150px] bg-white"
+                className="input w-auto min-w-[150px] bg-white dark:bg-slate-800"
               >
                 <option value="">All Departments</option>
                 {departments.map(dept => (
@@ -243,7 +243,7 @@ export function EmployeeListPage() {
                   setStatusFilter(e.target.value);
                   setCurrentPage(1);
                 }}
-                className="input w-auto min-w-[120px] bg-white"
+                className="input w-auto min-w-[120px] bg-white dark:bg-slate-800"
               >
                 <option value="">All Status</option>
                 <option value="active">Active</option>
@@ -253,7 +253,7 @@ export function EmployeeListPage() {
               {hasActiveFilters && (
                 <button 
                   onClick={clearFilters}
-                  className="btn btn-ghost text-neutral-500 hover:text-neutral-700"
+                  className="btn btn-ghost text-neutral-500 dark:text-slate-400 hover:text-neutral-700 dark:hover:text-slate-300"
                 >
                   <RefreshCw size={16} />
                   Clear
@@ -264,8 +264,8 @@ export function EmployeeListPage() {
 
           {/* Active Filters Display */}
           {hasActiveFilters && (
-            <div className="flex flex-wrap items-center gap-2 mt-3 pt-3 border-t border-neutral-200">
-              <span className="text-sm text-neutral-500">Active filters:</span>
+            <div className="flex flex-wrap items-center gap-2 mt-3 pt-3 border-t border-neutral-200 dark:border-slate-700">
+              <span className="text-sm text-neutral-500 dark:text-slate-400">Active filters:</span>
               {searchTerm && (
                 <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-primary-100 text-primary-700 text-xs font-medium rounded-full">
                   Search: "{searchTerm}"
@@ -292,7 +292,7 @@ export function EmployeeListPage() {
         <div className="overflow-x-auto">
           <table className="table">
             <thead>
-              <tr className="bg-neutral-50">
+              <tr className="bg-neutral-50 dark:bg-slate-800">
                 <th className="font-semibold">Employee</th>
                 <th className="font-semibold hidden md:table-cell">Contact</th>
                 <th className="font-semibold">Department</th>
@@ -311,34 +311,34 @@ export function EmployeeListPage() {
                         <span className="text-white font-semibold text-sm">{employee.avatar}</span>
                       </div>
                       <div>
-                        <p className="font-semibold text-neutral-900 group-hover:text-primary-600 transition-colors">{employee.name}</p>
-                        <p className="text-xs text-neutral-500 md:hidden">{employee.position}</p>
+                        <p className="font-semibold text-neutral-900 dark:text-white group-hover:text-primary-600 transition-colors">{employee.name}</p>
+                        <p className="text-xs text-neutral-500 dark:text-slate-400 md:hidden">{employee.position}</p>
                       </div>
                     </div>
                   </td>
                   <td className="hidden md:table-cell">
                     <div className="space-y-1">
-                      <p className="text-sm text-neutral-700 flex items-center gap-1.5">
-                        <Mail size={12} className="text-neutral-400" />
+                      <p className="text-sm text-neutral-700 dark:text-slate-300 flex items-center gap-1.5">
+                        <Mail size={12} className="text-neutral-400 dark:text-slate-500" />
                         {employee.email}
                       </p>
-                      <p className="text-xs text-neutral-500 flex items-center gap-1.5">
-                        <Phone size={12} className="text-neutral-400" />
+                      <p className="text-xs text-neutral-500 dark:text-slate-400 flex items-center gap-1.5">
+                        <Phone size={12} className="text-neutral-400 dark:text-slate-500" />
                         {employee.phone}
                       </p>
                     </div>
                   </td>
                   <td>
-                    <span className="inline-flex items-center px-2.5 py-1 rounded-lg bg-neutral-100 text-xs font-medium text-neutral-700">
+                    <span className="inline-flex items-center px-2.5 py-1 rounded-lg bg-neutral-100 dark:bg-slate-700 text-xs font-medium text-neutral-700 dark:text-slate-300">
                       {employee.department}
                     </span>
                   </td>
-                  <td className="hidden lg:table-cell text-neutral-600">{employee.position}</td>
+                  <td className="hidden lg:table-cell text-neutral-600 dark:text-slate-400">{employee.position}</td>
                   <td>
                     <span className={`badge ${
                       employee.status === 'active' 
                         ? 'bg-emerald-100 text-emerald-700' 
-                        : 'bg-neutral-100 text-neutral-600'
+                        : 'bg-neutral-100 dark:bg-slate-700 text-neutral-600 dark:text-slate-400'
                     }`}>
                       <span className={`w-1.5 h-1.5 rounded-full mr-1.5 ${
                         employee.status === 'active' ? 'bg-emerald-500' : 'bg-neutral-400'
@@ -346,27 +346,27 @@ export function EmployeeListPage() {
                       {employee.status === 'active' ? 'Active' : 'Inactive'}
                     </span>
                   </td>
-                  <td className="hidden sm:table-cell text-sm text-neutral-500">{formatDate(employee.hireDate)}</td>
+                  <td className="hidden sm:table-cell text-sm text-neutral-500 dark:text-slate-400">{formatDate(employee.hireDate)}</td>
                   <td>
                     <div className="relative" ref={openDropdown === employee.id ? dropdownRef : null}>
                       <button 
                         onClick={() => { setOpenDropdown(openDropdown === employee.id ? null : employee.id); setDeleteConfirm(null); }}
-                        className="p-2 hover:bg-neutral-100 rounded-lg transition-colors"
+                        className="p-2 hover:bg-neutral-100 dark:hover:bg-slate-700 rounded-lg transition-colors"
                       >
-                        <MoreVertical size={18} className="text-neutral-400" />
+                        <MoreVertical size={18} className="text-neutral-400 dark:text-slate-500" />
                       </button>
                       
                       {openDropdown === employee.id && (
-                        <div className="absolute right-0 top-full mt-1 w-52 bg-white rounded-xl shadow-lg border border-neutral-200 py-1 z-50 animate-in">
+                        <div className="absolute right-0 top-full mt-1 w-52 bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-neutral-200 dark:border-slate-700 py-1 z-50 animate-in">
                           <Link 
                             to={`/app/employees/${employee.id}/edit`}
-                            className="flex items-center gap-2.5 px-4 py-2.5 text-sm text-neutral-700 hover:bg-neutral-50 transition-colors"
+                            className="flex items-center gap-2.5 px-4 py-2.5 text-sm text-neutral-700 dark:text-slate-300 hover:bg-neutral-50 dark:hover:bg-slate-800 transition-colors"
                             onClick={() => setOpenDropdown(null)}
                           >
-                            <Eye size={16} className="text-neutral-400" />
+                            <Eye size={16} className="text-neutral-400 dark:text-slate-500" />
                             View / Edit
                           </Link>
-                          <hr className="my-1 border-neutral-100" />
+                          <hr className="my-1 border-neutral-100 dark:border-slate-700" />
                           <button
                             onClick={() => handleDelete(employee.id)}
                             className={`flex items-center gap-2.5 px-4 py-2.5 text-sm w-full transition-colors ${
@@ -391,11 +391,11 @@ export function EmployeeListPage() {
         {/* Empty State */}
         {filteredEmployees.length === 0 && (
           <div className="p-12 text-center">
-            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-neutral-100 flex items-center justify-center">
-              <Users className="w-8 h-8 text-neutral-400" />
+            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-neutral-100 dark:bg-slate-700 flex items-center justify-center">
+              <Users className="w-8 h-8 text-neutral-400 dark:text-slate-500" />
             </div>
-            <h3 className="text-lg font-semibold text-neutral-900 mb-1">No employees found</h3>
-            <p className="text-neutral-500 mb-4">
+            <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-1">No employees found</h3>
+            <p className="text-neutral-500 dark:text-slate-400 mb-4">
               {hasActiveFilters 
                 ? "Try adjusting your search or filter criteria" 
                 : "Get started by adding your first employee"}
@@ -415,12 +415,12 @@ export function EmployeeListPage() {
 
         {/* Pagination */}
         {filteredEmployees.length > 0 && (
-          <div className="p-4 border-t border-neutral-100 bg-neutral-50/50">
+          <div className="p-4 border-t border-neutral-100 dark:border-slate-700 bg-neutral-50/50">
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-              <p className="text-sm text-neutral-500">
-                Showing <span className="font-medium text-neutral-700">{startIndex + 1}</span> to{' '}
-                <span className="font-medium text-neutral-700">{Math.min(startIndex + itemsPerPage, filteredEmployees.length)}</span> of{' '}
-                <span className="font-medium text-neutral-700">{filteredEmployees.length}</span> employees
+              <p className="text-sm text-neutral-500 dark:text-slate-400">
+                Showing <span className="font-medium text-neutral-700 dark:text-slate-300">{startIndex + 1}</span> to{' '}
+                <span className="font-medium text-neutral-700 dark:text-slate-300">{Math.min(startIndex + itemsPerPage, filteredEmployees.length)}</span> of{' '}
+                <span className="font-medium text-neutral-700 dark:text-slate-300">{filteredEmployees.length}</span> employees
               </p>
               
               <div className="flex items-center gap-2">
@@ -441,7 +441,7 @@ export function EmployeeListPage() {
                       className={`w-9 h-9 rounded-lg text-sm font-medium transition-colors ${
                         currentPage === page 
                           ? 'bg-primary-500 text-white' 
-                          : 'hover:bg-neutral-100 text-neutral-600'
+                          : 'hover:bg-neutral-100 dark:hover:bg-slate-700 text-neutral-600 dark:text-slate-400'
                       }`}
                     >
                       {page}

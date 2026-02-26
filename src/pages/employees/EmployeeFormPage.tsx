@@ -213,7 +213,7 @@ export function EmployeeFormPage() {
   }) => (
     <div>
       <label className="label flex items-center gap-1.5">
-        {Icon && <Icon size={14} className="text-neutral-400" />}
+        {Icon && <Icon size={14} className="text-neutral-400 dark:text-slate-500" />}
         {label}
         {required && <span className="text-red-500">*</span>}
       </label>
@@ -251,16 +251,16 @@ export function EmployeeFormPage() {
       <div className="flex items-center gap-4">
         <button
           onClick={() => navigate('/app/employees')}
-          className="p-2.5 hover:bg-neutral-100 rounded-xl transition-colors"
+          className="p-2.5 hover:bg-neutral-100 dark:hover:bg-slate-700 rounded-xl transition-colors"
           aria-label="Go back"
         >
-          <ArrowLeft size={20} className="text-neutral-600" />
+          <ArrowLeft size={20} className="text-neutral-600 dark:text-slate-400" />
         </button>
         <div className="flex-1">
-          <h1 className="text-2xl font-heading font-bold text-neutral-900">
+          <h1 className="text-2xl font-heading font-bold text-neutral-900 dark:text-white">
             {isEditing ? 'Edit Employee' : 'Add New Employee'}
           </h1>
-          <p className="text-neutral-500 mt-1 text-sm">
+          <p className="text-neutral-500 dark:text-slate-400 mt-1 text-sm">
             {isEditing ? 'Update employee information' : 'Fill in the details to add a new team member'}
           </p>
         </div>
@@ -277,7 +277,7 @@ export function EmployeeFormPage() {
                 className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${
                   activeSection === section.id 
                     ? 'bg-primary-50 text-primary-600' 
-                    : 'text-neutral-600 hover:bg-neutral-50'
+                    : 'text-neutral-600 dark:text-slate-400 hover:bg-neutral-50 dark:hover:bg-slate-800'
                 }`}
               >
                 <section.icon size={18} />
@@ -303,8 +303,8 @@ export function EmployeeFormPage() {
                   <User className="w-5 h-5 text-blue-600" />
                 </div>
                 <div>
-                  <h2 className="text-lg font-semibold text-neutral-900">Personal Information</h2>
-                  <p className="text-sm text-neutral-500">Basic details about the employee</p>
+                  <h2 className="text-lg font-semibold text-neutral-900 dark:text-white">Personal Information</h2>
+                  <p className="text-sm text-neutral-500 dark:text-slate-400">Basic details about the employee</p>
                 </div>
               </div>
               
@@ -314,7 +314,7 @@ export function EmployeeFormPage() {
                 <InputField label="Middle Name" name="middleName" placeholder="Optional" />
                 <div>
                   <label className="label flex items-center gap-1.5">
-                    <User size={14} className="text-neutral-400" />
+                    <User size={14} className="text-neutral-400 dark:text-slate-500" />
                     Gender
                   </label>
                   <select
@@ -347,7 +347,7 @@ export function EmployeeFormPage() {
                 </div>
                 <div className="md:col-span-2">
                   <label className="label flex items-center gap-1.5">
-                    <MapPin size={14} className="text-neutral-400" />
+                    <MapPin size={14} className="text-neutral-400 dark:text-slate-500" />
                     Address
                   </label>
                   <input
@@ -371,15 +371,15 @@ export function EmployeeFormPage() {
                   <Briefcase className="w-5 h-5 text-emerald-600" />
                 </div>
                 <div>
-                  <h2 className="text-lg font-semibold text-neutral-900">Employment Information</h2>
-                  <p className="text-sm text-neutral-500">Job role and compensation details</p>
+                  <h2 className="text-lg font-semibold text-neutral-900 dark:text-white">Employment Information</h2>
+                  <p className="text-sm text-neutral-500 dark:text-slate-400">Job role and compensation details</p>
                 </div>
               </div>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="label flex items-center gap-1.5">
-                    <Building2 size={14} className="text-neutral-400" />
+                    <Building2 size={14} className="text-neutral-400 dark:text-slate-500" />
                     Department <span className="text-red-500">*</span>
                   </label>
                   <select
@@ -421,11 +421,11 @@ export function EmployeeFormPage() {
                 <InputField label="Hire Date" name="hireDate" type="date" required icon={Calendar} />
                 <div className="md:col-span-2">
                   <label className="label flex items-center gap-1.5">
-                    <Banknote size={14} className="text-neutral-400" />
+                    <Banknote size={14} className="text-neutral-400 dark:text-slate-500" />
                     Basic Monthly Salary
                   </label>
                   <div className="relative">
-                    <span className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-500">₱</span>
+                    <span className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-500 dark:text-slate-400">₱</span>
                     <input
                       type="number"
                       value={formData.basicSalary}
@@ -447,8 +447,8 @@ export function EmployeeFormPage() {
                   <CreditCard className="w-5 h-5 text-amber-600" />
                 </div>
                 <div>
-                  <h2 className="text-lg font-semibold text-neutral-900">Government IDs</h2>
-                  <p className="text-sm text-neutral-500">Required for payroll processing</p>
+                  <h2 className="text-lg font-semibold text-neutral-900 dark:text-white">Government IDs</h2>
+                  <p className="text-sm text-neutral-500 dark:text-slate-400">Required for payroll processing</p>
                 </div>
               </div>
               
@@ -462,7 +462,7 @@ export function EmployeeFormPage() {
                     className="input"
                     placeholder="XX-XXXXXXX-X"
                   />
-                  <p className="mt-1 text-xs text-neutral-400">Format: 00-0000000-0</p>
+                  <p className="mt-1 text-xs text-neutral-400 dark:text-slate-500">Format: 00-0000000-0</p>
                 </div>
                 <div>
                   <label className="label">PhilHealth Number</label>
@@ -473,7 +473,7 @@ export function EmployeeFormPage() {
                     className="input"
                     placeholder="XX-XXXXXXXXX-X"
                   />
-                  <p className="mt-1 text-xs text-neutral-400">Format: 00-000000000-0</p>
+                  <p className="mt-1 text-xs text-neutral-400 dark:text-slate-500">Format: 00-000000000-0</p>
                 </div>
                 <div>
                   <label className="label">Pag-IBIG Number</label>
@@ -484,7 +484,7 @@ export function EmployeeFormPage() {
                     className="input"
                     placeholder="XXXX-XXXX-XXXX"
                   />
-                  <p className="mt-1 text-xs text-neutral-400">Format: 0000-0000-0000</p>
+                  <p className="mt-1 text-xs text-neutral-400 dark:text-slate-500">Format: 0000-0000-0000</p>
                 </div>
                 <div>
                   <label className="label">TIN (Tax Identification Number)</label>
@@ -495,7 +495,7 @@ export function EmployeeFormPage() {
                     className="input"
                     placeholder="XXX-XXX-XXX-XXX"
                   />
-                  <p className="mt-1 text-xs text-neutral-400">Format: 000-000-000-000</p>
+                  <p className="mt-1 text-xs text-neutral-400 dark:text-slate-500">Format: 000-000-000-000</p>
                 </div>
               </div>
             </div>
@@ -509,8 +509,8 @@ export function EmployeeFormPage() {
                   <Phone className="w-5 h-5 text-red-600" />
                 </div>
                 <div>
-                  <h2 className="text-lg font-semibold text-neutral-900">Emergency Contact</h2>
-                  <p className="text-sm text-neutral-500">Person to contact in case of emergency</p>
+                  <h2 className="text-lg font-semibold text-neutral-900 dark:text-white">Emergency Contact</h2>
+                  <p className="text-sm text-neutral-500 dark:text-slate-400">Person to contact in case of emergency</p>
                 </div>
               </div>
               
@@ -539,7 +539,7 @@ export function EmployeeFormPage() {
 
           {/* Form Actions */}
           <div className="card p-4 flex flex-col sm:flex-row justify-between items-center gap-4 sticky bottom-4">
-            <p className="text-sm text-neutral-500">
+            <p className="text-sm text-neutral-500 dark:text-slate-400">
               <span className="text-red-500">*</span> Required fields
             </p>
             <div className="flex gap-3 w-full sm:w-auto">

@@ -247,7 +247,7 @@ export function SubscriptionsPage() {
             className={`pb-4 px-2 sm:px-1 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
               activeTab === 'plans'
                 ? 'border-primary-500 text-primary-600'
-                : 'border-transparent text-neutral-500 hover:text-neutral-700'
+                : 'border-transparent text-neutral-500 dark:text-slate-400 hover:text-neutral-700 dark:hover:text-slate-300'
             }`}
           >
             <div className="flex items-center gap-2">
@@ -260,7 +260,7 @@ export function SubscriptionsPage() {
             className={`pb-4 px-2 sm:px-1 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
               activeTab === 'payments'
                 ? 'border-primary-500 text-primary-600'
-                : 'border-transparent text-neutral-500 hover:text-neutral-700'
+                : 'border-transparent text-neutral-500 dark:text-slate-400 hover:text-neutral-700 dark:hover:text-slate-300'
             }`}
           >
             <div className="flex items-center gap-2">
@@ -273,7 +273,7 @@ export function SubscriptionsPage() {
             className={`pb-4 px-2 sm:px-1 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
               activeTab === 'revenue'
                 ? 'border-primary-500 text-primary-600'
-                : 'border-transparent text-neutral-500 hover:text-neutral-700'
+                : 'border-transparent text-neutral-500 dark:text-slate-400 hover:text-neutral-700 dark:hover:text-slate-300'
             }`}
           >
             <div className="flex items-center gap-2">
@@ -286,7 +286,7 @@ export function SubscriptionsPage() {
             className={`pb-4 px-2 sm:px-1 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
               activeTab === 'settings'
                 ? 'border-primary-500 text-primary-600'
-                : 'border-transparent text-neutral-500 hover:text-neutral-700'
+                : 'border-transparent text-neutral-500 dark:text-slate-400 hover:text-neutral-700 dark:hover:text-slate-300'
             }`}
           >
             <div className="flex items-center gap-2">
@@ -311,7 +311,7 @@ export function SubscriptionsPage() {
               <div className="flex items-start justify-between mb-6">
                 <div className="flex-1">
                   <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mb-2">{plan.name}</h3>
-                  <p className="text-neutral-600">{plan.description}</p>
+                  <p className="text-neutral-600 dark:text-slate-400">{plan.description}</p>
                 </div>
                 <button 
                   onClick={() => setShowPlanModal(true)}
@@ -324,14 +324,14 @@ export function SubscriptionsPage() {
 
               <div className="grid grid-cols-2 gap-6 mb-6 p-6 bg-primary-50 rounded-xl">
                 <div>
-                  <p className="text-sm text-neutral-600 mb-1">Monthly Price</p>
+                  <p className="text-sm text-neutral-600 dark:text-slate-400 mb-1">Monthly Price</p>
                   <p className="text-3xl font-bold text-primary-600">{formatCurrency(plan.monthlyPrice)}</p>
-                  <p className="text-xs text-neutral-500 mt-1">Billed monthly</p>
+                  <p className="text-xs text-neutral-500 dark:text-slate-400 mt-1">Billed monthly</p>
                 </div>
                 <div>
-                  <p className="text-sm text-neutral-600 mb-1">Yearly Price</p>
+                  <p className="text-sm text-neutral-600 dark:text-slate-400 mb-1">Yearly Price</p>
                   <p className="text-3xl font-bold text-primary-600">{formatCurrency(plan.yearlyPrice)}</p>
-                  <p className="text-xs text-neutral-500 mt-1">Save {Math.round((1 - plan.yearlyPrice / (plan.monthlyPrice * 12)) * 100)}% annually</p>
+                  <p className="text-xs text-neutral-500 dark:text-slate-400 mt-1">Save {Math.round((1 - plan.yearlyPrice / (plan.monthlyPrice * 12)) * 100)}% annually</p>
                 </div>
               </div>
 
@@ -341,15 +341,15 @@ export function SubscriptionsPage() {
                   {plan.features.map((feature, idx) => (
                     <div key={idx} className="flex items-start gap-2">
                       <Check className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
-                      <span className="text-neutral-700">{feature}</span>
+                      <span className="text-neutral-700 dark:text-slate-300">{feature}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="mt-6 pt-6 border-t border-neutral-200">
-                <p className="text-sm text-neutral-500">
-                  <strong className="text-neutral-700">Note:</strong> Changes to this plan will be reflected on the landing page immediately. 
+              <div className="mt-6 pt-6 border-t border-neutral-200 dark:border-slate-700">
+                <p className="text-sm text-neutral-500 dark:text-slate-400">
+                  <strong className="text-neutral-700 dark:text-slate-300">Note:</strong> Changes to this plan will be reflected on the landing page immediately. 
                   Existing subscribers will not be affected unless you modify their subscriptions individually.
                 </p>
               </div>
@@ -372,7 +372,7 @@ export function SubscriptionsPage() {
                   <p className="text-2xl font-bold text-emerald-600">
                     {mockTransactions.filter(t => t.status === 'paid').length}
                   </p>
-                  <p className="text-sm text-neutral-500">Paid</p>
+                  <p className="text-sm text-neutral-500 dark:text-slate-400">Paid</p>
                 </div>
               </div>
             </div>
@@ -385,7 +385,7 @@ export function SubscriptionsPage() {
                   <p className="text-2xl font-bold text-amber-600">
                     {mockTransactions.filter(t => t.status === 'pending').length}
                   </p>
-                  <p className="text-sm text-neutral-500">Pending</p>
+                  <p className="text-sm text-neutral-500 dark:text-slate-400">Pending</p>
                 </div>
               </div>
             </div>
@@ -398,7 +398,7 @@ export function SubscriptionsPage() {
                   <p className="text-2xl font-bold text-red-600">
                     {mockTransactions.filter(t => t.status === 'failed').length}
                   </p>
-                  <p className="text-sm text-neutral-500">Failed</p>
+                  <p className="text-sm text-neutral-500 dark:text-slate-400">Failed</p>
                 </div>
               </div>
             </div>
@@ -408,10 +408,10 @@ export function SubscriptionsPage() {
                   <DollarSign className="w-5 h-5 text-blue-600" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-neutral-900">
+                  <p className="text-2xl font-bold text-neutral-900 dark:text-white">
                     {formatCurrency(mockRevenue.pending)}
                   </p>
-                  <p className="text-sm text-neutral-500">Pending Amount</p>
+                  <p className="text-sm text-neutral-500 dark:text-slate-400">Pending Amount</p>
                 </div>
               </div>
             </div>
@@ -421,7 +421,7 @@ export function SubscriptionsPage() {
           <div className="card p-4">
             <div className="flex flex-col sm:flex-row gap-4">
               <div className="flex-1 relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400 dark:text-slate-500" />
                 <input
                   type="text"
                   placeholder="Search transactions..."
@@ -457,36 +457,36 @@ export function SubscriptionsPage() {
             <div className="overflow-x-auto">
               <table className="w-full min-w-[700px]">
                 <thead>
-                  <tr className="bg-neutral-50 border-b border-neutral-200">
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-neutral-600 uppercase tracking-wider">
+                  <tr className="bg-neutral-50 dark:bg-slate-800 border-b border-neutral-200 dark:border-slate-700">
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-neutral-600 dark:text-slate-400 uppercase tracking-wider">
                       Transaction ID
                     </th>
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-neutral-600 uppercase tracking-wider">
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-neutral-600 dark:text-slate-400 uppercase tracking-wider">
                       Company
                     </th>
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-neutral-600 uppercase tracking-wider">
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-neutral-600 dark:text-slate-400 uppercase tracking-wider">
                       Plan
                     </th>
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-neutral-600 uppercase tracking-wider">
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-neutral-600 dark:text-slate-400 uppercase tracking-wider">
                       Amount
                     </th>
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-neutral-600 uppercase tracking-wider">
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-neutral-600 dark:text-slate-400 uppercase tracking-wider">
                       Method
                     </th>
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-neutral-600 uppercase tracking-wider">
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-neutral-600 dark:text-slate-400 uppercase tracking-wider">
                       Status
                     </th>
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-neutral-600 uppercase tracking-wider">
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-neutral-600 dark:text-slate-400 uppercase tracking-wider">
                       Date
                     </th>
-                    <th className="px-6 py-4 text-right text-xs font-semibold text-neutral-600 uppercase tracking-wider">
+                    <th className="px-6 py-4 text-right text-xs font-semibold text-neutral-600 dark:text-slate-400 uppercase tracking-wider">
                       Action
                     </th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-neutral-100">
+                <tbody className="divide-y divide-neutral-100 dark:divide-slate-700">
                   {filteredTransactions.map((txn) => (
-                    <tr key={txn.id} className="hover:bg-neutral-50 transition-colors">
+                    <tr key={txn.id} className="hover:bg-neutral-50 dark:hover:bg-slate-800 transition-colors">
                       <td className="px-6 py-4">
                         <span className="font-mono text-sm font-medium text-neutral-900 dark:text-white">{txn.id}</span>
                       </td>
@@ -494,24 +494,24 @@ export function SubscriptionsPage() {
                         <span className="font-medium text-neutral-900 dark:text-white">{txn.company}</span>
                       </td>
                       <td className="px-6 py-4">
-                        <span className="text-neutral-600">{txn.plan}</span>
+                        <span className="text-neutral-600 dark:text-slate-400">{txn.plan}</span>
                       </td>
                       <td className="px-6 py-4">
                         <span className="font-semibold text-neutral-900 dark:text-white">{formatCurrency(txn.amount)}</span>
                       </td>
                       <td className="px-6 py-4">
-                        <span className="text-neutral-600">{txn.method}</span>
+                        <span className="text-neutral-600 dark:text-slate-400">{txn.method}</span>
                       </td>
                       <td className="px-6 py-4">
                         {getStatusBadge(txn.status)}
                       </td>
                       <td className="px-6 py-4">
-                        <span className="text-neutral-600">{formatDate(txn.date)}</span>
+                        <span className="text-neutral-600 dark:text-slate-400">{formatDate(txn.date)}</span>
                       </td>
                       <td className="px-6 py-4 text-right">
                         <button 
                           onClick={() => setSelectedTransaction(txn)}
-                          className="p-2 text-neutral-400 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-colors"
+                          className="p-2 text-neutral-400 dark:text-slate-500 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-colors"
                         >
                           <Eye className="w-4 h-4" />
                         </button>
@@ -536,14 +536,14 @@ export function SubscriptionsPage() {
                   <DollarSign className="w-6 h-6 text-emerald-600" />
                 </div>
                 <div>
-                  <p className="text-sm text-neutral-500">Monthly Revenue</p>
-                  <p className="text-2xl font-bold text-neutral-900">{formatCurrency(mockRevenue.monthly)}</p>
+                  <p className="text-sm text-neutral-500 dark:text-slate-400">Monthly Revenue</p>
+                  <p className="text-2xl font-bold text-neutral-900 dark:text-white">{formatCurrency(mockRevenue.monthly)}</p>
                 </div>
               </div>
               <div className="flex items-center gap-1">
                 <TrendingUp className="w-4 h-4 text-emerald-500" />
                 <span className="text-sm font-medium text-emerald-600">+{mockRevenue.growth}%</span>
-                <span className="text-sm text-neutral-400">vs last month</span>
+                <span className="text-sm text-neutral-400 dark:text-slate-500">vs last month</span>
               </div>
             </div>
 
@@ -553,11 +553,11 @@ export function SubscriptionsPage() {
                   <Calendar className="w-6 h-6 text-blue-600" />
                 </div>
                 <div>
-                  <p className="text-sm text-neutral-500">Quarterly Revenue</p>
-                  <p className="text-2xl font-bold text-neutral-900">{formatCurrency(mockRevenue.quarterly)}</p>
+                  <p className="text-sm text-neutral-500 dark:text-slate-400">Quarterly Revenue</p>
+                  <p className="text-2xl font-bold text-neutral-900 dark:text-white">{formatCurrency(mockRevenue.quarterly)}</p>
                 </div>
               </div>
-              <p className="text-sm text-neutral-500">Q1 2026</p>
+              <p className="text-sm text-neutral-500 dark:text-slate-400">Q1 2026</p>
             </div>
 
             <div className="card p-6">
@@ -566,11 +566,11 @@ export function SubscriptionsPage() {
                   <BarChart3 className="w-6 h-6 text-purple-600" />
                 </div>
                 <div>
-                  <p className="text-sm text-neutral-500">Annual Revenue</p>
-                  <p className="text-2xl font-bold text-neutral-900">{formatCurrency(mockRevenue.yearly)}</p>
+                  <p className="text-sm text-neutral-500 dark:text-slate-400">Annual Revenue</p>
+                  <p className="text-2xl font-bold text-neutral-900 dark:text-white">{formatCurrency(mockRevenue.yearly)}</p>
                 </div>
               </div>
-              <p className="text-sm text-neutral-500">Projected for 2026</p>
+              <p className="text-sm text-neutral-500 dark:text-slate-400">Projected for 2026</p>
             </div>
           </div>
 
@@ -578,10 +578,10 @@ export function SubscriptionsPage() {
           <div className="card p-6">
             <div className="flex items-center justify-between mb-6">
               <div>
-                <h3 className="font-semibold text-neutral-900">Revenue Trend</h3>
-                <p className="text-sm text-neutral-500">Monthly revenue over time</p>
+                <h3 className="font-semibold text-neutral-900 dark:text-white">Revenue Trend</h3>
+                <p className="text-sm text-neutral-500 dark:text-slate-400">Monthly revenue over time</p>
               </div>
-              <select className="text-sm border border-neutral-200 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-primary-500">
+              <select className="text-sm border border-neutral-200 dark:border-slate-700 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-primary-500">
                 <option>Last 6 months</option>
                 <option>Last 12 months</option>
                 <option>This year</option>
@@ -596,7 +596,7 @@ export function SubscriptionsPage() {
                       style={{ height: `${(value / 500000) * 200}px` }}
                     ></div>
                   </div>
-                  <span className="text-xs text-neutral-500">
+                  <span className="text-xs text-neutral-500 dark:text-slate-400">
                     {['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'][index]}
                   </span>
                 </div>
@@ -607,7 +607,7 @@ export function SubscriptionsPage() {
           {/* Revenue by Plan */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div className="card p-6">
-              <h3 className="font-semibold text-neutral-900 mb-4">Revenue by Plan</h3>
+              <h3 className="font-semibold text-neutral-900 dark:text-white mb-4">Revenue by Plan</h3>
               <div className="space-y-4">
                 {[
                   { name: 'Starter', revenue: 67500, percentage: 14, color: 'bg-blue-500' },
@@ -616,12 +616,12 @@ export function SubscriptionsPage() {
                 ].map((plan, index) => (
                   <div key={index}>
                     <div className="flex items-center justify-between mb-1">
-                      <span className="text-sm font-medium text-neutral-700">{plan.name}</span>
-                      <span className="text-sm text-neutral-500">
+                      <span className="text-sm font-medium text-neutral-700 dark:text-slate-300">{plan.name}</span>
+                      <span className="text-sm text-neutral-500 dark:text-slate-400">
                         {formatCurrency(plan.revenue)} ({plan.percentage}%)
                       </span>
                     </div>
-                    <div className="w-full h-2 bg-neutral-100 rounded-full overflow-hidden">
+                    <div className="w-full h-2 bg-neutral-100 dark:bg-slate-700 rounded-full overflow-hidden">
                       <div 
                         className={`h-full ${plan.color} rounded-full transition-all duration-500`}
                         style={{ width: `${plan.percentage}%` }}
@@ -633,23 +633,23 @@ export function SubscriptionsPage() {
             </div>
 
             <div className="card p-6">
-              <h3 className="font-semibold text-neutral-900 mb-4">Revenue Formula</h3>
-              <div className="bg-neutral-50 rounded-xl p-4 space-y-3">
+              <h3 className="font-semibold text-neutral-900 dark:text-white mb-4">Revenue Formula</h3>
+              <div className="bg-neutral-50 dark:bg-slate-800 rounded-xl p-4 space-y-3">
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-neutral-600">Starter (45 × ₱1,500)</span>
-                  <span className="font-medium text-neutral-900">₱67,500</span>
+                  <span className="text-neutral-600 dark:text-slate-400">Starter (45 × ₱1,500)</span>
+                  <span className="font-medium text-neutral-900 dark:text-white">₱67,500</span>
                 </div>
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-neutral-600">Professional (78 × ₱4,500)</span>
-                  <span className="font-medium text-neutral-900">₱351,000</span>
+                  <span className="text-neutral-600 dark:text-slate-400">Professional (78 × ₱4,500)</span>
+                  <span className="font-medium text-neutral-900 dark:text-white">₱351,000</span>
                 </div>
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-neutral-600">Enterprise (33 × ₱12,000)</span>
-                  <span className="font-medium text-neutral-900">₱66,500</span>
+                  <span className="text-neutral-600 dark:text-slate-400">Enterprise (33 × ₱12,000)</span>
+                  <span className="font-medium text-neutral-900 dark:text-white">₱66,500</span>
                 </div>
-                <hr className="border-neutral-200" />
+                <hr className="border-neutral-200 dark:border-slate-700" />
                 <div className="flex items-center justify-between">
-                  <span className="font-semibold text-neutral-900">Total Monthly</span>
+                  <span className="font-semibold text-neutral-900 dark:text-white">Total Monthly</span>
                   <span className="font-bold text-lg text-emerald-600">{formatCurrency(mockRevenue.monthly)}</span>
                 </div>
               </div>
@@ -665,12 +665,12 @@ export function SubscriptionsPage() {
       {/* Plan Modal */}
       {showPlanModal && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-            <div className="p-6 border-b border-neutral-200">
-              <h2 className="text-xl font-bold text-neutral-900">
+          <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+            <div className="p-6 border-b border-neutral-200 dark:border-slate-700">
+              <h2 className="text-xl font-bold text-neutral-900 dark:text-white">
                 Edit Subscription Plan
               </h2>
-              <p className="text-sm text-neutral-500 mt-1">
+              <p className="text-sm text-neutral-500 dark:text-slate-400 mt-1">
                 Changes will be reflected on the landing page
               </p>
             </div>
@@ -718,7 +718,7 @@ export function SubscriptionsPage() {
                     value={editedPlan.yearlyPrice}
                     onChange={(e) => setEditedPlan({ ...editedPlan, yearlyPrice: parseInt(e.target.value) || 0 })}
                   />
-                  <p className="text-xs text-neutral-500 mt-1">
+                  <p className="text-xs text-neutral-500 dark:text-slate-400 mt-1">
                     Annual discount: {Math.round((1 - editedPlan.yearlyPrice / (editedPlan.monthlyPrice * 12)) * 100)}%
                   </p>
                 </div>
@@ -759,7 +759,7 @@ export function SubscriptionsPage() {
               </div>
             </div>
 
-            <div className="p-6 border-t border-neutral-200 flex justify-end gap-3">
+            <div className="p-6 border-t border-neutral-200 dark:border-slate-700 flex justify-end gap-3">
               <button 
                 onClick={() => setShowPlanModal(false)}
                 className="btn btn-secondary"

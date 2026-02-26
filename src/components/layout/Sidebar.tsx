@@ -58,7 +58,7 @@ const navigationByRole = {
     { name: 'Leaves', href: '/app/leaves', icon: 'Calendar', color: 'text-purple-500' },
     { name: 'Payroll', href: '/app/payroll', icon: 'Wallet', color: 'text-pink-500' },
     { name: 'Reports', href: '/app/reports', icon: 'FileText', color: 'text-cyan-500' },
-    { name: 'Settings', href: '/app/settings', icon: 'Settings', color: 'text-neutral-500' },
+    { name: 'Settings', href: '/app/settings', icon: 'Settings', color: 'text-neutral-500 dark:text-slate-400' },
   ],
   employee: [
     { name: 'Dashboard', href: '/app/dashboard', icon: 'LayoutDashboard', color: 'text-blue-500' },
@@ -102,7 +102,7 @@ export function Sidebar() {
                 alt="SAHOD" 
                 className="w-10 h-10 rounded-xl shrink-0 object-contain"
               />
-              <span className={`font-heading font-bold text-xl text-neutral-800 dark:text-white transition-opacity duration-200 ${
+              <span className={`font-heading font-bold text-xl text-neutral-800 dark:text-slate-200 dark:text-white transition-opacity duration-200 ${
                 sidebarCollapsed ? 'lg:opacity-0 lg:invisible' : 'lg:opacity-100'
               }`}>
                 SAHOD
@@ -110,7 +110,7 @@ export function Sidebar() {
             </div>
             <button 
               onClick={toggleSidebarCollapse}
-              className="hidden lg:flex p-2 rounded-xl text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-slate-700 transition-all"
+              className="hidden lg:flex p-2 rounded-xl text-neutral-400 dark:text-slate-500 hover:text-neutral-600 dark:hover:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-slate-700 transition-all"
             >
               {sidebarCollapsed ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}
             </button>
@@ -129,7 +129,7 @@ export function Sidebar() {
                   className={`group flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 relative ${
                     isActive
                       ? 'bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400 shadow-sm'
-                      : 'text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-slate-700 hover:text-neutral-900 dark:hover:text-white'
+                      : 'text-neutral-600 dark:text-slate-400 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-slate-700 hover:text-neutral-900 dark:hover:text-white'
                   }`}
                 >
                   {/* Active indicator */}

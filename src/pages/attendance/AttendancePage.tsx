@@ -104,9 +104,9 @@ export function AttendancePage() {
       default:
         return { 
           icon: Clock, 
-          color: 'text-neutral-600', 
-          bg: 'bg-neutral-100', 
-          badge: 'bg-neutral-100 text-neutral-700',
+          color: 'text-neutral-600 dark:text-slate-400', 
+          bg: 'bg-neutral-100 dark:bg-slate-700', 
+          badge: 'bg-neutral-100 dark:bg-slate-700 text-neutral-700 dark:text-slate-300',
           label: status
         };
     }
@@ -139,20 +139,20 @@ export function AttendancePage() {
               <Clock className="w-6 h-6 text-primary-600" />
             </div>
             <div>
-              <h1 className="text-2xl font-heading font-bold text-neutral-900">Attendance</h1>
-              <p className="text-neutral-500 text-sm">Track and manage daily attendance</p>
+              <h1 className="text-2xl font-heading font-bold text-neutral-900 dark:text-white">Attendance</h1>
+              <p className="text-neutral-500 dark:text-slate-400 text-sm">Track and manage daily attendance</p>
             </div>
           </div>
         </div>
         
         {/* Date Picker */}
-        <div className="flex items-center gap-2 bg-white border border-neutral-200 rounded-xl p-1.5 shadow-sm">
+        <div className="flex items-center gap-2 bg-white dark:bg-slate-800 border border-neutral-200 dark:border-slate-700 rounded-xl p-1.5 shadow-sm">
           <button 
             onClick={() => changeDate(-1)}
-            className="p-2 hover:bg-neutral-100 rounded-lg transition-colors"
+            className="p-2 hover:bg-neutral-100 dark:hover:bg-slate-700 rounded-lg transition-colors"
             aria-label="Previous day"
           >
-            <ChevronLeft size={20} className="text-neutral-600" />
+            <ChevronLeft size={20} className="text-neutral-600 dark:text-slate-400" />
           </button>
           <div className="relative flex items-center gap-2 px-3">
             <Calendar className="w-5 h-5 text-primary-500" />
@@ -160,15 +160,15 @@ export function AttendancePage() {
               type="date"
               value={date}
               onChange={(e) => setDate(e.target.value)}
-              className="bg-transparent border-0 text-sm font-medium text-neutral-900 focus:outline-none cursor-pointer"
+              className="bg-transparent border-0 text-sm font-medium text-neutral-900 dark:text-white focus:outline-none cursor-pointer"
             />
           </div>
           <button 
             onClick={() => changeDate(1)}
-            className="p-2 hover:bg-neutral-100 rounded-lg transition-colors"
+            className="p-2 hover:bg-neutral-100 dark:hover:bg-slate-700 rounded-lg transition-colors"
             aria-label="Next day"
           >
-            <ChevronRight size={20} className="text-neutral-600" />
+            <ChevronRight size={20} className="text-neutral-600 dark:text-slate-400" />
           </button>
         </div>
       </div>
@@ -189,8 +189,8 @@ export function AttendancePage() {
               <CheckCircle className="w-5 h-5 text-emerald-600" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-neutral-900">{presentCount}</p>
-              <p className="text-xs text-neutral-500">Present</p>
+              <p className="text-2xl font-bold text-neutral-900 dark:text-white">{presentCount}</p>
+              <p className="text-xs text-neutral-500 dark:text-slate-400">Present</p>
             </div>
           </div>
         </div>
@@ -200,8 +200,8 @@ export function AttendancePage() {
               <AlertCircle className="w-5 h-5 text-amber-600" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-neutral-900">{lateCount}</p>
-              <p className="text-xs text-neutral-500">Late/Early Out</p>
+              <p className="text-2xl font-bold text-neutral-900 dark:text-white">{lateCount}</p>
+              <p className="text-xs text-neutral-500 dark:text-slate-400">Late/Early Out</p>
             </div>
           </div>
         </div>
@@ -211,8 +211,8 @@ export function AttendancePage() {
               <XCircle className="w-5 h-5 text-red-600" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-neutral-900">{absentCount}</p>
-              <p className="text-xs text-neutral-500">Absent</p>
+              <p className="text-2xl font-bold text-neutral-900 dark:text-white">{absentCount}</p>
+              <p className="text-xs text-neutral-500 dark:text-slate-400">Absent</p>
             </div>
           </div>
         </div>
@@ -222,8 +222,8 @@ export function AttendancePage() {
               <Calendar className="w-5 h-5 text-blue-600" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-neutral-900">{onLeaveCount}</p>
-              <p className="text-xs text-neutral-500">On Leave</p>
+              <p className="text-2xl font-bold text-neutral-900 dark:text-white">{onLeaveCount}</p>
+              <p className="text-xs text-neutral-500 dark:text-slate-400">On Leave</p>
             </div>
           </div>
         </div>
@@ -233,8 +233,8 @@ export function AttendancePage() {
               <Timer className="w-5 h-5 text-purple-600" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-neutral-900">{avgHours}h</p>
-              <p className="text-xs text-neutral-500">Avg Hours</p>
+              <p className="text-2xl font-bold text-neutral-900 dark:text-white">{avgHours}h</p>
+              <p className="text-xs text-neutral-500 dark:text-slate-400">Avg Hours</p>
             </div>
           </div>
         </div>
@@ -254,23 +254,23 @@ export function AttendancePage() {
       {/* Main Card */}
       <div className={`card overflow-hidden transition-all duration-500 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
         {/* Filters */}
-        <div className="p-4 border-b border-neutral-100 bg-neutral-50/50">
+        <div className="p-4 border-b border-neutral-100 dark:border-slate-700 bg-neutral-50/50">
           <div className="flex flex-col sm:flex-row gap-4">
             <div className="relative flex-1">
-              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-neutral-400" size={18} />
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-neutral-400 dark:text-slate-500" size={18} />
               <input
                 type="text"
                 placeholder="Search by name or department..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="input pl-10 bg-white"
+                className="input pl-10 bg-white dark:bg-slate-800"
               />
             </div>
             <div className="flex gap-2">
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
-                className="input w-auto min-w-[140px] bg-white"
+                className="input w-auto min-w-[140px] bg-white dark:bg-slate-800"
               >
                 <option value="">All Status</option>
                 <option value="present">Present</option>
@@ -291,7 +291,7 @@ export function AttendancePage() {
         <div className="overflow-x-auto">
           <table className="table">
             <thead>
-              <tr className="bg-neutral-50">
+              <tr className="bg-neutral-50 dark:bg-slate-800">
                 <th className="font-semibold">Employee</th>
                 <th className="font-semibold">Department</th>
                 <th className="font-semibold text-center">Time In</th>
@@ -306,25 +306,25 @@ export function AttendancePage() {
                 const StatusIcon = statusConfig.icon;
                 
                 return (
-                  <tr key={record.id} className="group hover:bg-neutral-50 transition-colors">
+                  <tr key={record.id} className="group hover:bg-neutral-50 dark:hover:bg-slate-800 transition-colors">
                     <td>
                       <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center shadow-sm">
                           <span className="text-white font-semibold text-sm">{`${record.employeeName.split(' ')[0][0]}${record.employeeName.split(' ').slice(-1)[0][0]}`.toUpperCase()}</span>
                         </div>
-                        <span className="font-medium text-neutral-900">{record.employeeName}</span>
+                        <span className="font-medium text-neutral-900 dark:text-white">{record.employeeName}</span>
                       </div>
                     </td>
                     <td>
-                      <span className="text-sm text-neutral-600">{record.department}</span>
+                      <span className="text-sm text-neutral-600 dark:text-slate-400">{record.department}</span>
                     </td>
                     <td className="text-center">
-                      <span className={`font-mono text-sm ${record.timeIn === '--:--' ? 'text-neutral-400' : 'text-neutral-900'}`}>
+                      <span className={`font-mono text-sm ${record.timeIn === '--:--' ? 'text-neutral-400' : 'text-neutral-900 dark:text-white'}`}>
                         {record.timeIn}
                       </span>
                     </td>
                     <td className="text-center">
-                      <span className={`font-mono text-sm ${record.timeOut === '--:--' ? 'text-neutral-400' : 'text-neutral-900'}`}>
+                      <span className={`font-mono text-sm ${record.timeOut === '--:--' ? 'text-neutral-400' : 'text-neutral-900 dark:text-white'}`}>
                         {record.timeOut}
                       </span>
                     </td>
@@ -351,19 +351,19 @@ export function AttendancePage() {
         {/* Empty State */}
         {filteredAttendance.length === 0 && (
           <div className="p-12 text-center">
-            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-neutral-100 flex items-center justify-center">
-              <Users className="w-8 h-8 text-neutral-400" />
+            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-neutral-100 dark:bg-slate-700 flex items-center justify-center">
+              <Users className="w-8 h-8 text-neutral-400 dark:text-slate-500" />
             </div>
-            <h3 className="text-lg font-semibold text-neutral-900 mb-1">No records found</h3>
-            <p className="text-neutral-500">
+            <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-1">No records found</h3>
+            <p className="text-neutral-500 dark:text-slate-400">
               No attendance records match your search criteria.
             </p>
           </div>
         )}
 
         {/* Footer */}
-        <div className="p-4 border-t border-neutral-100 bg-neutral-50/50 flex items-center justify-between">
-          <p className="text-sm text-neutral-500">
+        <div className="p-4 border-t border-neutral-100 dark:border-slate-700 bg-neutral-50/50 flex items-center justify-between">
+          <p className="text-sm text-neutral-500 dark:text-slate-400">
             Showing {filteredAttendance.length} of {dateAttendance.length} records
           </p>
           <button className="btn btn-ghost text-sm" onClick={handleRefresh}>
@@ -375,7 +375,7 @@ export function AttendancePage() {
 
       {/* Legend */}
       <div className="card p-4">
-        <h3 className="text-sm font-semibold text-neutral-700 mb-3">Status Legend</h3>
+        <h3 className="text-sm font-semibold text-neutral-700 dark:text-slate-300 mb-3">Status Legend</h3>
         <div className="flex flex-wrap gap-4">
           {['present', 'late', 'early-out', 'absent', 'on-leave'].map((status) => {
             const config = getStatusConfig(status);
@@ -385,7 +385,7 @@ export function AttendancePage() {
                 <div className={`p-1.5 rounded-lg ${config.bg}`}>
                   <StatusIcon className={`w-4 h-4 ${config.color}`} />
                 </div>
-                <span className="text-sm text-neutral-600">{config.label}</span>
+                <span className="text-sm text-neutral-600 dark:text-slate-400">{config.label}</span>
               </div>
             );
           })}

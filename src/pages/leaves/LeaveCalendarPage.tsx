@@ -145,7 +145,7 @@ export function LeaveCalendarPage() {
       case 'approved': return { bg: 'bg-emerald-50', text: 'text-emerald-700', border: 'border-emerald-200' };
       case 'pending': return { bg: 'bg-amber-50', text: 'text-amber-700', border: 'border-amber-200' };
       case 'rejected': return { bg: 'bg-red-50', text: 'text-red-700', border: 'border-red-200' };
-      default: return { bg: 'bg-neutral-50', text: 'text-neutral-700', border: 'border-neutral-200' };
+      default: return { bg: 'bg-neutral-50 dark:bg-slate-800', text: 'text-neutral-700 dark:text-slate-300', border: 'border-neutral-200 dark:border-slate-700' };
     }
   };
 
@@ -162,24 +162,24 @@ export function LeaveCalendarPage() {
 
     return (
       <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-        <div className="bg-white rounded-xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
+        <div className="bg-white dark:bg-slate-800 rounded-xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
           {/* Header */}
-          <div className="p-6 border-b border-neutral-200">
+          <div className="p-6 border-b border-neutral-200 dark:border-slate-700">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-xl bg-primary-100 flex items-center justify-center">
                   <span className="font-semibold text-primary-600">{selectedLeave.avatar}</span>
                 </div>
                 <div>
-                  <h2 className="text-xl font-bold text-neutral-900">{selectedLeave.employee}</h2>
-                  <p className="text-neutral-500">{selectedLeave.department}</p>
+                  <h2 className="text-xl font-bold text-neutral-900 dark:text-white">{selectedLeave.employee}</h2>
+                  <p className="text-neutral-500 dark:text-slate-400">{selectedLeave.department}</p>
                 </div>
               </div>
               <button 
                 onClick={() => setSelectedLeave(null)}
-                className="p-2 hover:bg-neutral-100 rounded-lg transition-colors"
+                className="p-2 hover:bg-neutral-100 dark:hover:bg-slate-700 rounded-lg transition-colors"
               >
-                <X className="w-5 h-5 text-neutral-600" />
+                <X className="w-5 h-5 text-neutral-600 dark:text-slate-400" />
               </button>
             </div>
           </div>
@@ -188,26 +188,26 @@ export function LeaveCalendarPage() {
           <div className="p-6 space-y-6">
             {/* Leave Details */}
             <div>
-              <h3 className="font-semibold text-neutral-900 mb-3">Leave Details</h3>
+              <h3 className="font-semibold text-neutral-900 dark:text-white mb-3">Leave Details</h3>
               <div className="space-y-3">
                 <div className="flex justify-between">
-                  <span className="text-neutral-500">Type:</span>
+                  <span className="text-neutral-500 dark:text-slate-400">Type:</span>
                   <span className={`badge ${getLeaveTypeColor(selectedLeave.type)} text-white`}>
                     {selectedLeave.type}
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-neutral-500">Duration:</span>
+                  <span className="text-neutral-500 dark:text-slate-400">Duration:</span>
                   <span className="font-medium">
                     {new Date(selectedLeave.startDate).toLocaleDateString()} - {new Date(selectedLeave.endDate).toLocaleDateString()}
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-neutral-500">Days:</span>
+                  <span className="text-neutral-500 dark:text-slate-400">Days:</span>
                   <span className="font-medium">{selectedLeave.days} day{selectedLeave.days > 1 ? 's' : ''}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-neutral-500">Status:</span>
+                  <span className="text-neutral-500 dark:text-slate-400">Status:</span>
                   <div className="flex items-center gap-2">
                     <StatusIcon className={`w-4 h-4 ${statusColors.text}`} />
                     <span className={`badge ${statusColors.bg} ${statusColors.text} ${statusColors.border} capitalize`}>
@@ -216,7 +216,7 @@ export function LeaveCalendarPage() {
                   </div>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-neutral-500">Requested:</span>
+                  <span className="text-neutral-500 dark:text-slate-400">Requested:</span>
                   <span className="font-medium">{new Date(selectedLeave.requestDate).toLocaleDateString()}</span>
                 </div>
               </div>
@@ -224,17 +224,17 @@ export function LeaveCalendarPage() {
 
             {/* Reason */}
             <div>
-              <h3 className="font-semibold text-neutral-900 mb-3">Reason</h3>
-              <div className="p-3 bg-neutral-50 rounded-lg">
-                <p className="text-neutral-700">{selectedLeave.reason}</p>
+              <h3 className="font-semibold text-neutral-900 dark:text-white mb-3">Reason</h3>
+              <div className="p-3 bg-neutral-50 dark:bg-slate-800 rounded-lg">
+                <p className="text-neutral-700 dark:text-slate-300">{selectedLeave.reason}</p>
               </div>
             </div>
 
             {/* Contact Info */}
             {selectedLeave.emergencyContact && (
               <div>
-                <h3 className="font-semibold text-neutral-900 mb-3">Emergency Contact</h3>
-                <div className="flex items-center gap-2 text-neutral-700">
+                <h3 className="font-semibold text-neutral-900 dark:text-white mb-3">Emergency Contact</h3>
+                <div className="flex items-center gap-2 text-neutral-700 dark:text-slate-300">
                   <Phone className="w-4 h-4" />
                   <span>{selectedLeave.emergencyContact}</span>
                 </div>
@@ -242,7 +242,7 @@ export function LeaveCalendarPage() {
             )}
 
             {/* Actions */}
-            <div className="flex gap-3 pt-4 border-t border-neutral-200">
+            <div className="flex gap-3 pt-4 border-t border-neutral-200 dark:border-slate-700">
               {selectedLeave.status === 'pending' && (
                 <>
                   <button className="btn btn-primary flex-1">
@@ -275,16 +275,16 @@ export function LeaveCalendarPage() {
             <CalendarDays className="w-6 h-6 text-primary-600" />
           </div>
           <div>
-            <h1 className="text-2xl font-heading font-bold text-neutral-900">Leave Calendar</h1>
-            <p className="text-neutral-500 text-sm">Visual overview of employee leave schedules</p>
+            <h1 className="text-2xl font-heading font-bold text-neutral-900 dark:text-white">Leave Calendar</h1>
+            <p className="text-neutral-500 dark:text-slate-400 text-sm">Visual overview of employee leave schedules</p>
           </div>
         </div>
         <div className="flex gap-2">
-          <div className="flex gap-1 p-1 bg-neutral-100 rounded-lg">
+          <div className="flex gap-1 p-1 bg-neutral-100 dark:bg-slate-700 rounded-lg">
             <button 
               onClick={() => setViewMode('month')}
               className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                viewMode === 'month' ? 'bg-white text-primary-600 shadow-sm' : 'text-neutral-600 hover:text-neutral-900'
+                viewMode === 'month' ? 'bg-white text-primary-600 shadow-sm' : 'text-neutral-600 dark:text-slate-400 hover:text-neutral-900 dark:hover:text-white'
               }`}
             >
               Month
@@ -292,7 +292,7 @@ export function LeaveCalendarPage() {
             <button 
               onClick={() => setViewMode('list')}
               className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                viewMode === 'list' ? 'bg-white text-primary-600 shadow-sm' : 'text-neutral-600 hover:text-neutral-900'
+                viewMode === 'list' ? 'bg-white text-primary-600 shadow-sm' : 'text-neutral-600 dark:text-slate-400 hover:text-neutral-900 dark:hover:text-white'
               }`}
             >
               List
@@ -309,8 +309,8 @@ export function LeaveCalendarPage() {
               <Users className="w-6 h-6 text-white" />
             </div>
             <div>
-              <p className="text-3xl font-bold text-neutral-900">{filteredLeaves.length}</p>
-              <p className="text-sm text-neutral-500">Active Requests</p>
+              <p className="text-3xl font-bold text-neutral-900 dark:text-white">{filteredLeaves.length}</p>
+              <p className="text-sm text-neutral-500 dark:text-slate-400">Active Requests</p>
             </div>
           </div>
         </div>
@@ -320,8 +320,8 @@ export function LeaveCalendarPage() {
               <CheckCircle className="w-6 h-6 text-white" />
             </div>
             <div>
-              <p className="text-3xl font-bold text-neutral-900">{filteredLeaves.filter(l => l.status === 'approved').length}</p>
-              <p className="text-sm text-neutral-500">Approved</p>
+              <p className="text-3xl font-bold text-neutral-900 dark:text-white">{filteredLeaves.filter(l => l.status === 'approved').length}</p>
+              <p className="text-sm text-neutral-500 dark:text-slate-400">Approved</p>
             </div>
           </div>
         </div>
@@ -331,8 +331,8 @@ export function LeaveCalendarPage() {
               <Clock className="w-6 h-6 text-white" />
             </div>
             <div>
-              <p className="text-3xl font-bold text-neutral-900">{filteredLeaves.filter(l => l.status === 'pending').length}</p>
-              <p className="text-sm text-neutral-500">Pending</p>
+              <p className="text-3xl font-bold text-neutral-900 dark:text-white">{filteredLeaves.filter(l => l.status === 'pending').length}</p>
+              <p className="text-sm text-neutral-500 dark:text-slate-400">Pending</p>
             </div>
           </div>
         </div>
@@ -342,8 +342,8 @@ export function LeaveCalendarPage() {
               <TrendingUp className="w-6 h-6 text-white" />
             </div>
             <div>
-              <p className="text-3xl font-bold text-neutral-900">{filteredLeaves.reduce((sum, l) => sum + l.days, 0)}</p>
-              <p className="text-sm text-neutral-500">Total Days</p>
+              <p className="text-3xl font-bold text-neutral-900 dark:text-white">{filteredLeaves.reduce((sum, l) => sum + l.days, 0)}</p>
+              <p className="text-sm text-neutral-500 dark:text-slate-400">Total Days</p>
             </div>
           </div>
         </div>
@@ -353,22 +353,22 @@ export function LeaveCalendarPage() {
         {/* Calendar View */}
         <div className={`xl:col-span-3 card overflow-hidden transition-all duration-500 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
           {/* Calendar Header */}
-          <div className="p-6 border-b border-neutral-100 bg-gradient-to-r from-neutral-50 to-white">
+          <div className="p-6 border-b border-neutral-100 dark:border-slate-700 bg-gradient-to-r from-neutral-50 dark:from-slate-800 to-white dark:to-slate-800">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
-                <h2 className="text-xl font-bold text-neutral-900">
+                <h2 className="text-xl font-bold text-neutral-900 dark:text-white">
                   {currentDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
                 </h2>
                 <div className="flex gap-1">
                   <button 
                     onClick={() => navigateMonth('prev')}
-                    className="p-2 hover:bg-neutral-100 rounded-lg transition-colors"
+                    className="p-2 hover:bg-neutral-100 dark:hover:bg-slate-700 rounded-lg transition-colors"
                   >
                     <ChevronLeft className="w-4 h-4" />
                   </button>
                   <button 
                     onClick={() => navigateMonth('next')}
-                    className="p-2 hover:bg-neutral-100 rounded-lg transition-colors"
+                    className="p-2 hover:bg-neutral-100 dark:hover:bg-slate-700 rounded-lg transition-colors"
                   >
                     <ChevronRight className="w-4 h-4" />
                   </button>
@@ -407,7 +407,7 @@ export function LeaveCalendarPage() {
               {/* Day Headers */}
               <div className="grid grid-cols-7 gap-2 mb-4">
                 {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
-                  <div key={day} className="p-2 text-center text-sm font-semibold text-neutral-500">
+                  <div key={day} className="p-2 text-center text-sm font-semibold text-neutral-500 dark:text-slate-400">
                     {day}
                   </div>
                 ))}
@@ -425,12 +425,12 @@ export function LeaveCalendarPage() {
                       return (
                         <div 
                           key={dayIndex}
-                          className={`min-h-[100px] p-2 border border-neutral-100 rounded-lg ${
-                            isCurrentMonth ? 'bg-white' : 'bg-neutral-50'
+                          className={`min-h-[100px] p-2 border border-neutral-100 dark:border-slate-700 rounded-lg ${
+                            isCurrentMonth ? 'bg-white' : 'bg-neutral-50 dark:bg-slate-800'
                           } ${isToday ? 'ring-2 ring-primary-500' : ''}`}
                         >
                           <div className={`text-sm font-medium mb-1 ${
-                            isCurrentMonth ? 'text-neutral-900' : 'text-neutral-400'
+                            isCurrentMonth ? 'text-neutral-900' : 'text-neutral-400 dark:text-slate-500'
                           } ${isToday ? 'text-primary-600' : ''}`}>
                             {date.getDate()}
                           </div>
@@ -447,7 +447,7 @@ export function LeaveCalendarPage() {
                               </button>
                             ))}
                             {leavesForDate.length > 2 && (
-                              <div className="text-xs text-neutral-500 text-center p-1">
+                              <div className="text-xs text-neutral-500 dark:text-slate-400 text-center p-1">
                                 +{leavesForDate.length - 2} more
                               </div>
                             )}
@@ -471,15 +471,15 @@ export function LeaveCalendarPage() {
                                     leave.status === 'pending' ? Clock : XCircle;
                   
                   return (
-                    <div key={leave.id} className="flex items-center gap-4 p-4 border border-neutral-200 rounded-xl hover:shadow-sm transition-shadow">
+                    <div key={leave.id} className="flex items-center gap-4 p-4 border border-neutral-200 dark:border-slate-700 rounded-xl hover:shadow-sm transition-shadow">
                       <div className="w-12 h-12 rounded-xl bg-primary-100 flex items-center justify-center">
                         <span className="font-semibold text-primary-600">{leave.avatar}</span>
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center justify-between">
                           <div>
-                            <h3 className="font-semibold text-neutral-900">{leave.employee}</h3>
-                            <p className="text-sm text-neutral-500">{leave.department}</p>
+                            <h3 className="font-semibold text-neutral-900 dark:text-white">{leave.employee}</h3>
+                            <p className="text-sm text-neutral-500 dark:text-slate-400">{leave.department}</p>
                           </div>
                           <div className="text-right">
                             <div className={`inline-flex items-center gap-1 px-2 py-1 rounded-lg ${statusColors.bg} ${statusColors.text}`}>
@@ -488,7 +488,7 @@ export function LeaveCalendarPage() {
                             </div>
                           </div>
                         </div>
-                        <div className="flex items-center gap-4 mt-2 text-sm text-neutral-600">
+                        <div className="flex items-center gap-4 mt-2 text-sm text-neutral-600 dark:text-slate-400">
                           <span className={`badge ${getLeaveTypeColor(leave.type)} text-white`}>{leave.type}</span>
                           <span>{new Date(leave.startDate).toLocaleDateString()} - {new Date(leave.endDate).toLocaleDateString()}</span>
                           <span>{leave.days} day{leave.days > 1 ? 's' : ''}</span>
@@ -496,9 +496,9 @@ export function LeaveCalendarPage() {
                       </div>
                       <button 
                         onClick={() => setSelectedLeave(leave)}
-                        className="p-2 hover:bg-neutral-100 rounded-lg transition-colors"
+                        className="p-2 hover:bg-neutral-100 dark:hover:bg-slate-700 rounded-lg transition-colors"
                       >
-                        <Eye className="w-4 h-4 text-neutral-400" />
+                        <Eye className="w-4 h-4 text-neutral-400 dark:text-slate-500" />
                       </button>
                     </div>
                   );
@@ -512,9 +512,9 @@ export function LeaveCalendarPage() {
         <div className={`space-y-6 transition-all duration-500 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
           {/* My Leave Balance */}
           <div className="card">
-            <div className="p-4 border-b border-neutral-100">
-              <h3 className="font-semibold text-neutral-900">My Leave Balance</h3>
-              <p className="text-sm text-neutral-500">Current year allocation</p>
+            <div className="p-4 border-b border-neutral-100 dark:border-slate-700">
+              <h3 className="font-semibold text-neutral-900 dark:text-white">My Leave Balance</h3>
+              <p className="text-sm text-neutral-500 dark:text-slate-400">Current year allocation</p>
             </div>
             <div className="p-4 space-y-4">
               {Object.entries(employeeBalance).map(([type, balance]) => (
@@ -523,7 +523,7 @@ export function LeaveCalendarPage() {
                     <span className="capitalize font-medium">{type}</span>
                     <span>{balance.available} / {balance.total}</span>
                   </div>
-                  <div className="w-full bg-neutral-200 rounded-full h-2">
+                  <div className="w-full bg-neutral-200 dark:bg-slate-600 rounded-full h-2">
                     <div 
                       className="bg-primary-500 h-2 rounded-full" 
                       style={{ width: `${(balance.available / balance.total) * 100}%` }}
@@ -536,8 +536,8 @@ export function LeaveCalendarPage() {
 
           {/* Legend */}
           <div className="card">
-            <div className="p-4 border-b border-neutral-100">
-              <h3 className="font-semibold text-neutral-900">Leave Types</h3>
+            <div className="p-4 border-b border-neutral-100 dark:border-slate-700">
+              <h3 className="font-semibold text-neutral-900 dark:text-white">Leave Types</h3>
             </div>
             <div className="p-4 space-y-3">
               {[
@@ -550,7 +550,7 @@ export function LeaveCalendarPage() {
               ].map(({ type, color }) => (
                 <div key={type} className="flex items-center gap-3">
                   <div className={`w-4 h-4 rounded ${color}`}></div>
-                  <span className="text-sm text-neutral-700">{type}</span>
+                  <span className="text-sm text-neutral-700 dark:text-slate-300">{type}</span>
                 </div>
               ))}
             </div>

@@ -387,10 +387,10 @@ export function CompaniesPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-heading font-bold text-neutral-900">
+          <h1 className="text-2xl font-heading font-bold text-neutral-900 dark:text-white">
             Companies
           </h1>
-          <p className="text-neutral-500 mt-1">
+          <p className="text-neutral-500 dark:text-slate-400 mt-1">
             Manage all registered companies on the platform
           </p>
         </div>
@@ -414,8 +414,8 @@ export function CompaniesPage() {
               <Building2 className="w-5 h-5 text-blue-600" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-neutral-900">{stats.total}</p>
-              <p className="text-sm text-neutral-500">Total</p>
+              <p className="text-2xl font-bold text-neutral-900 dark:text-white">{stats.total}</p>
+              <p className="text-sm text-neutral-500 dark:text-slate-400">Total</p>
             </div>
           </div>
         </button>
@@ -430,7 +430,7 @@ export function CompaniesPage() {
             </div>
             <div>
               <p className="text-2xl font-bold text-blue-600">{stats.pending}</p>
-              <p className="text-sm text-neutral-500">Pending</p>
+              <p className="text-sm text-neutral-500 dark:text-slate-400">Pending</p>
             </div>
           </div>
         </button>
@@ -445,7 +445,7 @@ export function CompaniesPage() {
             </div>
             <div>
               <p className="text-2xl font-bold text-emerald-600">{stats.active}</p>
-              <p className="text-sm text-neutral-500">Active</p>
+              <p className="text-sm text-neutral-500 dark:text-slate-400">Active</p>
             </div>
           </div>
         </button>
@@ -460,7 +460,7 @@ export function CompaniesPage() {
             </div>
             <div>
               <p className="text-2xl font-bold text-amber-600">{stats.trial}</p>
-              <p className="text-sm text-neutral-500">Trial</p>
+              <p className="text-sm text-neutral-500 dark:text-slate-400">Trial</p>
             </div>
           </div>
         </button>
@@ -475,7 +475,7 @@ export function CompaniesPage() {
             </div>
             <div>
               <p className="text-2xl font-bold text-orange-600">{stats.expired}</p>
-              <p className="text-sm text-neutral-500">Expired</p>
+              <p className="text-sm text-neutral-500 dark:text-slate-400">Expired</p>
             </div>
           </div>
         </button>
@@ -490,7 +490,7 @@ export function CompaniesPage() {
             </div>
             <div>
               <p className="text-2xl font-bold text-red-600">{stats.suspended}</p>
-              <p className="text-sm text-neutral-500">Suspended</p>
+              <p className="text-sm text-neutral-500 dark:text-slate-400">Suspended</p>
             </div>
           </div>
         </button>
@@ -500,7 +500,7 @@ export function CompaniesPage() {
       <div className="card p-4">
         <div className="flex flex-col sm:flex-row gap-4">
           <div className="flex-1 relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400 dark:text-slate-500" />
             <input
               type="text"
               placeholder="Search companies, HR admin..."
@@ -509,12 +509,12 @@ export function CompaniesPage() {
                 setSearchQuery(e.target.value);
                 setShowActionMenu(null);
               }}
-              className="w-full pl-10 pr-10 py-2.5 text-sm bg-white border border-neutral-200 rounded-xl transition-all duration-200 placeholder:text-neutral-400 focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
+              className="w-full pl-10 pr-10 py-2.5 text-sm bg-white dark:bg-slate-800 border border-neutral-200 dark:border-slate-700 rounded-xl transition-all duration-200 placeholder:text-neutral-400 dark:placeholder:text-slate-500 focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
             />
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-neutral-400 hover:text-neutral-600 rounded"
+                className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-neutral-400 dark:text-slate-500 hover:text-neutral-600 rounded"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -534,16 +534,16 @@ export function CompaniesPage() {
               </button>
               
               {showFilterMenu && (
-                <div className="absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-lg border border-neutral-200 p-4 z-50">
+                <div className="absolute right-0 mt-2 w-64 bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-neutral-200 dark:border-slate-700 p-4 z-50">
                   <div className="space-y-4">
                     <div>
-                      <label className="block text-sm font-medium text-neutral-700 mb-2">
+                      <label className="block text-sm font-medium text-neutral-700 dark:text-slate-300 mb-2">
                         Subscription Plan
                       </label>
                       <select
                         value={planFilter}
                         onChange={(e) => setPlanFilter(e.target.value)}
-                        className="w-full px-3 py-2 text-sm bg-white border border-neutral-200 rounded-lg focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
+                        className="w-full px-3 py-2 text-sm bg-white dark:bg-slate-800 border border-neutral-200 dark:border-slate-700 rounded-lg focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
                       >
                         <option value="all">All Plans</option>
                         <option value="Starter">Starter</option>
@@ -552,13 +552,13 @@ export function CompaniesPage() {
                       </select>
                     </div>
                     
-                    <div className="pt-2 border-t border-neutral-100 flex gap-2">
+                    <div className="pt-2 border-t border-neutral-100 dark:border-slate-700 flex gap-2">
                       <button
                         onClick={() => {
                           setPlanFilter('all');
                           setShowFilterMenu(false);
                         }}
-                        className="flex-1 px-3 py-2 text-sm text-neutral-600 hover:bg-neutral-50 rounded-lg transition-colors"
+                        className="flex-1 px-3 py-2 text-sm text-neutral-600 dark:text-slate-400 hover:bg-neutral-50 dark:hover:bg-slate-800 rounded-lg transition-colors"
                       >
                         Clear
                       </button>
@@ -589,48 +589,48 @@ export function CompaniesPage() {
         <div className="overflow-x-auto">
           <table className="w-full min-w-[700px]">
             <thead>
-              <tr className="bg-neutral-50 border-b border-neutral-200">
-                <th className="px-6 py-4 text-left text-xs font-semibold text-neutral-600 uppercase tracking-wider">
+              <tr className="bg-neutral-50 dark:bg-slate-800 border-b border-neutral-200 dark:border-slate-700">
+                <th className="px-6 py-4 text-left text-xs font-semibold text-neutral-600 dark:text-slate-400 uppercase tracking-wider">
                   Company
                 </th>
-                <th className="px-6 py-4 text-left text-xs font-semibold text-neutral-600 uppercase tracking-wider">
+                <th className="px-6 py-4 text-left text-xs font-semibold text-neutral-600 dark:text-slate-400 uppercase tracking-wider">
                   HR Admin
                 </th>
-                <th className="px-6 py-4 text-left text-xs font-semibold text-neutral-600 uppercase tracking-wider">
+                <th className="px-6 py-4 text-left text-xs font-semibold text-neutral-600 dark:text-slate-400 uppercase tracking-wider">
                   Plan
                 </th>
-                <th className="px-6 py-4 text-left text-xs font-semibold text-neutral-600 uppercase tracking-wider">
+                <th className="px-6 py-4 text-left text-xs font-semibold text-neutral-600 dark:text-slate-400 uppercase tracking-wider">
                   Employees
                 </th>
-                <th className="px-6 py-4 text-left text-xs font-semibold text-neutral-600 uppercase tracking-wider">
+                <th className="px-6 py-4 text-left text-xs font-semibold text-neutral-600 dark:text-slate-400 uppercase tracking-wider">
                   Status
                 </th>
-                <th className="px-6 py-4 text-left text-xs font-semibold text-neutral-600 uppercase tracking-wider">
+                <th className="px-6 py-4 text-left text-xs font-semibold text-neutral-600 dark:text-slate-400 uppercase tracking-wider">
                   Expires
                 </th>
-                <th className="px-6 py-4 text-right text-xs font-semibold text-neutral-600 uppercase tracking-wider">
+                <th className="px-6 py-4 text-right text-xs font-semibold text-neutral-600 dark:text-slate-400 uppercase tracking-wider">
                   Actions
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-neutral-100 overflow-visible">
+            <tbody className="divide-y divide-neutral-100 dark:divide-slate-700 overflow-visible">
               {filteredCompanies.map((company) => (
-                <tr key={company.id} className="hover:bg-neutral-50 transition-colors overflow-visible">
+                <tr key={company.id} className="hover:bg-neutral-50 dark:hover:bg-slate-800 transition-colors overflow-visible">
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center text-white font-bold text-sm">
                         {company.name.charAt(0)}
                       </div>
                       <div>
-                        <p className="font-medium text-neutral-900">{company.name}</p>
-                        <p className="text-sm text-neutral-500">{company.address}</p>
+                        <p className="font-medium text-neutral-900 dark:text-white">{company.name}</p>
+                        <p className="text-sm text-neutral-500 dark:text-slate-400">{company.address}</p>
                       </div>
                     </div>
                   </td>
                   <td className="px-6 py-4">
                     <div>
-                      <p className="font-medium text-neutral-900">{company.hrAdmin.name}</p>
-                      <p className="text-sm text-neutral-500">{company.hrAdmin.email}</p>
+                      <p className="font-medium text-neutral-900 dark:text-white">{company.hrAdmin.name}</p>
+                      <p className="text-sm text-neutral-500 dark:text-slate-400">{company.hrAdmin.email}</p>
                     </div>
                   </td>
                   <td className="px-6 py-4">
@@ -638,11 +638,11 @@ export function CompaniesPage() {
                   </td>
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-2">
-                      <Users className="w-4 h-4 text-neutral-400" />
-                      <span className="font-medium text-neutral-900">{company.employees}</span>
-                      <span className="text-neutral-400">/ {company.maxEmployees}</span>
+                      <Users className="w-4 h-4 text-neutral-400 dark:text-slate-500" />
+                      <span className="font-medium text-neutral-900 dark:text-white">{company.employees}</span>
+                      <span className="text-neutral-400 dark:text-slate-500">/ {company.maxEmployees}</span>
                     </div>
-                    <div className="w-24 h-1.5 bg-neutral-200 rounded-full mt-1">
+                    <div className="w-24 h-1.5 bg-neutral-200 dark:bg-slate-600 rounded-full mt-1">
                       <div 
                         className={`h-full rounded-full ${
                           company.employees / company.maxEmployees > 0.9 ? 'bg-red-500' :
@@ -658,11 +658,11 @@ export function CompaniesPage() {
                   </td>
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-1.5 text-sm">
-                      <Calendar className="w-4 h-4 text-neutral-400" />
+                      <Calendar className="w-4 h-4 text-neutral-400 dark:text-slate-500" />
                       <span className={`${
                         new Date(company.expiryDate) < new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
                           ? 'text-amber-600 font-medium'
-                          : 'text-neutral-600'
+                          : 'text-neutral-600 dark:text-slate-400'
                       }`}>
                         {formatDate(company.expiryDate)}
                       </span>
@@ -672,7 +672,7 @@ export function CompaniesPage() {
                     <div className="flex items-center justify-end gap-2 relative">
                       <button 
                         onClick={() => setSelectedCompany(company)}
-                        className="p-2 text-neutral-400 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-colors"
+                        className="p-2 text-neutral-400 dark:text-slate-500 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-colors"
                         title="View Details"
                       >
                         <Eye className="w-4 h-4" />
@@ -680,16 +680,16 @@ export function CompaniesPage() {
                       <div className="relative" ref={showActionMenu === company.id ? actionMenuRef : null}>
                         <button 
                           onClick={() => setShowActionMenu(showActionMenu === company.id ? null : company.id)}
-                          className="p-2 text-neutral-400 hover:text-neutral-600 hover:bg-neutral-100 rounded-lg transition-colors"
+                          className="p-2 text-neutral-400 dark:text-slate-500 hover:text-neutral-600 hover:bg-neutral-100 dark:hover:bg-slate-700 rounded-lg transition-colors"
                         >
                           <MoreVertical className="w-4 h-4" />
                         </button>
                         
                         {showActionMenu === company.id && (
-                          <div className="absolute right-0 bottom-full mb-1 w-48 bg-white rounded-xl shadow-lg border border-neutral-200 py-1 z-[9999]">
+                          <div className="absolute right-0 bottom-full mb-1 w-48 bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-neutral-200 dark:border-slate-700 py-1 z-[9999]">
                             <button 
                               onClick={() => handleViewProfile(company)}
-                              className="w-full px-4 py-2 text-left text-sm text-neutral-700 hover:bg-neutral-50 flex items-center gap-2"
+                              className="w-full px-4 py-2 text-left text-sm text-neutral-700 dark:text-slate-300 hover:bg-neutral-50 dark:hover:bg-slate-800 flex items-center gap-2"
                             >
                               <Eye className="w-4 h-4" />
                               View Profile
@@ -713,26 +713,26 @@ export function CompaniesPage() {
                             )}
                             <button 
                               onClick={() => handleResetPassword(company)}
-                              className="w-full px-4 py-2 text-left text-sm text-neutral-700 hover:bg-neutral-50 flex items-center gap-2"
+                              className="w-full px-4 py-2 text-left text-sm text-neutral-700 dark:text-slate-300 hover:bg-neutral-50 dark:hover:bg-slate-800 flex items-center gap-2"
                             >
                               <KeyRound className="w-4 h-4" />
                               Reset HR Password
                             </button>
                             <button 
                               onClick={() => handleUpgradePlan(company)}
-                              className="w-full px-4 py-2 text-left text-sm text-neutral-700 hover:bg-neutral-50 flex items-center gap-2"
+                              className="w-full px-4 py-2 text-left text-sm text-neutral-700 dark:text-slate-300 hover:bg-neutral-50 dark:hover:bg-slate-800 flex items-center gap-2"
                             >
                               <TrendingUp className="w-4 h-4" />
                               Upgrade Plan
                             </button>
                             <button 
                               onClick={() => handleSupportMode(company)}
-                              className="w-full px-4 py-2 text-left text-sm text-neutral-700 hover:bg-neutral-50 flex items-center gap-2"
+                              className="w-full px-4 py-2 text-left text-sm text-neutral-700 dark:text-slate-300 hover:bg-neutral-50 dark:hover:bg-slate-800 flex items-center gap-2"
                             >
                               <Shield className="w-4 h-4" />
                               Support Mode
                             </button>
-                            <hr className="my-1 border-neutral-100" />
+                            <hr className="my-1 border-neutral-100 dark:border-slate-700" />
                             <button 
                               onClick={() => handleDeleteCompany(company.id)}
                               className="w-full px-4 py-2 text-left text-sm text-red-600 hover:bg-red-50 flex items-center gap-2"
@@ -752,21 +752,21 @@ export function CompaniesPage() {
         </div>
 
         {/* Pagination */}
-        <div className="px-6 py-4 border-t border-neutral-200 flex items-center justify-between">
-          <p className="text-sm text-neutral-500">
+        <div className="px-6 py-4 border-t border-neutral-200 dark:border-slate-700 flex items-center justify-between">
+          <p className="text-sm text-neutral-500 dark:text-slate-400">
             Showing <span className="font-medium">{filteredCompanies.length}</span> of <span className="font-medium">{companies.length}</span> companies
           </p>
           <div className="flex items-center gap-2">
-            <button className="px-3 py-1.5 text-sm font-medium text-neutral-600 hover:bg-neutral-100 rounded-lg transition-colors">
+            <button className="px-3 py-1.5 text-sm font-medium text-neutral-600 dark:text-slate-400 hover:bg-neutral-100 dark:hover:bg-slate-700 rounded-lg transition-colors">
               Previous
             </button>
             <button className="px-3 py-1.5 text-sm font-medium bg-primary-500 text-white rounded-lg">
               1
             </button>
-            <button className="px-3 py-1.5 text-sm font-medium text-neutral-600 hover:bg-neutral-100 rounded-lg transition-colors">
+            <button className="px-3 py-1.5 text-sm font-medium text-neutral-600 dark:text-slate-400 hover:bg-neutral-100 dark:hover:bg-slate-700 rounded-lg transition-colors">
               2
             </button>
-            <button className="px-3 py-1.5 text-sm font-medium text-neutral-600 hover:bg-neutral-100 rounded-lg transition-colors">
+            <button className="px-3 py-1.5 text-sm font-medium text-neutral-600 dark:text-slate-400 hover:bg-neutral-100 dark:hover:bg-slate-700 rounded-lg transition-colors">
               Next
             </button>
           </div>
@@ -776,21 +776,21 @@ export function CompaniesPage() {
       {/* Company Detail Modal */}
       {selectedCompany && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-            <div className="p-6 border-b border-neutral-200">
+          <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+            <div className="p-6 border-b border-neutral-200 dark:border-slate-700">
               <div className="flex items-start justify-between">
                 <div className="flex items-center gap-4">
                   <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center text-white font-bold text-2xl">
                     {selectedCompany.name.charAt(0)}
                   </div>
                   <div>
-                    <h2 className="text-xl font-bold text-neutral-900">{selectedCompany.name}</h2>
-                    <p className="text-neutral-500">{selectedCompany.slug}</p>
+                    <h2 className="text-xl font-bold text-neutral-900 dark:text-white">{selectedCompany.name}</h2>
+                    <p className="text-neutral-500 dark:text-slate-400">{selectedCompany.slug}</p>
                   </div>
                 </div>
                 <button 
                   onClick={() => setSelectedCompany(null)}
-                  className="p-2 text-neutral-400 hover:text-neutral-600 hover:bg-neutral-100 rounded-lg transition-colors"
+                  className="p-2 text-neutral-400 dark:text-slate-500 hover:text-neutral-600 hover:bg-neutral-100 dark:hover:bg-slate-700 rounded-lg transition-colors"
                 >
                   <XCircle className="w-5 h-5" />
                 </button>
@@ -802,7 +802,7 @@ export function CompaniesPage() {
               <div className="flex items-center gap-4">
                 {getStatusBadge(selectedCompany.status)}
                 {getPlanBadge(selectedCompany.plan)}
-                <span className="text-sm text-neutral-500">
+                <span className="text-sm text-neutral-500 dark:text-slate-400">
                   {formatCurrency(selectedCompany.monthlyFee)}/month
                 </span>
               </div>
@@ -810,65 +810,65 @@ export function CompaniesPage() {
               {/* Contact Info */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="flex items-center gap-3 text-sm">
-                  <Mail className="w-4 h-4 text-neutral-400" />
-                  <span className="text-neutral-700">{selectedCompany.hrAdmin.email}</span>
+                  <Mail className="w-4 h-4 text-neutral-400 dark:text-slate-500" />
+                  <span className="text-neutral-700 dark:text-slate-300">{selectedCompany.hrAdmin.email}</span>
                 </div>
                 <div className="flex items-center gap-3 text-sm">
-                  <Phone className="w-4 h-4 text-neutral-400" />
-                  <span className="text-neutral-700">{selectedCompany.phone}</span>
+                  <Phone className="w-4 h-4 text-neutral-400 dark:text-slate-500" />
+                  <span className="text-neutral-700 dark:text-slate-300">{selectedCompany.phone}</span>
                 </div>
                 <div className="flex items-center gap-3 text-sm sm:col-span-2">
-                  <MapPin className="w-4 h-4 text-neutral-400" />
-                  <span className="text-neutral-700">{selectedCompany.address}</span>
+                  <MapPin className="w-4 h-4 text-neutral-400 dark:text-slate-500" />
+                  <span className="text-neutral-700 dark:text-slate-300">{selectedCompany.address}</span>
                 </div>
               </div>
 
               {/* Stats */}
               <div className="grid grid-cols-3 gap-4">
-                <div className="bg-neutral-50 rounded-xl p-4 text-center">
-                  <p className="text-2xl font-bold text-neutral-900">{selectedCompany.employees}</p>
-                  <p className="text-sm text-neutral-500">Employees</p>
+                <div className="bg-neutral-50 dark:bg-slate-800 rounded-xl p-4 text-center">
+                  <p className="text-2xl font-bold text-neutral-900 dark:text-white">{selectedCompany.employees}</p>
+                  <p className="text-sm text-neutral-500 dark:text-slate-400">Employees</p>
                 </div>
-                <div className="bg-neutral-50 rounded-xl p-4 text-center">
-                  <p className="text-2xl font-bold text-neutral-900">{selectedCompany.maxEmployees}</p>
-                  <p className="text-sm text-neutral-500">Max Limit</p>
+                <div className="bg-neutral-50 dark:bg-slate-800 rounded-xl p-4 text-center">
+                  <p className="text-2xl font-bold text-neutral-900 dark:text-white">{selectedCompany.maxEmployees}</p>
+                  <p className="text-sm text-neutral-500 dark:text-slate-400">Max Limit</p>
                 </div>
-                <div className="bg-neutral-50 rounded-xl p-4 text-center">
-                  <p className="text-2xl font-bold text-neutral-900">
+                <div className="bg-neutral-50 dark:bg-slate-800 rounded-xl p-4 text-center">
+                  <p className="text-2xl font-bold text-neutral-900 dark:text-white">
                     {Math.round((selectedCompany.employees / selectedCompany.maxEmployees) * 100)}%
                   </p>
-                  <p className="text-sm text-neutral-500">Usage</p>
+                  <p className="text-sm text-neutral-500 dark:text-slate-400">Usage</p>
                 </div>
               </div>
 
               {/* Dates */}
               <div className="grid grid-cols-2 gap-4 text-sm">
                 <div>
-                  <p className="text-neutral-500">Registered</p>
-                  <p className="font-medium text-neutral-900">{formatDate(selectedCompany.createdAt)}</p>
+                  <p className="text-neutral-500 dark:text-slate-400">Registered</p>
+                  <p className="font-medium text-neutral-900 dark:text-white">{formatDate(selectedCompany.createdAt)}</p>
                 </div>
                 <div>
-                  <p className="text-neutral-500">Subscription Expires</p>
-                  <p className="font-medium text-neutral-900">{formatDate(selectedCompany.expiryDate)}</p>
+                  <p className="text-neutral-500 dark:text-slate-400">Subscription Expires</p>
+                  <p className="font-medium text-neutral-900 dark:text-white">{formatDate(selectedCompany.expiryDate)}</p>
                 </div>
               </div>
 
               {/* HR Admin */}
-              <div className="bg-neutral-50 rounded-xl p-4">
-                <h4 className="font-medium text-neutral-900 mb-2">HR Administrator</h4>
+              <div className="bg-neutral-50 dark:bg-slate-800 rounded-xl p-4">
+                <h4 className="font-medium text-neutral-900 dark:text-white mb-2">HR Administrator</h4>
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-primary-100 flex items-center justify-center text-primary-600 font-medium">
                     {selectedCompany.hrAdmin.name.charAt(0)}
                   </div>
                   <div>
-                    <p className="font-medium text-neutral-900">{selectedCompany.hrAdmin.name}</p>
-                    <p className="text-sm text-neutral-500">{selectedCompany.hrAdmin.email}</p>
+                    <p className="font-medium text-neutral-900 dark:text-white">{selectedCompany.hrAdmin.name}</p>
+                    <p className="text-sm text-neutral-500 dark:text-slate-400">{selectedCompany.hrAdmin.email}</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="p-6 border-t border-neutral-200 flex justify-end gap-3">
+            <div className="p-6 border-t border-neutral-200 dark:border-slate-700 flex justify-end gap-3">
               <button 
                 onClick={() => setSelectedCompany(null)}
                 className="btn btn-secondary"
@@ -890,21 +890,21 @@ export function CompaniesPage() {
       {/* Edit Company Modal */}
       {editingCompany && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-            <div className="p-6 border-b border-neutral-200">
+          <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+            <div className="p-6 border-b border-neutral-200 dark:border-slate-700">
               <div className="flex items-start justify-between">
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center text-white font-bold text-xl">
                     <Edit3 className="w-6 h-6" />
                   </div>
                   <div>
-                    <h2 className="text-xl font-bold text-neutral-900">Edit Company</h2>
-                    <p className="text-neutral-500">Update company information</p>
+                    <h2 className="text-xl font-bold text-neutral-900 dark:text-white">Edit Company</h2>
+                    <p className="text-neutral-500 dark:text-slate-400">Update company information</p>
                   </div>
                 </div>
                 <button 
                   onClick={() => setEditingCompany(null)}
-                  className="p-2 text-neutral-400 hover:text-neutral-600 hover:bg-neutral-100 rounded-lg transition-colors"
+                  className="p-2 text-neutral-400 dark:text-slate-500 hover:text-neutral-600 hover:bg-neutral-100 dark:hover:bg-slate-700 rounded-lg transition-colors"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -914,45 +914,45 @@ export function CompaniesPage() {
             <div className="p-6 space-y-6">
               {/* Company Info */}
               <div className="space-y-4">
-                <h3 className="font-semibold text-neutral-900 flex items-center gap-2">
+                <h3 className="font-semibold text-neutral-900 dark:text-white flex items-center gap-2">
                   <Building2 className="w-4 h-4" />
                   Company Information
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-neutral-700 mb-1">Company Name</label>
+                    <label className="block text-sm font-medium text-neutral-700 dark:text-slate-300 mb-1">Company Name</label>
                     <input
                       type="text"
                       value={editingCompany.name}
                       onChange={(e) => handleEditFieldChange('name', e.target.value)}
-                      className="w-full px-4 py-2.5 text-sm bg-white border border-neutral-200 rounded-xl focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
+                      className="w-full px-4 py-2.5 text-sm bg-white dark:bg-slate-800 border border-neutral-200 dark:border-slate-700 rounded-xl focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-neutral-700 mb-1">Slug</label>
+                    <label className="block text-sm font-medium text-neutral-700 dark:text-slate-300 mb-1">Slug</label>
                     <input
                       type="text"
                       value={editingCompany.slug}
                       onChange={(e) => handleEditFieldChange('slug', e.target.value)}
-                      className="w-full px-4 py-2.5 text-sm bg-white border border-neutral-200 rounded-xl focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
+                      className="w-full px-4 py-2.5 text-sm bg-white dark:bg-slate-800 border border-neutral-200 dark:border-slate-700 rounded-xl focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-neutral-700 mb-1">Phone</label>
+                    <label className="block text-sm font-medium text-neutral-700 dark:text-slate-300 mb-1">Phone</label>
                     <input
                       type="text"
                       value={editingCompany.phone}
                       onChange={(e) => handleEditFieldChange('phone', e.target.value)}
-                      className="w-full px-4 py-2.5 text-sm bg-white border border-neutral-200 rounded-xl focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
+                      className="w-full px-4 py-2.5 text-sm bg-white dark:bg-slate-800 border border-neutral-200 dark:border-slate-700 rounded-xl focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-neutral-700 mb-1">Address</label>
+                    <label className="block text-sm font-medium text-neutral-700 dark:text-slate-300 mb-1">Address</label>
                     <input
                       type="text"
                       value={editingCompany.address}
                       onChange={(e) => handleEditFieldChange('address', e.target.value)}
-                      className="w-full px-4 py-2.5 text-sm bg-white border border-neutral-200 rounded-xl focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
+                      className="w-full px-4 py-2.5 text-sm bg-white dark:bg-slate-800 border border-neutral-200 dark:border-slate-700 rounded-xl focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
                     />
                   </div>
                 </div>
@@ -960,27 +960,27 @@ export function CompaniesPage() {
 
               {/* HR Admin Info */}
               <div className="space-y-4">
-                <h3 className="font-semibold text-neutral-900 flex items-center gap-2">
+                <h3 className="font-semibold text-neutral-900 dark:text-white flex items-center gap-2">
                   <Users className="w-4 h-4" />
                   HR Administrator
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-neutral-700 mb-1">Admin Name</label>
+                    <label className="block text-sm font-medium text-neutral-700 dark:text-slate-300 mb-1">Admin Name</label>
                     <input
                       type="text"
                       value={editingCompany.hrAdmin.name}
                       onChange={(e) => handleEditFieldChange('hrAdmin.name', e.target.value)}
-                      className="w-full px-4 py-2.5 text-sm bg-white border border-neutral-200 rounded-xl focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
+                      className="w-full px-4 py-2.5 text-sm bg-white dark:bg-slate-800 border border-neutral-200 dark:border-slate-700 rounded-xl focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-neutral-700 mb-1">Admin Email</label>
+                    <label className="block text-sm font-medium text-neutral-700 dark:text-slate-300 mb-1">Admin Email</label>
                     <input
                       type="email"
                       value={editingCompany.hrAdmin.email}
                       onChange={(e) => handleEditFieldChange('hrAdmin.email', e.target.value)}
-                      className="w-full px-4 py-2.5 text-sm bg-white border border-neutral-200 rounded-xl focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
+                      className="w-full px-4 py-2.5 text-sm bg-white dark:bg-slate-800 border border-neutral-200 dark:border-slate-700 rounded-xl focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
                     />
                   </div>
                 </div>
@@ -988,17 +988,17 @@ export function CompaniesPage() {
 
               {/* Subscription Info */}
               <div className="space-y-4">
-                <h3 className="font-semibold text-neutral-900 flex items-center gap-2">
+                <h3 className="font-semibold text-neutral-900 dark:text-white flex items-center gap-2">
                   <TrendingUp className="w-4 h-4" />
                   Subscription Details
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-neutral-700 mb-1">Plan</label>
+                    <label className="block text-sm font-medium text-neutral-700 dark:text-slate-300 mb-1">Plan</label>
                     <select
                       value={editingCompany.plan}
                       onChange={(e) => handleEditFieldChange('plan', e.target.value)}
-                      className="w-full px-4 py-2.5 text-sm bg-white border border-neutral-200 rounded-xl focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
+                      className="w-full px-4 py-2.5 text-sm bg-white dark:bg-slate-800 border border-neutral-200 dark:border-slate-700 rounded-xl focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
                     >
                       <option value="Starter">Starter</option>
                       <option value="Professional">Professional</option>
@@ -1006,11 +1006,11 @@ export function CompaniesPage() {
                     </select>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-neutral-700 mb-1">Status</label>
+                    <label className="block text-sm font-medium text-neutral-700 dark:text-slate-300 mb-1">Status</label>
                     <select
                       value={editingCompany.status}
                       onChange={(e) => handleEditFieldChange('status', e.target.value)}
-                      className="w-full px-4 py-2.5 text-sm bg-white border border-neutral-200 rounded-xl focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
+                      className="w-full px-4 py-2.5 text-sm bg-white dark:bg-slate-800 border border-neutral-200 dark:border-slate-700 rounded-xl focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
                     >
                       <option value="pending">Pending Approval</option>
                       <option value="trial">Trial</option>
@@ -1020,37 +1020,37 @@ export function CompaniesPage() {
                     </select>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-neutral-700 mb-1">Max Employees</label>
+                    <label className="block text-sm font-medium text-neutral-700 dark:text-slate-300 mb-1">Max Employees</label>
                     <input
                       type="number"
                       value={editingCompany.maxEmployees}
                       onChange={(e) => handleEditFieldChange('maxEmployees', parseInt(e.target.value))}
-                      className="w-full px-4 py-2.5 text-sm bg-white border border-neutral-200 rounded-xl focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
+                      className="w-full px-4 py-2.5 text-sm bg-white dark:bg-slate-800 border border-neutral-200 dark:border-slate-700 rounded-xl focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-neutral-700 mb-1">Monthly Fee (₱)</label>
+                    <label className="block text-sm font-medium text-neutral-700 dark:text-slate-300 mb-1">Monthly Fee (₱)</label>
                     <input
                       type="number"
                       value={editingCompany.monthlyFee}
                       onChange={(e) => handleEditFieldChange('monthlyFee', parseInt(e.target.value))}
-                      className="w-full px-4 py-2.5 text-sm bg-white border border-neutral-200 rounded-xl focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
+                      className="w-full px-4 py-2.5 text-sm bg-white dark:bg-slate-800 border border-neutral-200 dark:border-slate-700 rounded-xl focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-neutral-700 mb-1">Expiry Date</label>
+                    <label className="block text-sm font-medium text-neutral-700 dark:text-slate-300 mb-1">Expiry Date</label>
                     <input
                       type="date"
                       value={editingCompany.expiryDate}
                       onChange={(e) => handleEditFieldChange('expiryDate', e.target.value)}
-                      className="w-full px-4 py-2.5 text-sm bg-white border border-neutral-200 rounded-xl focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
+                      className="w-full px-4 py-2.5 text-sm bg-white dark:bg-slate-800 border border-neutral-200 dark:border-slate-700 rounded-xl focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
                     />
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="p-6 border-t border-neutral-200 flex flex-col sm:flex-row justify-end gap-3">
+            <div className="p-6 border-t border-neutral-200 dark:border-slate-700 flex flex-col sm:flex-row justify-end gap-3">
               <button 
                 onClick={() => setEditingCompany(null)}
                 className="btn btn-secondary w-full sm:w-auto"
@@ -1083,21 +1083,21 @@ export function CompaniesPage() {
       {/* Add Company Modal */}
       {showAddModal && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-            <div className="p-6 border-b border-neutral-200">
+          <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+            <div className="p-6 border-b border-neutral-200 dark:border-slate-700">
               <div className="flex items-start justify-between">
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-white font-bold text-xl">
                     <Plus className="w-6 h-6" />
                   </div>
                   <div>
-                    <h2 className="text-xl font-bold text-neutral-900">Add New Company</h2>
-                    <p className="text-neutral-500">Register a new company on the platform</p>
+                    <h2 className="text-xl font-bold text-neutral-900 dark:text-white">Add New Company</h2>
+                    <p className="text-neutral-500 dark:text-slate-400">Register a new company on the platform</p>
                   </div>
                 </div>
                 <button 
                   onClick={() => setShowAddModal(false)}
-                  className="p-2 text-neutral-400 hover:text-neutral-600 hover:bg-neutral-100 rounded-lg transition-colors"
+                  className="p-2 text-neutral-400 dark:text-slate-500 hover:text-neutral-600 hover:bg-neutral-100 dark:hover:bg-slate-700 rounded-lg transition-colors"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -1107,49 +1107,49 @@ export function CompaniesPage() {
             <div className="p-6 space-y-6">
               {/* Company Info */}
               <div className="space-y-4">
-                <h3 className="font-semibold text-neutral-900 flex items-center gap-2">
+                <h3 className="font-semibold text-neutral-900 dark:text-white flex items-center gap-2">
                   <Building2 className="w-4 h-4" />
                   Company Information
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-neutral-700 mb-1">Company Name *</label>
+                    <label className="block text-sm font-medium text-neutral-700 dark:text-slate-300 mb-1">Company Name *</label>
                     <input
                       type="text"
                       value={newCompany.name}
                       onChange={(e) => setNewCompany({...newCompany, name: e.target.value})}
                       placeholder="Enter company name"
-                      className="w-full px-4 py-2.5 text-sm bg-white border border-neutral-200 rounded-xl focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
+                      className="w-full px-4 py-2.5 text-sm bg-white dark:bg-slate-800 border border-neutral-200 dark:border-slate-700 rounded-xl focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-neutral-700 mb-1">Slug</label>
+                    <label className="block text-sm font-medium text-neutral-700 dark:text-slate-300 mb-1">Slug</label>
                     <input
                       type="text"
                       value={newCompany.slug}
                       onChange={(e) => setNewCompany({...newCompany, slug: e.target.value})}
                       placeholder="company-slug (auto-generated)"
-                      className="w-full px-4 py-2.5 text-sm bg-white border border-neutral-200 rounded-xl focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
+                      className="w-full px-4 py-2.5 text-sm bg-white dark:bg-slate-800 border border-neutral-200 dark:border-slate-700 rounded-xl focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-neutral-700 mb-1">Phone</label>
+                    <label className="block text-sm font-medium text-neutral-700 dark:text-slate-300 mb-1">Phone</label>
                     <input
                       type="text"
                       value={newCompany.phone}
                       onChange={(e) => setNewCompany({...newCompany, phone: e.target.value})}
                       placeholder="+63 XXX XXX XXXX"
-                      className="w-full px-4 py-2.5 text-sm bg-white border border-neutral-200 rounded-xl focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
+                      className="w-full px-4 py-2.5 text-sm bg-white dark:bg-slate-800 border border-neutral-200 dark:border-slate-700 rounded-xl focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-neutral-700 mb-1">Address</label>
+                    <label className="block text-sm font-medium text-neutral-700 dark:text-slate-300 mb-1">Address</label>
                     <input
                       type="text"
                       value={newCompany.address}
                       onChange={(e) => setNewCompany({...newCompany, address: e.target.value})}
                       placeholder="City, Province"
-                      className="w-full px-4 py-2.5 text-sm bg-white border border-neutral-200 rounded-xl focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
+                      className="w-full px-4 py-2.5 text-sm bg-white dark:bg-slate-800 border border-neutral-200 dark:border-slate-700 rounded-xl focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
                     />
                   </div>
                 </div>
@@ -1157,29 +1157,29 @@ export function CompaniesPage() {
 
               {/* HR Admin Info */}
               <div className="space-y-4">
-                <h3 className="font-semibold text-neutral-900 flex items-center gap-2">
+                <h3 className="font-semibold text-neutral-900 dark:text-white flex items-center gap-2">
                   <Users className="w-4 h-4" />
                   HR Administrator
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-neutral-700 mb-1">Admin Name</label>
+                    <label className="block text-sm font-medium text-neutral-700 dark:text-slate-300 mb-1">Admin Name</label>
                     <input
                       type="text"
                       value={newCompany.hrAdminName}
                       onChange={(e) => setNewCompany({...newCompany, hrAdminName: e.target.value})}
                       placeholder="Full name"
-                      className="w-full px-4 py-2.5 text-sm bg-white border border-neutral-200 rounded-xl focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
+                      className="w-full px-4 py-2.5 text-sm bg-white dark:bg-slate-800 border border-neutral-200 dark:border-slate-700 rounded-xl focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-neutral-700 mb-1">Admin Email *</label>
+                    <label className="block text-sm font-medium text-neutral-700 dark:text-slate-300 mb-1">Admin Email *</label>
                     <input
                       type="email"
                       value={newCompany.hrAdminEmail}
                       onChange={(e) => setNewCompany({...newCompany, hrAdminEmail: e.target.value})}
                       placeholder="email@company.com"
-                      className="w-full px-4 py-2.5 text-sm bg-white border border-neutral-200 rounded-xl focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
+                      className="w-full px-4 py-2.5 text-sm bg-white dark:bg-slate-800 border border-neutral-200 dark:border-slate-700 rounded-xl focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
                     />
                   </div>
                 </div>
@@ -1187,13 +1187,13 @@ export function CompaniesPage() {
 
               {/* Subscription Info */}
               <div className="space-y-4">
-                <h3 className="font-semibold text-neutral-900 flex items-center gap-2">
+                <h3 className="font-semibold text-neutral-900 dark:text-white flex items-center gap-2">
                   <TrendingUp className="w-4 h-4" />
                   Subscription Details
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-neutral-700 mb-1">Plan</label>
+                    <label className="block text-sm font-medium text-neutral-700 dark:text-slate-300 mb-1">Plan</label>
                     <select
                       value={newCompany.plan}
                       onChange={(e) => {
@@ -1211,7 +1211,7 @@ export function CompaniesPage() {
                           monthlyFee: config.monthlyFee
                         });
                       }}
-                      className="w-full px-4 py-2.5 text-sm bg-white border border-neutral-200 rounded-xl focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
+                      className="w-full px-4 py-2.5 text-sm bg-white dark:bg-slate-800 border border-neutral-200 dark:border-slate-700 rounded-xl focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
                     >
                       <option value="Starter">Starter</option>
                       <option value="Professional">Professional</option>
@@ -1219,21 +1219,21 @@ export function CompaniesPage() {
                     </select>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-neutral-700 mb-1">Max Employees</label>
+                    <label className="block text-sm font-medium text-neutral-700 dark:text-slate-300 mb-1">Max Employees</label>
                     <input
                       type="number"
                       value={newCompany.maxEmployees}
                       onChange={(e) => setNewCompany({...newCompany, maxEmployees: parseInt(e.target.value)})}
-                      className="w-full px-4 py-2.5 text-sm bg-white border border-neutral-200 rounded-xl focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
+                      className="w-full px-4 py-2.5 text-sm bg-white dark:bg-slate-800 border border-neutral-200 dark:border-slate-700 rounded-xl focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-neutral-700 mb-1">Monthly Fee (₱)</label>
+                    <label className="block text-sm font-medium text-neutral-700 dark:text-slate-300 mb-1">Monthly Fee (₱)</label>
                     <input
                       type="number"
                       value={newCompany.monthlyFee}
                       onChange={(e) => setNewCompany({...newCompany, monthlyFee: parseInt(e.target.value)})}
-                      className="w-full px-4 py-2.5 text-sm bg-white border border-neutral-200 rounded-xl focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
+                      className="w-full px-4 py-2.5 text-sm bg-white dark:bg-slate-800 border border-neutral-200 dark:border-slate-700 rounded-xl focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
                     />
                   </div>
                 </div>
@@ -1249,7 +1249,7 @@ export function CompaniesPage() {
               </div>
             </div>
 
-            <div className="p-6 border-t border-neutral-200 flex flex-col sm:flex-row justify-end gap-3">
+            <div className="p-6 border-t border-neutral-200 dark:border-slate-700 flex flex-col sm:flex-row justify-end gap-3">
               <button 
                 onClick={() => setShowAddModal(false)}
                 className="btn btn-secondary w-full sm:w-auto"

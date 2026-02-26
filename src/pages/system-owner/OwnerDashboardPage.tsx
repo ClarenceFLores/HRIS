@@ -266,7 +266,7 @@ export function OwnerDashboardPage() {
       case 'info':
         return <CheckCircle2 className="w-5 h-5 text-blue-500" />;
       default:
-        return <Bell className="w-5 h-5 text-neutral-500" />;
+        return <Bell className="w-5 h-5 text-neutral-500 dark:text-slate-400" />;
     }
   };
 
@@ -408,7 +408,7 @@ export function OwnerDashboardPage() {
       {/* Pending Approvals Section */}
       {pendingApprovals.length > 0 && (
         <div className="card overflow-hidden">
-          <div className="p-5 border-b border-neutral-200 bg-gradient-to-r from-amber-50 to-orange-50">
+          <div className="p-5 border-b border-neutral-200 dark:border-slate-700 bg-gradient-to-r from-amber-50 dark:from-slate-800 to-orange-50">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center">
@@ -427,7 +427,7 @@ export function OwnerDashboardPage() {
               </button>
             </div>
           </div>
-          <div className="divide-y divide-neutral-100">
+          <div className="divide-y divide-neutral-100 dark:divide-slate-700">
             {pendingApprovals.map((approval) => (
               <div key={approval.id} className="p-5 hover:bg-neutral-50 dark:hover:bg-slate-800 transition-colors">
                 <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
@@ -440,21 +440,21 @@ export function OwnerDashboardPage() {
                         <h4 className="font-semibold text-neutral-900 dark:text-white">{approval.companyName}</h4>
                         {getPlanBadge(approval.requestedPlan)}
                       </div>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-neutral-600 dark:text-slate-300">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-neutral-600 dark:text-slate-400 dark:text-slate-300">
                         <div className="flex items-center gap-2">
-                          <Users className="w-4 h-4 text-neutral-400" />
+                          <Users className="w-4 h-4 text-neutral-400 dark:text-slate-500" />
                           <span>{approval.hrAdminName}</span>
                         </div>
                         <div className="flex items-center gap-2">
-                          <Mail className="w-4 h-4 text-neutral-400" />
+                          <Mail className="w-4 h-4 text-neutral-400 dark:text-slate-500" />
                           <span>{approval.email}</span>
                         </div>
                         <div className="flex items-center gap-2">
-                          <Briefcase className="w-4 h-4 text-neutral-400" />
+                          <Briefcase className="w-4 h-4 text-neutral-400 dark:text-slate-500" />
                           <span>{approval.industryType}</span>
                         </div>
                         <div className="flex items-center gap-2">
-                          <Calendar className="w-4 h-4 text-neutral-400" />
+                          <Calendar className="w-4 h-4 text-neutral-400 dark:text-slate-500" />
                           <span>Registered: {formatDate(approval.dateRegistered)}</span>
                         </div>
                       </div>
@@ -495,8 +495,8 @@ export function OwnerDashboardPage() {
       {/* Empty State for Pending Approvals */}
       {pendingApprovals.length === 0 && (
         <div className="card p-8 text-center">
-          <div className="w-16 h-16 mx-auto rounded-full bg-neutral-100 flex items-center justify-center mb-4">
-            <CheckCircle2 className="w-8 h-8 text-neutral-400" />
+          <div className="w-16 h-16 mx-auto rounded-full bg-neutral-100 dark:bg-slate-700 flex items-center justify-center mb-4">
+            <CheckCircle2 className="w-8 h-8 text-neutral-400 dark:text-slate-500" />
           </div>
           <h3 className="font-semibold text-neutral-700 dark:text-slate-300 mb-1">No Pending Registrations</h3>
           <p className="text-sm text-neutral-500 dark:text-slate-400 max-w-md mx-auto">
@@ -529,10 +529,10 @@ export function OwnerDashboardPage() {
         <div className="card p-5 hover:shadow-lg transition-shadow">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-sm font-medium text-neutral-500">Suspended Companies</p>
+              <p className="text-sm font-medium text-neutral-500 dark:text-slate-400">Suspended Companies</p>
               <p className="text-3xl font-bold text-red-600 mt-1">{stats.suspendedCompanies}</p>
               <div className="flex items-center gap-2 mt-2">
-                <span className="text-sm text-neutral-500">
+                <span className="text-sm text-neutral-500 dark:text-slate-400">
                   {stats.suspendedCompanies} accounts need attention
                 </span>
               </div>
@@ -550,10 +550,10 @@ export function OwnerDashboardPage() {
         <div className="card p-6">
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h3 className="font-semibold text-neutral-900">Company Growth</h3>
-              <p className="text-sm text-neutral-500">Monthly registration trend</p>
+              <h3 className="font-semibold text-neutral-900 dark:text-white">Company Growth</h3>
+              <p className="text-sm text-neutral-500 dark:text-slate-400">Monthly registration trend</p>
             </div>
-            <select className="text-sm border border-neutral-200 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-primary-500">
+            <select className="text-sm border border-neutral-200 dark:border-slate-700 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-primary-500">
               <option>Last 6 months</option>
               <option>Last 12 months</option>
               <option>This year</option>
@@ -567,7 +567,7 @@ export function OwnerDashboardPage() {
                   className="w-full bg-gradient-to-t from-primary-500 to-primary-400 rounded-t-lg transition-all hover:from-primary-600 hover:to-primary-500"
                   style={{ height: `${(item.value / 160) * 100}%` }}
                 ></div>
-                <span className="text-xs text-neutral-500">{item.month}</span>
+                <span className="text-xs text-neutral-500 dark:text-slate-400">{item.month}</span>
               </div>
             ))}
           </div>
@@ -577,10 +577,10 @@ export function OwnerDashboardPage() {
         <div className="card p-6">
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h3 className="font-semibold text-neutral-900">Revenue Growth</h3>
-              <p className="text-sm text-neutral-500">Monthly revenue trend</p>
+              <h3 className="font-semibold text-neutral-900 dark:text-white">Revenue Growth</h3>
+              <p className="text-sm text-neutral-500 dark:text-slate-400">Monthly revenue trend</p>
             </div>
-            <select className="text-sm border border-neutral-200 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-primary-500">
+            <select className="text-sm border border-neutral-200 dark:border-slate-700 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-primary-500">
               <option>Last 6 months</option>
               <option>Last 12 months</option>
               <option>This year</option>
@@ -594,7 +594,7 @@ export function OwnerDashboardPage() {
                   className="w-full bg-gradient-to-t from-emerald-500 to-emerald-400 rounded-t-lg transition-all hover:from-emerald-600 hover:to-emerald-500"
                   style={{ height: `${(item.value / 500000) * 100}%` }}
                 ></div>
-                <span className="text-xs text-neutral-500">{item.month}</span>
+                <span className="text-xs text-neutral-500 dark:text-slate-400">{item.month}</span>
               </div>
             ))}
           </div>
@@ -669,21 +669,21 @@ export function OwnerDashboardPage() {
       {/* Approval Detail Modal */}
       {selectedApproval && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl shadow-xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
-            <div className="p-6 border-b border-neutral-200">
+          <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
+            <div className="p-6 border-b border-neutral-200 dark:border-slate-700">
               <div className="flex items-start justify-between">
                 <div className="flex items-center gap-4">
                   <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center text-white font-bold text-xl">
                     {selectedApproval.companyName.charAt(0)}
                   </div>
                   <div>
-                    <h2 className="text-xl font-bold text-neutral-900">{selectedApproval.companyName}</h2>
-                    <p className="text-neutral-500">Registration Review</p>
+                    <h2 className="text-xl font-bold text-neutral-900 dark:text-white">{selectedApproval.companyName}</h2>
+                    <p className="text-neutral-500 dark:text-slate-400">Registration Review</p>
                   </div>
                 </div>
                 <button 
                   onClick={() => setSelectedApproval(null)}
-                  className="p-2 text-neutral-400 hover:text-neutral-600 hover:bg-neutral-100 rounded-lg transition-colors"
+                  className="p-2 text-neutral-400 dark:text-slate-500 hover:text-neutral-600 hover:bg-neutral-100 dark:hover:bg-slate-700 rounded-lg transition-colors"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -702,11 +702,11 @@ export function OwnerDashboardPage() {
 
               {/* Company Details */}
               <div className="space-y-3">
-                <h4 className="font-semibold text-neutral-800 flex items-center gap-2">
-                  <Building2 className="w-4 h-4 text-neutral-400" />
+                <h4 className="font-semibold text-neutral-800 dark:text-slate-200 flex items-center gap-2">
+                  <Building2 className="w-4 h-4 text-neutral-400 dark:text-slate-500" />
                   Company Details
                 </h4>
-                <div className="bg-neutral-50 rounded-xl p-4 space-y-2 text-sm">
+                <div className="bg-neutral-50 dark:bg-slate-800 rounded-xl p-4 space-y-2 text-sm">
                   <div className="flex justify-between">
                     <span className="text-neutral-500 dark:text-slate-400">Industry</span>
                     <span className="font-medium text-neutral-900 dark:text-white">{selectedApproval.industryType}</span>
@@ -724,11 +724,11 @@ export function OwnerDashboardPage() {
 
               {/* HR Admin Details */}
               <div className="space-y-3">
-                <h4 className="font-semibold text-neutral-800 flex items-center gap-2">
-                  <Users className="w-4 h-4 text-neutral-400" />
+                <h4 className="font-semibold text-neutral-800 dark:text-slate-200 flex items-center gap-2">
+                  <Users className="w-4 h-4 text-neutral-400 dark:text-slate-500" />
                   HR Administrator
                 </h4>
-                <div className="bg-neutral-50 rounded-xl p-4 space-y-2 text-sm">
+                <div className="bg-neutral-50 dark:bg-slate-800 rounded-xl p-4 space-y-2 text-sm">
                   <div className="flex justify-between">
                     <span className="text-neutral-500 dark:text-slate-400">Name</span>
                     <span className="font-medium text-neutral-900 dark:text-white">{selectedApproval.hrAdminName}</span>
@@ -746,11 +746,11 @@ export function OwnerDashboardPage() {
 
               {/* Registration Info */}
               <div className="space-y-3">
-                <h4 className="font-semibold text-neutral-800 flex items-center gap-2">
-                  <Calendar className="w-4 h-4 text-neutral-400" />
+                <h4 className="font-semibold text-neutral-800 dark:text-slate-200 flex items-center gap-2">
+                  <Calendar className="w-4 h-4 text-neutral-400 dark:text-slate-500" />
                   Registration Info
                 </h4>
-                <div className="bg-neutral-50 rounded-xl p-4 space-y-2 text-sm">
+                <div className="bg-neutral-50 dark:bg-slate-800 rounded-xl p-4 space-y-2 text-sm">
                   <div className="flex justify-between">
                     <span className="text-neutral-500 dark:text-slate-400">Date Registered</span>
                     <span className="font-medium text-neutral-900 dark:text-white">{formatDate(selectedApproval.dateRegistered)}</span>
@@ -772,7 +772,7 @@ export function OwnerDashboardPage() {
               </div>
             </div>
 
-            <div className="p-6 border-t border-neutral-200 flex flex-col sm:flex-row justify-end gap-3">
+            <div className="p-6 border-t border-neutral-200 dark:border-slate-700 flex flex-col sm:flex-row justify-end gap-3">
               <button 
                 onClick={() => setSelectedApproval(null)}
                 className="btn btn-secondary w-full sm:w-auto"
