@@ -166,6 +166,8 @@ export function OwnerDashboardPage() {
 
   useEffect(() => {
     setMounted(true);
+    // Initialize lastNotifiedCount on first mount to prevent false notifications
+    lastNotifiedCount.current = pendingApprovals.length;
   }, []);
   
   // Show toast when new registrations come in
@@ -302,15 +304,15 @@ export function OwnerDashboardPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-heading font-bold text-neutral-900">
+          <h1 className="text-2xl font-heading font-bold text-neutral-900 dark:text-white">
             Platform Dashboard
           </h1>
-          <p className="text-neutral-500 mt-1">
+          <p className="text-neutral-500 dark:text-slate-400 mt-1">
             Welcome back, {user?.displayName || 'System Owner'}
           </p>
         </div>
         <div className="flex items-center gap-3">
-          <span className="text-sm text-neutral-500">
+          <span className="text-sm text-neutral-500 dark:text-slate-400">
             Last updated: {new Date().toLocaleTimeString()}
           </span>
           <button
@@ -330,10 +332,10 @@ export function OwnerDashboardPage() {
         <div className="card p-5 hover:shadow-lg transition-shadow">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-sm font-medium text-neutral-500">Total Companies</p>
-              <p className="text-3xl font-bold text-neutral-900 mt-1">{stats.totalCompanies}</p>
+              <p className="text-sm font-medium text-neutral-500 dark:text-slate-400">Total Companies</p>
+              <p className="text-3xl font-bold text-neutral-900 dark:text-white mt-1">{stats.totalCompanies}</p>
               <div className="flex items-center gap-1 mt-2">
-                <span className="text-sm text-neutral-500">{stats.trialCompanies} in trial</span>
+                <span className="text-sm text-neutral-500 dark:text-slate-400">{stats.trialCompanies} in trial</span>
               </div>
             </div>
             <div className="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center">
@@ -346,10 +348,10 @@ export function OwnerDashboardPage() {
         <div className="card p-5 hover:shadow-lg transition-shadow">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-sm font-medium text-neutral-500">Active Companies</p>
-              <p className="text-3xl font-bold text-emerald-600 mt-1">{stats.activeCompanies}</p>
+              <p className="text-sm font-medium text-neutral-500 dark:text-slate-400">Active Companies</p>
+              <p className="text-3xl font-bold text-emerald-600 dark:text-emerald-400 mt-1">{stats.activeCompanies}</p>
               <div className="flex items-center gap-2 mt-2">
-                <span className="text-sm text-neutral-500">
+                <span className="text-sm text-neutral-500 dark:text-slate-400">
                   {stats.totalCompanies > 0 ? Math.round((stats.activeCompanies / stats.totalCompanies) * 100) : 0}% of total
                 </span>
               </div>
@@ -364,8 +366,8 @@ export function OwnerDashboardPage() {
         <div className="card p-5 hover:shadow-lg transition-shadow">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-sm font-medium text-neutral-500">Trial Companies</p>
-              <p className="text-3xl font-bold text-amber-600 mt-1">{stats.trialCompanies}</p>
+              <p className="text-sm font-medium text-neutral-500 dark:text-slate-400">Trial Companies</p>
+              <p className="text-3xl font-bold text-amber-600 dark:text-amber-400 mt-1">{stats.trialCompanies}</p>
               <div className="flex items-center gap-2 mt-2">
                 <Clock className="w-4 h-4 text-amber-500" />
                 <span className="text-sm text-amber-600">{stats.expiringSoon} expiring soon</span>
@@ -381,10 +383,10 @@ export function OwnerDashboardPage() {
         <div className="card p-5 hover:shadow-lg transition-shadow">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-sm font-medium text-neutral-500">Total Employees</p>
-              <p className="text-3xl font-bold text-neutral-900 mt-1">{stats.totalEmployees.toLocaleString()}</p>
+              <p className="text-sm font-medium text-neutral-500 dark:text-slate-400">Total Employees</p>
+              <p className="text-3xl font-bold text-neutral-900 dark:text-white mt-1">{stats.totalEmployees.toLocaleString()}</p>
               <div className="flex items-center gap-1 mt-2">
-                <span className="text-sm text-neutral-400">across all companies</span>
+                <span className="text-sm text-neutral-400 dark:text-slate-500">across all companies</span>
               </div>
             </div>
             <div className="w-12 h-12 rounded-xl bg-purple-100 flex items-center justify-center">
@@ -404,8 +406,8 @@ export function OwnerDashboardPage() {
                   <UserCheck className="w-5 h-5 text-amber-600" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-neutral-900">Pending Approvals</h3>
-                  <p className="text-sm text-neutral-500">{pendingApprovals.length} registrations awaiting review</p>
+                  <h3 className="font-semibold text-neutral-900 dark:text-white">Pending Approvals</h3>
+                  <p className="text-sm text-neutral-500 dark:text-slate-400">{pendingApprovals.length} registrations awaiting review</p>
                 </div>
               </div>
               <button
@@ -426,10 +428,10 @@ export function OwnerDashboardPage() {
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-1">
-                        <h4 className="font-semibold text-neutral-900">{approval.companyName}</h4>
+                        <h4 className="font-semibold text-neutral-900 dark:text-white">{approval.companyName}</h4>
                         {getPlanBadge(approval.requestedPlan)}
                       </div>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-neutral-600">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-neutral-600 dark:text-slate-300">
                         <div className="flex items-center gap-2">
                           <Users className="w-4 h-4 text-neutral-400" />
                           <span>{approval.hrAdminName}</span>

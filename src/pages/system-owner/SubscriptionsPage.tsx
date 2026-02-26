@@ -230,10 +230,10 @@ export function SubscriptionsPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-heading font-bold text-neutral-900">
+          <h1 className="text-2xl font-heading font-bold text-neutral-900 dark:text-white">
             Subscriptions
           </h1>
-          <p className="text-neutral-500 mt-1">
+          <p className="text-neutral-500 dark:text-slate-400 mt-1">
             Manage subscription plans and monitor payments
           </p>
         </div>
@@ -310,7 +310,7 @@ export function SubscriptionsPage() {
 
               <div className="flex items-start justify-between mb-6">
                 <div className="flex-1">
-                  <h3 className="text-2xl font-bold text-neutral-900 mb-2">{plan.name}</h3>
+                  <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mb-2">{plan.name}</h3>
                   <p className="text-neutral-600">{plan.description}</p>
                 </div>
                 <button 
@@ -336,7 +336,7 @@ export function SubscriptionsPage() {
               </div>
 
               <div>
-                <h4 className="font-semibold text-neutral-900 mb-3">Plan Features:</h4>
+                <h4 className="font-semibold text-neutral-900 dark:text-white mb-3">Plan Features:</h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {plan.features.map((feature, idx) => (
                     <div key={idx} className="flex items-start gap-2">
@@ -488,16 +488,16 @@ export function SubscriptionsPage() {
                   {filteredTransactions.map((txn) => (
                     <tr key={txn.id} className="hover:bg-neutral-50 transition-colors">
                       <td className="px-6 py-4">
-                        <span className="font-mono text-sm font-medium text-neutral-900">{txn.id}</span>
+                        <span className="font-mono text-sm font-medium text-neutral-900 dark:text-white">{txn.id}</span>
                       </td>
                       <td className="px-6 py-4">
-                        <span className="font-medium text-neutral-900">{txn.company}</span>
+                        <span className="font-medium text-neutral-900 dark:text-white">{txn.company}</span>
                       </td>
                       <td className="px-6 py-4">
                         <span className="text-neutral-600">{txn.plan}</span>
                       </td>
                       <td className="px-6 py-4">
-                        <span className="font-semibold text-neutral-900">{formatCurrency(txn.amount)}</span>
+                        <span className="font-semibold text-neutral-900 dark:text-white">{formatCurrency(txn.amount)}</span>
                       </td>
                       <td className="px-6 py-4">
                         <span className="text-neutral-600">{txn.method}</span>

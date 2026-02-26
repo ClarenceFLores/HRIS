@@ -99,15 +99,22 @@ function App() {
     return () => unsubscribe();
   }, [initAuthListener]);
 
-  // Only load Firestore registration data when signed in as system owner.
-  // Calling this while unauthenticated triggers "Missing or insufficient
-  // permissions" because pendingRegistrations / companies / hrUsers all
-  // require system-owner credentials to read.
+  // Load HR users from Firestore on app startup so they can log in
+  // This runs once on app initialization, regardless of auth state
+  useEffect(() => {
+    loadFromFirestore().catch(err => {
+      console.warn('Could not load Firestore data on startup:', err);
+    });
+  }, [loadFromFirestore]);
+
+  // Refresh Firestore data when system owner logs in for latest registrations
   useEffect(() => {
     if (user?.role === 'system_owner') {
-      loadFromFirestore();
+      loadFromFirestore().catch(err => {
+        console.warn('Could not refresh Firestore data:', err);
+      });
     }
-  }, [user, loadFromFirestore]);
+  }, [user?.role, loadFromFirestore]);
 
   return (
     <ToastProvider>
