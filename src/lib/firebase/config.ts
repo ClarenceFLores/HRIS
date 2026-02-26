@@ -8,7 +8,7 @@ import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 import { getAnalytics, isSupported } from 'firebase/analytics';
-import { initializeAppCheck, ReCaptchaEnterpriseProvider } from 'firebase/app-check';
+import { initializeAppCheck, ReCaptchaV3Provider } from 'firebase/app-check';
 import { getDatabase } from 'firebase/database';
 
 // Firebase configuration
@@ -52,7 +52,7 @@ const reCaptchaSiteKey =
   import.meta.env.VITE_RECAPTCHA_SITE_KEY ?? 'dev-placeholder-replaced-by-debug-token';
 
 export const appCheck = initializeAppCheck(app, {
-  provider: new ReCaptchaEnterpriseProvider(reCaptchaSiteKey),
+  provider: new ReCaptchaV3Provider(reCaptchaSiteKey),
   isTokenAutoRefreshEnabled: true,
 });
 // ─────────────────────────────────────────────────────────────────────────────
