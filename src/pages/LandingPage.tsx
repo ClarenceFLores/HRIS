@@ -255,7 +255,7 @@ export function LandingPage() {
                       <p className="text-sm text-blue-600/70">Employees</p>
                     </div>
                     <div className="p-4 bg-emerald-50 rounded-xl">
-                      <p className="text-2xl font-bold text-emerald-600">â‚±2.1M</p>
+                      <p className="text-2xl font-bold text-emerald-600">₱2.1M</p>
                       <p className="text-sm text-emerald-600/70">Monthly Payroll</p>
                     </div>
                     <div className="p-4 bg-amber-50 rounded-xl">
@@ -427,7 +427,7 @@ export function LandingPage() {
             <div className="relative bg-white dark:bg-slate-900 rounded-3xl border border-neutral-200 dark:border-slate-700 shadow-2xl overflow-hidden">
               {/* Trial badge strip */}
               <div className="bg-gradient-to-r from-primary-500 to-primary-600 py-3 px-6 flex items-center justify-center gap-2">
-                <span className="text-white font-semibold text-sm tracking-wide">ðŸŽ‰ 30-Day Free Trial â€” No Credit Card Required</span>
+                <span className="text-white font-semibold text-sm tracking-wide">🎉 30-Day Free Trial — No Credit Card Required</span>
               </div>
 
               <div className="p-8 sm:p-10">
@@ -449,7 +449,7 @@ export function LandingPage() {
                 <div className="mb-8 pb-8 border-b border-neutral-100 dark:border-slate-800">
                   <div className="flex items-baseline gap-2">
                     <span className="text-6xl font-bold text-neutral-900 dark:text-white">
-                      â‚±{(billingYearly
+                      ₱{(billingYearly
                         ? Math.round(plan.yearlyPrice / 12)
                         : plan.monthlyPrice
                       ).toLocaleString('en-PH')}
@@ -463,7 +463,7 @@ export function LandingPage() {
                   </div>
                   {billingYearly ? (
                     <p className="text-emerald-600 dark:text-emerald-400 text-sm mt-2 font-medium">
-                      â‚±{plan.yearlyPrice.toLocaleString('en-PH')}/year â€” save â‚±{((plan.monthlyPrice * 12) - plan.yearlyPrice).toLocaleString('en-PH')}
+                      ₱{plan.yearlyPrice.toLocaleString('en-PH')}/year — save ₱{((plan.monthlyPrice * 12) - plan.yearlyPrice).toLocaleString('en-PH')}
                     </p>
                   ) : (
                     <p className="text-neutral-400 dark:text-slate-500 text-sm mt-2">
@@ -493,7 +493,7 @@ export function LandingPage() {
                   <ArrowRight size={18} />
                 </Link>
                 <p className="text-center text-xs text-neutral-400 dark:text-slate-500 mt-3">
-                  No credit card required &bull; Cancel anytime &bull; Full access from day 1
+                  No credit card required • Cancel anytime • Full access from day 1
                 </p>
               </div>
             </div>
