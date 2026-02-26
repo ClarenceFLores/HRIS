@@ -605,30 +605,29 @@ export function OwnerDashboardPage() {
       <div className="card p-6">
         <div className="flex items-center justify-between mb-4">
           <h3 className="font-semibold text-neutral-900 dark:text-white">Recent Alerts</h3>
-            <button className="text-sm text-primary-600 hover:text-primary-700 font-medium">
-              View All
-            </button>
-          </div>
-          <div className="space-y-3">
-            {mockAlerts.map((alert) => (
-              <div 
-                key={alert.id} 
-                className={`flex items-start gap-3 p-3 rounded-xl transition-colors ${
-                  alert.type === 'error' ? 'bg-red-50' : 
-                  alert.type === 'warning' ? 'bg-amber-50' : 'bg-blue-50'
-                }`}
-              >
-                {getAlertIcon(alert.type)}
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-neutral-800 dark:text-slate-200">{alert.message}</p>
-                  <p className="text-xs text-neutral-500 dark:text-slate-400 mt-0.5">{alert.time}</p>
-                </div>
-                <button className="text-xs text-neutral-500 hover:text-neutral-700 dark:text-slate-400 dark:hover:text-slate-200 font-medium">
-                  Dismiss
-                </button>
+          <button className="text-sm text-primary-600 hover:text-primary-700 font-medium">
+            View All
+          </button>
+        </div>
+        <div className="space-y-3">
+          {mockAlerts.map((alert) => (
+            <div 
+              key={alert.id} 
+              className={`flex items-start gap-3 p-3 rounded-xl transition-colors ${
+                alert.type === 'error' ? 'bg-red-50' : 
+                alert.type === 'warning' ? 'bg-amber-50' : 'bg-blue-50'
+              }`}
+            >
+              {getAlertIcon(alert.type)}
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-neutral-800 dark:text-slate-200">{alert.message}</p>
+                <p className="text-xs text-neutral-500 dark:text-slate-400 mt-0.5">{alert.time}</p>
               </div>
-            ))}
-          </div>
+              <button className="text-xs text-neutral-500 hover:text-neutral-700 dark:text-slate-400 dark:hover:text-slate-200 font-medium">
+                Dismiss
+              </button>
+            </div>
+          ))}
         </div>
       </div>
 
