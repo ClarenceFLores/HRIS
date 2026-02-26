@@ -11,4 +11,18 @@ export default defineConfig({
     server: {
         port: 5173,
     },
+    build: {
+        sourcemap: false,
+        rollupOptions: {
+            onwarn: function (warning, warn) {
+                // Suppress source map warnings
+                if (warning.code === 'SOURCEMAP_ERROR')
+                    return;
+                warn(warning);
+            },
+        },
+    },
+    optimizeDeps: {
+        exclude: ['lucide-react'],
+    },
 });
