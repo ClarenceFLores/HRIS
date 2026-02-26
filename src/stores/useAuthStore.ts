@@ -157,6 +157,7 @@ export const useAuthStore = create<AuthState>()(
         const localApprovedUser = useRegistrationsStore.getState().validateUserCredentials(email.toLowerCase(), password);
         
         if (localApprovedUser) {
+          console.log('✅ HR user found in local state:', localApprovedUser.email);
           const hrUser: User = {
             id: `hr-${localApprovedUser.companyId}-${Date.now()}`,
             email: localApprovedUser.email,
@@ -175,6 +176,8 @@ export const useAuthStore = create<AuthState>()(
           markSession();
           return;
         }
+        
+        console.log('⚠️ HR user not found in local state, checking Firestore...');
 
         // Fallback: query Firestore hrUsers collection directly
         // This handles cases where local state is empty (different device / cleared storage)
@@ -182,7 +185,9 @@ export const useAuthStore = create<AuthState>()(
           const hrUserDoc = await getDoc(doc(db, 'hrUsers', email.toLowerCase()));
           if (hrUserDoc.exists()) {
             const data = hrUserDoc.data();
+            console.log('📄 Firestore hrUsers document found:', email.toLowerCase());
             if (data.password === password) {
+              console.log('✅ Password matches, logging in HR user from Firestore');
               const hrUser: User = {
                 id: `hr-${data.companyId}-${Date.now()}`,
                 email: data.email,
@@ -200,10 +205,14 @@ export const useAuthStore = create<AuthState>()(
               });
               markSession();
               return;
+            } else {
+              console.log('❌ Password mismatch for HR user in Firestore');
             }
+          } else {
+            console.log('❌ No hrUsers document found in Firestore for:', email.toLowerCase());
           }
         } catch (firestoreError) {
-          console.warn('Firestore hrUsers lookup failed:', firestoreError);
+          console.warn('⚠️ Firestore hrUsers lookup failed:', firestoreError);
         }
         
         // If DEMO_MODE, credentials not found - throw error

@@ -252,7 +252,7 @@ export function DashboardPage() {
             </div>
             <div>
               <p className="text-3xl font-bold text-neutral-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">{stat.value}</p>
-              <p className="text-sm font-medium text-neutral-700 mt-1">{stat.name}</p>
+              <p className="text-sm font-medium text-neutral-700 dark:text-slate-300 mt-1">{stat.name}</p>
               <p className="text-xs text-neutral-400 mt-0.5">{stat.description}</p>
             </div>
           </div>
@@ -616,21 +616,21 @@ export function DashboardPage() {
           </div>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          <div className="text-center p-4 bg-neutral-50 rounded-xl">
-            <p className="text-3xl font-bold text-emerald-600">98%</p>
-            <p className="text-sm text-neutral-600 mt-1">Avg. Attendance</p>
+          <div className="text-center p-4 bg-neutral-50 dark:bg-slate-800 rounded-xl">
+            <p className="text-3xl font-bold text-emerald-600 dark:text-emerald-400">98%</p>
+            <p className="text-sm text-neutral-600 dark:text-slate-300 mt-1">Avg. Attendance</p>
           </div>
-          <div className="text-center p-4 bg-neutral-50 rounded-xl">
-            <p className="text-3xl font-bold text-blue-600">12</p>
-            <p className="text-sm text-neutral-600 mt-1">New Hires</p>
+          <div className="text-center p-4 bg-neutral-50 dark:bg-slate-800 rounded-xl">
+            <p className="text-3xl font-bold text-blue-600 dark:text-blue-400">12</p>
+            <p className="text-sm text-neutral-600 dark:text-slate-300 mt-1">New Hires</p>
           </div>
-          <div className="text-center p-4 bg-neutral-50 rounded-xl">
-            <p className="text-3xl font-bold text-amber-600">45</p>
-            <p className="text-sm text-neutral-600 mt-1">Leaves Approved</p>
+          <div className="text-center p-4 bg-neutral-50 dark:bg-slate-800 rounded-xl">
+            <p className="text-3xl font-bold text-amber-600 dark:text-amber-400">45</p>
+            <p className="text-sm text-neutral-600 dark:text-slate-300 mt-1">Leaves Approved</p>
           </div>
-          <div className="text-center p-4 bg-neutral-50 rounded-xl">
-            <p className="text-3xl font-bold text-purple-600">₱2.4M</p>
-            <p className="text-sm text-neutral-600 mt-1">Total Payroll</p>
+          <div className="text-center p-4 bg-neutral-50 dark:bg-slate-800 rounded-xl">
+            <p className="text-3xl font-bold text-purple-600 dark:text-purple-400">₱2.4M</p>
+            <p className="text-sm text-neutral-600 dark:text-slate-300 mt-1">Total Payroll</p>
           </div>
         </div>
       </div>

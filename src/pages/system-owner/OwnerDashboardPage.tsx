@@ -168,6 +168,12 @@ export function OwnerDashboardPage() {
     setMounted(true);
     // Initialize lastNotifiedCount on first mount to prevent false notifications
     lastNotifiedCount.current = pendingApprovals.length;
+    
+    // Ensure Firestore data is loaded when dashboard mounts
+    const registrationsStore = useRegistrationsStore.getState();
+    registrationsStore.loadFromFirestore().catch(err => {
+      console.warn('Could not load Firestore data on dashboard mount:', err);
+    });
   }, []);
   
   // Show toast when new registrations come in
@@ -190,7 +196,10 @@ export function OwnerDashboardPage() {
     const registration = pendingApprovals.find(a => a.id === id);
     
     // Use the store's approve function
-    approveRegistration(id, user?.email || 'System Owner');
+    await approveRegistration(id, user?.email || 'System Owner');
+    
+    // Reload from Firestore to ensure credentials are synced
+    await useRegistrationsStore.getState().loadFromFirestore();
     
     await new Promise(resolve => setTimeout(resolve, 500));
     
@@ -489,7 +498,7 @@ export function OwnerDashboardPage() {
           <div className="w-16 h-16 mx-auto rounded-full bg-neutral-100 flex items-center justify-center mb-4">
             <CheckCircle2 className="w-8 h-8 text-neutral-400" />
           </div>
-          <h3 className="font-semibold text-neutral-700 mb-1">No Pending Registrations</h3>
+          <h3 className="font-semibold text-neutral-700 dark:text-slate-300 mb-1">No Pending Registrations</h3>
           <p className="text-sm text-neutral-500 max-w-md mx-auto">
             All company registrations have been reviewed. New registrations from HR accounts will appear here for your approval.
           </p>
@@ -503,7 +512,7 @@ export function OwnerDashboardPage() {
           <div className="flex items-start justify-between">
             <div>
               <p className="text-sm font-medium text-neutral-500">Monthly Revenue</p>
-              <p className="text-3xl font-bold text-neutral-900 mt-1">
+              <p className="text-3xl font-bold text-neutral-900 dark:text-white mt-1">
                 {formatCurrency(stats.monthlyRevenue)}
               </p>
               <div className="flex items-center gap-1 mt-2">
@@ -596,12 +605,12 @@ export function OwnerDashboardPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Plan Distribution */}
         <div className="card p-6">
-          <h3 className="font-semibold text-neutral-900 mb-4">Subscription Distribution</h3>
+          <h3 className="font-semibold text-neutral-900 dark:text-white mb-4">Subscription Distribution</h3>
           <div className="space-y-4">
             {planDistribution.map((plan, index) => (
               <div key={index}>
                 <div className="flex items-center justify-between mb-1">
-                  <span className="text-sm font-medium text-neutral-700">{plan.plan}</span>
+                  <span className="text-sm font-medium text-neutral-700 dark:text-slate-300">{plan.plan}</span>
                   <span className="text-sm text-neutral-500">{plan.count} ({plan.percentage}%)</span>
                 </div>
                 <div className="w-full h-2 bg-neutral-100 rounded-full overflow-hidden">
@@ -643,7 +652,7 @@ export function OwnerDashboardPage() {
                   <p className="text-sm font-medium text-neutral-800">{alert.message}</p>
                   <p className="text-xs text-neutral-500 mt-0.5">{alert.time}</p>
                 </div>
-                <button className="text-xs text-neutral-500 hover:text-neutral-700 font-medium">
+                <button className="text-xs text-neutral-500 hover:text-neutral-700 dark:text-slate-400 dark:hover:text-slate-200 font-medium">
                   Dismiss
                 </button>
               </div>
@@ -654,35 +663,35 @@ export function OwnerDashboardPage() {
 
       {/* Quick Actions */}
       <div className="card p-6">
-        <h3 className="font-semibold text-neutral-900 mb-4">Quick Actions</h3>
+        <h3 className="font-semibold text-neutral-900 dark:text-white mb-4">Quick Actions</h3>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
           <button 
             onClick={() => navigate('/app/companies')}
-            className="flex flex-col items-center gap-2 p-4 rounded-xl bg-neutral-50 hover:bg-neutral-100 transition-colors"
+            className="flex flex-col items-center gap-2 p-4 rounded-xl bg-neutral-50 hover:bg-neutral-100 dark:bg-slate-800 dark:hover:bg-slate-700 transition-colors"
           >
-            <Building2 className="w-6 h-6 text-primary-600" />
-            <span className="text-sm font-medium text-neutral-700">Manage Companies</span>
+            <Building2 className="w-6 h-6 text-primary-600 dark:text-primary-400" />
+            <span className="text-sm font-medium text-neutral-700 dark:text-slate-300">Manage Companies</span>
           </button>
           <button 
             onClick={() => navigate('/app/subscriptions')}
-            className="flex flex-col items-center gap-2 p-4 rounded-xl bg-neutral-50 hover:bg-neutral-100 transition-colors"
+            className="flex flex-col items-center gap-2 p-4 rounded-xl bg-neutral-50 hover:bg-neutral-100 dark:bg-slate-800 dark:hover:bg-slate-700 transition-colors"
           >
-            <CreditCard className="w-6 h-6 text-emerald-600" />
-            <span className="text-sm font-medium text-neutral-700">Subscriptions</span>
+            <CreditCard className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
+            <span className="text-sm font-medium text-neutral-700 dark:text-slate-300">Subscriptions</span>
           </button>
           <button 
             onClick={() => navigate('/app/platform-analytics')}
-            className="flex flex-col items-center gap-2 p-4 rounded-xl bg-neutral-50 hover:bg-neutral-100 transition-colors"
+            className="flex flex-col items-center gap-2 p-4 rounded-xl bg-neutral-50 hover:bg-neutral-100 dark:bg-slate-800 dark:hover:bg-slate-700 transition-colors"
           >
-            <BarChart3 className="w-6 h-6 text-purple-600" />
-            <span className="text-sm font-medium text-neutral-700">Analytics</span>
+            <BarChart3 className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+            <span className="text-sm font-medium text-neutral-700 dark:text-slate-300">Analytics</span>
           </button>
           <button 
             onClick={() => navigate('/app/system-config')}
-            className="flex flex-col items-center gap-2 p-4 rounded-xl bg-neutral-50 hover:bg-neutral-100 transition-colors"
+            className="flex flex-col items-center gap-2 p-4 rounded-xl bg-neutral-50 hover:bg-neutral-100 dark:bg-slate-800 dark:hover:bg-slate-700 transition-colors"
           >
-            <Settings2 className="w-6 h-6 text-amber-600" />
-            <span className="text-sm font-medium text-neutral-700">System Config</span>
+            <Settings2 className="w-6 h-6 text-amber-600 dark:text-amber-400" />
+            <span className="text-sm font-medium text-neutral-700 dark:text-slate-300">System Config</span>
           </button>
         </div>
       </div>
