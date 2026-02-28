@@ -223,10 +223,12 @@ export function LeaveRequestPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="label">Start Date <span className="text-red-500">*</span></label>
+              <label htmlFor="startDate" className="label">Start Date <span className="text-red-500">*</span></label>
               <div className="relative">
                 <CalendarDays className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400 dark:text-slate-500" size={18} />
                 <input
+                  id="startDate"
+                  name="startDate"
                   type="date"
                   value={formData.startDate}
                   onChange={(e) => handleChange('startDate', e.target.value)}
@@ -243,10 +245,12 @@ export function LeaveRequestPage() {
               )}
             </div>
             <div>
-              <label className="label">End Date <span className="text-red-500">*</span></label>
+              <label htmlFor="endDate" className="label">End Date <span className="text-red-500">*</span></label>
               <div className="relative">
                 <CalendarDays className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400 dark:text-slate-500" size={18} />
                 <input
+                  id="endDate"
+                  name="endDate"
                   type="date"
                   value={formData.endDate}
                   onChange={(e) => handleChange('endDate', e.target.value)}
@@ -291,8 +295,10 @@ export function LeaveRequestPage() {
           </div>
 
           <div>
-            <label className="label">Reason <span className="text-red-500">*</span></label>
+            <label htmlFor="reason" className="label">Reason <span className="text-red-500">*</span></label>
             <textarea
+              id="reason"
+              name="reason"
               value={formData.reason}
               onChange={(e) => handleChange('reason', e.target.value)}
               onBlur={() => handleBlur('reason')}

@@ -40,3 +40,11 @@ export const initializeAnalytics = async () => {
 };
 
 export { app, firebaseConfig };
+export { testFirestore, testFirestoreRead } from './testFirestore';
+export { clearFirebaseCache } from './clearCache';
+
+// Log Firebase initialization
+console.log('🔥 Firebase initialized:', {
+  projectId: firebaseConfig.projectId,
+  authDomain: firebaseConfig.authDomain
+});

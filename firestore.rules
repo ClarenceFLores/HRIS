@@ -2,13 +2,7 @@ rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
-    
-    // ============================================
-    // TEMPORARY DEBUGGING RULES - COMPLETELY OPEN
-    // TODO: Restore proper security after fixing permission issues
-    // ============================================
-    
-    // Allow all operations for debugging
+    // TEMPORARILY COMPLETELY OPEN FOR DEBUGGING
     match /{document=**} {
       allow read, write: if true;
     }

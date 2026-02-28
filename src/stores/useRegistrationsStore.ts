@@ -1,27 +1,19 @@
 /**
- * Store for managing company registrations
- * 
- * This store manages pending HR account registrations that need
- * approval from the system owner (developer).
- */
-
-/**
  * SAHOD - Human Resource Information System
  * © 2026 DevSpot. All rights reserved.
+ * 
+ * Store for managing company registrations
  */
 
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { 
   collection, 
-  addDoc, 
   getDocs, 
   doc, 
   setDoc, 
   updateDoc, 
-  deleteDoc,
-  query,
-  where 
+  deleteDoc
 } from 'firebase/firestore';
 import { auth, db } from '../lib/firebase/config';
 
@@ -93,7 +85,7 @@ interface RegistrationsState {
   removeRegistration: (id: string) => void;
   loadHrUsers: () => Promise<void>;
   loadFromFirestore: () => Promise<void>;
-  testFirestoreAccess: () => Promise<void>;
+  testFirestoreAccess: () => Promise<boolean>;
   
   // Getters
   getPendingCount: () => number;
@@ -269,30 +261,20 @@ export const useRegistrationsStore = create<RegistrationsState>()(
       loadHrUsers: async () => {
         try {
           console.log('🔍 Loading HR users from Firestore...');
-          console.log('🔍 Current auth state:', auth.currentUser?.email || 'Not authenticated');
-          console.log('🔍 Firebase config:', { projectId: db.app.options.projectId });
-          console.log('🔍 Attempting to read hrUsers collection...');
+          console.log('🔍 Firebase Project:', db.app.options.projectId);
           
           const usersSnapshot = await getDocs(collection(db, 'hrUsers'));
-          console.log('🔍 hrUsers collection snapshot received, doc count:', usersSnapshot.size);
+          console.log('✅ hrUsers collection accessed, doc count:', usersSnapshot.size);
           
           if (usersSnapshot.empty) {
-            console.log('⚠️ hrUsers collection is empty');
+            console.log('⚠️ hrUsers collection is empty - no users registered yet');
             set({ approvedUsers: [] });
             return;
           }
           
           const users: ApprovedUser[] = [];
-          usersSnapshot.forEach((doc) => {
-            console.log(`📄 Processing hrUser doc: ${doc.id}`);
-            const data = doc.data();
-            console.log(`📄 Data:`, { 
-              email: data.email, 
-              companyId: data.companyId, 
-              displayName: data.displayName,
-              hasPassword: !!data.password 
-            });
-            
+          usersSnapshot.forEach((docSnapshot) => {
+            const data = docSnapshot.data();
             users.push({
               email: data.email,
               password: data.password,
@@ -306,104 +288,80 @@ export const useRegistrationsStore = create<RegistrationsState>()(
           });
           
           set({ approvedUsers: users });
-          console.log('✅ Loaded HR users from Firebase:', users.map(u => ({ email: u.email, companyId: u.companyId })));
+          console.log('✅ Loaded', users.length, 'HR users from Firebase');
         } catch (error) {
           console.error('❌ Failed to load HR users from Firebase:', error);
-          console.error('🔍 Error details:', {
-            name: (error as Error).name,
-            message: (error as Error).message,
-            code: (error as any).code,
-            stack: (error as Error).stack?.split('\n').slice(0, 5).join('\n')
-          });
           
           // Set empty array as fallback so login can still work with localStorage
           set({ approvedUsers: [] });
           
-          // If this is a permission error, log additional debugging info
+          // If this is a permission error, provide helpful debugging info
           if ((error as any).code === 'permission-denied') {
-            console.error('🚫 Permission denied - possible causes:');
-            console.error('  1. Firestore rules not deployed correctly');
-            console.error('  2. Firebase project ID mismatch');
-            console.error('  3. Network connectivity issues');
-            console.error('  4. Firebase SDK not configured properly');
-            
-            console.log('🔍 Current Firebase config check:');
-            console.log('  - Auth current user:', auth.currentUser?.email || 'None');
-            console.log('  - DB project ID:', db.app.options.projectId);
-            console.log('  - Expected project ID: hris-2ea69');
+            console.error('🚫 PERMISSION DENIED');
+            console.error('📋 Troubleshooting steps:');
+            console.error('  1. Hard refresh browser: Ctrl+Shift+R (Windows) or Cmd+Shift+R (Mac)');
+            console.error('  2. Clear Firebase cache: Run clearFirebaseCache() in browser console');
+            console.error('  3. Wait 1-2 minutes for Firebase rules to propagate globally');
+            console.error('  4. Check rules at: https://console.firebase.google.com/project/hris-2ea69/firestore/rules');
+            console.error('');
+            console.error('🔍 Current state:');
+            console.error('  - Project ID:', db.app.options.projectId);
+            console.error('  - Auth user:', auth.currentUser?.email || 'Not authenticated');
+            console.error('  - Expected: Rules allow unauthenticated read access');
           }
         }
       },
 
       // Test Firestore access - useful for debugging permission issues
       testFirestoreAccess: async () => {
+        console.log('🧪 Testing Firestore access...');
+        console.log('📡 Project:', db.app.options.projectId);
+        console.log('🔐 Auth:', auth.currentUser?.email || 'Not authenticated');
+        
         try {
-          console.log('🧪 Testing basic Firestore access...');
+          // Test read access to hrUsers collection
+          const snapshot = await getDocs(collection(db, 'hrUsers'));
+          console.log('✅ READ test passed - hrUsers docs:', snapshot.size);
           
-          // Test 1: Try to create a test document
-          console.log('📋 Test 1: Creating test document in hrUsers collection...');
-          try {
-            const testDoc = {
-              email: 'test@example.com',
-              password: 'testpass',
-              displayName: 'Test User',
-              role: 'hr_client',
-              companyId: 'TEST-COMP-001',
-              companyName: 'Test Company',
-              plan: 'starter',
-              approvedAt: new Date().toISOString(),
-              createdAt: new Date(),
-              isTestDocument: true
-            };
-            
-            await setDoc(doc(db, 'hrUsers', 'test@example.com'), testDoc);
-            console.log('✅ Test document created successfully');
-          } catch (createError) {
-            console.error('❌ Failed to create test document:', createError);
-          }
+          // Test write access with a test document
+          await setDoc(doc(db, 'hrUsers', '_test_document'), {
+            email: 'test@firestore.test',
+            displayName: 'Firestore Test Document',
+            role: 'hr_client',
+            companyId: 'TEST-001',
+            companyName: 'Test Company',
+            plan: 'starter',
+            approvedAt: new Date().toISOString(),
+            isTestDocument: true,
+            createdAt: new Date(),
+          });
+          console.log('✅ WRITE test passed - test document created');
           
-          // Test 2: Try to read hrUsers collection
-          console.log('📋 Test 2: hrUsers collection access');
-          const testSnapshot = await getDocs(collection(db, 'hrUsers'));
-          console.log('✅ hrUsers read successful, doc count:', testSnapshot.size);
-          
-          if (testSnapshot.size > 0) {
-            console.log('📄 Found documents:');
-            testSnapshot.forEach((docSnapshot) => {
-              const data = docSnapshot.data();
-              console.log(`  - ${docSnapshot.id}: ${data.displayName || 'No name'} (${data.email || 'No email'})`);
-            });
-          }
-          
-          // Test 3: Try to read pendingRegistrations collection  
-          console.log('📋 Test 3: pendingRegistrations collection access');
-          const pendingSnapshot = await getDocs(collection(db, 'pendingRegistrations'));
-          console.log('✅ pendingRegistrations read successful, doc count:', pendingSnapshot.size);
-          
-          console.log('✅ All Firestore access tests passed');
+          console.log('✅ All Firestore tests passed!');
+          return true;
         } catch (error) {
-          console.error('❌ Firestore access test failed:', error);
-          console.error('🔍 This indicates permission or configuration issues');
+          console.error('❌ Firestore test failed:', error);
+          console.error('💡 Run clearFirebaseCache() in console and hard refresh browser');
+          return false;
         }
       },
 
       // Full load (pendingRegistrations + companies + hrUsers) – system owner only
       loadFromFirestore: async () => {
+        const currentUser = auth.currentUser;
+        if (!currentUser || currentUser.email !== 'clarenceflores082001@gmail.com') {
+          console.warn('⚠️ loadFromFirestore: Requires system owner authentication');
+          return;
+        }
+        
         try {
-          // Double-check auth state before making restricted calls
-          const currentUser = auth.currentUser;
-          if (!currentUser || currentUser.email !== 'clarenceflores082001@gmail.com') {
-            console.warn('⚠️ loadFromFirestore skipped: not system owner or not authenticated');
-            return;
-          }
+          console.log('🔍 Loading all Firestore data for system owner...');
           
-          console.log('🔍 Loading Firestore data for system owner...');
           // Load pending registrations
           const pendingSnapshot = await getDocs(collection(db, 'pendingRegistrations'));
-          const pendingRegs: PendingRegistration[] = [];
-          pendingSnapshot.forEach((doc) => {
+          const pendingRegs: PendingRegistration[] = pendingSnapshot.docs.map(doc => {
             const data = doc.data();
-            pendingRegs.push({
+            return {
               id: doc.id,
               companyName: data.companyName,
               companyEmail: data.companyEmail,
@@ -425,15 +383,14 @@ export const useRegistrationsStore = create<RegistrationsState>()(
               rejectedAt: data.rejectedAt,
               rejectedBy: data.rejectedBy,
               rejectionReason: data.rejectionReason,
-            });
+            };
           });
           
           // Load approved companies
           const companiesSnapshot = await getDocs(collection(db, 'companies'));
-          const companies: ApprovedCompany[] = [];
-          companiesSnapshot.forEach((doc) => {
+          const companies: ApprovedCompany[] = companiesSnapshot.docs.map(doc => {
             const data = doc.data();
-            companies.push({
+            return {
               id: doc.id,
               companyName: data.companyName,
               companyEmail: data.companyEmail,
@@ -445,15 +402,14 @@ export const useRegistrationsStore = create<RegistrationsState>()(
               trialEndDate: data.trialEndDate,
               approvedAt: data.approvedAt,
               employeeCount: data.employeeCount || 0,
-            });
+            };
           });
           
           // Load approved HR users
           const usersSnapshot = await getDocs(collection(db, 'hrUsers'));
-          const users: ApprovedUser[] = [];
-          usersSnapshot.forEach((doc) => {
+          const users: ApprovedUser[] = usersSnapshot.docs.map(doc => {
             const data = doc.data();
-            users.push({
+            return {
               email: data.email,
               password: data.password,
               displayName: data.displayName,
@@ -462,10 +418,10 @@ export const useRegistrationsStore = create<RegistrationsState>()(
               companyName: data.companyName,
               plan: data.plan,
               approvedAt: data.approvedAt,
-            });
+            };
           });
           
-          // Update store with Firebase data
+          // Update store
           set({
             pendingRegistrations: pendingRegs,
             approvedCompanies: companies,

@@ -212,13 +212,15 @@ export function EmployeeFormPage() {
     [key: string]: unknown;
   }) => (
     <div>
-      <label className="label flex items-center gap-1.5">
+      <label htmlFor={name} className="label flex items-center gap-1.5">
         {Icon && <Icon size={14} className="text-neutral-400 dark:text-slate-500" />}
         {label}
         {required && <span className="text-red-500">*</span>}
       </label>
       <input
         type={type}
+        id={name}
+        name={name}
         value={formData[name as keyof typeof formData]}
         onChange={(e) => handleChange(name, e.target.value)}
         onBlur={() => handleBlur(name)}
@@ -313,11 +315,13 @@ export function EmployeeFormPage() {
                 <InputField label="Last Name" name="lastName" required icon={UserCircle} placeholder="e.g., dela Cruz" />
                 <InputField label="Middle Name" name="middleName" placeholder="Optional" />
                 <div>
-                  <label className="label flex items-center gap-1.5">
+                  <label htmlFor="gender" className="label flex items-center gap-1.5">
                     <User size={14} className="text-neutral-400 dark:text-slate-500" />
                     Gender
                   </label>
                   <select
+                    id="gender"
+                    name="gender"
                     value={formData.gender}
                     onChange={(e) => handleChange('gender', e.target.value)}
                     className="input"
@@ -332,8 +336,10 @@ export function EmployeeFormPage() {
                 <InputField label="Phone Number" name="phone" type="tel" icon={Phone} placeholder="+63 912 345 6789" />
                 <InputField label="Date of Birth" name="birthDate" type="date" icon={Calendar} />
                 <div>
-                  <label className="label">Civil Status</label>
+                  <label htmlFor="civilStatus" className="label">Civil Status</label>
                   <select
+                    id="civilStatus"
+                    name="civilStatus"
                     value={formData.civilStatus}
                     onChange={(e) => handleChange('civilStatus', e.target.value)}
                     className="input"
@@ -378,11 +384,13 @@ export function EmployeeFormPage() {
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="label flex items-center gap-1.5">
+                  <label htmlFor="department" className="label flex items-center gap-1.5">
                     <Building2 size={14} className="text-neutral-400 dark:text-slate-500" />
                     Department <span className="text-red-500">*</span>
                   </label>
                   <select
+                    id="department"
+                    name="department"
                     value={formData.department}
                     onChange={(e) => handleChange('department', e.target.value)}
                     onBlur={() => handleBlur('department')}
@@ -406,8 +414,10 @@ export function EmployeeFormPage() {
                 </div>
                 <InputField label="Position" name="position" required icon={Briefcase} placeholder="e.g., Software Engineer" />
                 <div>
-                  <label className="label">Employment Type</label>
+                  <label htmlFor="employmentType" className="label">Employment Type</label>
                   <select
+                    id="employmentType"
+                    name="employmentType"
                     value={formData.employmentType}
                     onChange={(e) => handleChange('employmentType', e.target.value)}
                     className="input"
@@ -420,13 +430,15 @@ export function EmployeeFormPage() {
                 </div>
                 <InputField label="Hire Date" name="hireDate" type="date" required icon={Calendar} />
                 <div className="md:col-span-2">
-                  <label className="label flex items-center gap-1.5">
+                  <label htmlFor="basicSalary" className="label flex items-center gap-1.5">
                     <Banknote size={14} className="text-neutral-400 dark:text-slate-500" />
                     Basic Monthly Salary
                   </label>
                   <div className="relative">
                     <span className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-500 dark:text-slate-400">₱</span>
                     <input
+                      id="basicSalary"
+                      name="basicSalary"
                       type="number"
                       value={formData.basicSalary}
                       onChange={(e) => handleChange('basicSalary', e.target.value)}
@@ -454,8 +466,10 @@ export function EmployeeFormPage() {
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="label">SSS Number</label>
+                  <label htmlFor="sssNumber" className="label">SSS Number</label>
                   <input
+                    id="sssNumber"
+                    name="sssNumber"
                     type="text"
                     value={formData.sssNumber}
                     onChange={(e) => handleChange('sssNumber', e.target.value)}
@@ -465,8 +479,10 @@ export function EmployeeFormPage() {
                   <p className="mt-1 text-xs text-neutral-400 dark:text-slate-500">Format: 00-0000000-0</p>
                 </div>
                 <div>
-                  <label className="label">PhilHealth Number</label>
+                  <label htmlFor="philhealthNumber" className="label">PhilHealth Number</label>
                   <input
+                    id="philhealthNumber"
+                    name="philhealthNumber"
                     type="text"
                     value={formData.philhealthNumber}
                     onChange={(e) => handleChange('philhealthNumber', e.target.value)}
@@ -476,8 +492,10 @@ export function EmployeeFormPage() {
                   <p className="mt-1 text-xs text-neutral-400 dark:text-slate-500">Format: 00-000000000-0</p>
                 </div>
                 <div>
-                  <label className="label">Pag-IBIG Number</label>
+                  <label htmlFor="pagibigNumber" className="label">Pag-IBIG Number</label>
                   <input
+                    id="pagibigNumber"
+                    name="pagibigNumber"
                     type="text"
                     value={formData.pagibigNumber}
                     onChange={(e) => handleChange('pagibigNumber', e.target.value)}
@@ -487,8 +505,10 @@ export function EmployeeFormPage() {
                   <p className="mt-1 text-xs text-neutral-400 dark:text-slate-500">Format: 0000-0000-0000</p>
                 </div>
                 <div>
-                  <label className="label">TIN (Tax Identification Number)</label>
+                  <label htmlFor="tinNumber" className="label">TIN (Tax Identification Number)</label>
                   <input
+                    id="tinNumber"
+                    name="tinNumber"
                     type="text"
                     value={formData.tinNumber}
                     onChange={(e) => handleChange('tinNumber', e.target.value)}
@@ -518,8 +538,10 @@ export function EmployeeFormPage() {
                 <InputField label="Contact Name" name="emergencyContactName" placeholder="Full name" />
                 <InputField label="Contact Phone" name="emergencyContactPhone" type="tel" placeholder="+63 912 345 6789" />
                 <div>
-                  <label className="label">Relationship</label>
+                  <label htmlFor="emergencyContactRelationship" className="label">Relationship</label>
                   <select
+                    id="emergencyContactRelationship"
+                    name="emergencyContactRelationship"
                     value={formData.emergencyContactRelation}
                     onChange={(e) => handleChange('emergencyContactRelation', e.target.value)}
                     className="input"

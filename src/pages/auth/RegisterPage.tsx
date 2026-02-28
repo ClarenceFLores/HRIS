@@ -292,10 +292,12 @@ export function RegisterPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
+                  <label htmlFor="companyName" className="block text-sm font-medium text-neutral-700 mb-2">
                     Company Name <span className="text-red-500">*</span>
                   </label>
                   <input
+                    id="companyName"
+                    name="companyName"
                     type="text"
                     value={companyInfo.companyName}
                     onChange={(e) => setCompanyInfo({ ...companyInfo, companyName: e.target.value })}
@@ -306,12 +308,13 @@ export function RegisterPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
+                  <label htmlFor="companyEmail" className="block text-sm font-medium text-neutral-700 mb-2">
                     Company Email <span className="text-red-500">*</span>
                   </label>
                   <div className="relative">
                     <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400" />
                     <input
+                      id="companyEmail"                      name="companyEmail"
                       type="email"
                       value={companyInfo.companyEmail}
                       onChange={(e) => setCompanyInfo({ ...companyInfo, companyEmail: e.target.value })}
@@ -323,12 +326,14 @@ export function RegisterPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
+                  <label htmlFor="companyContactNumber" className="block text-sm font-medium text-neutral-700 mb-2">
                     Contact Number <span className="text-red-500">*</span>
                   </label>
                   <div className="relative">
                     <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400" />
                     <input
+                      id="companyContactNumber"
+                      name="companyContactNumber"
                       type="tel"
                       value={companyInfo.contactNumber}
                       onChange={(e) => setCompanyInfo({ ...companyInfo, contactNumber: e.target.value })}
@@ -340,12 +345,14 @@ export function RegisterPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
+                  <label htmlFor="industryType" className="block text-sm font-medium text-neutral-700 mb-2">
                     Industry Type <span className="text-red-500">*</span>
                   </label>
                   <div className="relative">
                     <Briefcase className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400" />
                     <select
+                      id="industryType"
+                      name="industryType"
                       value={companyInfo.industryType}
                       onChange={(e) => setCompanyInfo({ ...companyInfo, industryType: e.target.value })}
                       className={`form-select pl-10 ${errors.industryType ? 'border-red-500' : ''}`}
@@ -360,12 +367,14 @@ export function RegisterPage() {
                 </div>
 
                 <div className="md:col-span-2">
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
+                  <label htmlFor="companyAddress" className="block text-sm font-medium text-neutral-700 mb-2">
                     Company Address <span className="text-red-500">*</span>
                   </label>
                   <div className="relative">
                     <MapPin className="absolute left-3 top-3 w-5 h-5 text-neutral-400" />
                     <textarea
+                      id="companyAddress"
+                      name="companyAddress"
                       value={companyInfo.address}
                       onChange={(e) => setCompanyInfo({ ...companyInfo, address: e.target.value })}
                       placeholder="Enter complete company address"
@@ -377,12 +386,14 @@ export function RegisterPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
+                  <label htmlFor="companySize" className="block text-sm font-medium text-neutral-700 mb-2">
                     Company Size <span className="text-red-500">*</span>
                   </label>
                   <div className="relative">
                     <Users className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400" />
                     <select
+                      id="companySize"
+                      name="companySize"
                       value={companyInfo.companySize}
                       onChange={(e) => setCompanyInfo({ ...companyInfo, companySize: e.target.value })}
                       className={`form-select pl-10 ${errors.companySize ? 'border-red-500' : ''}`}
@@ -414,10 +425,12 @@ export function RegisterPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
+                  <label htmlFor="hrFullName" className="block text-sm font-medium text-neutral-700 mb-2">
                     Full Name <span className="text-red-500">*</span>
                   </label>
                   <input
+                    id="hrFullName"
+                    name="hrFullName"
                     type="text"
                     value={hrAdminInfo.fullName}
                     onChange={(e) => setHRAdminInfo({ ...hrAdminInfo, fullName: e.target.value })}
@@ -428,12 +441,14 @@ export function RegisterPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
+                  <label htmlFor="hrPosition" className="block text-sm font-medium text-neutral-700 mb-2">
                     Position <span className="text-red-500">*</span>
                   </label>
                   <div className="relative">
                     <Briefcase className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400" />
                     <input
+                      id="hrPosition"
+                      name="hrPosition"
                       type="text"
                       value={hrAdminInfo.position}
                       onChange={(e) => setHRAdminInfo({ ...hrAdminInfo, position: e.target.value })}
@@ -445,12 +460,14 @@ export function RegisterPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
+                  <label htmlFor="hrEmail" className="block text-sm font-medium text-neutral-700 mb-2">
                     Email Address <span className="text-red-500">*</span>
                   </label>
                   <div className="relative">
                     <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400" />
                     <input
+                      id="hrEmail"
+                      name="hrEmail"
                       type="email"
                       value={hrAdminInfo.email}
                       onChange={(e) => setHRAdminInfo({ ...hrAdminInfo, email: e.target.value })}
@@ -462,12 +479,14 @@ export function RegisterPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
+                  <label htmlFor="hrContactNumber" className="block text-sm font-medium text-neutral-700 mb-2">
                     Contact Number <span className="text-red-500">*</span>
                   </label>
                   <div className="relative">
                     <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400" />
                     <input
+                      id="hrContactNumber"
+                      name="hrContactNumber"
                       type="tel"
                       value={hrAdminInfo.contactNumber}
                       onChange={(e) => setHRAdminInfo({ ...hrAdminInfo, contactNumber: e.target.value })}
@@ -479,12 +498,14 @@ export function RegisterPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
+                  <label htmlFor="hrPassword" className="block text-sm font-medium text-neutral-700 mb-2">
                     Password <span className="text-red-500">*</span>
                   </label>
                   <div className="relative">
                     <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400" />
                     <input
+                      id="hrPassword"
+                      name="hrPassword"
                       type={showPassword ? 'text' : 'password'}
                       value={hrAdminInfo.password}
                       onChange={(e) => setHRAdminInfo({ ...hrAdminInfo, password: e.target.value })}
@@ -503,12 +524,14 @@ export function RegisterPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
+                  <label htmlFor="hrConfirmPassword" className="block text-sm font-medium text-neutral-700 mb-2">
                     Confirm Password <span className="text-red-500">*</span>
                   </label>
                   <div className="relative">
                     <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400" />
                     <input
+                      id="hrConfirmPassword"
+                      name="hrConfirmPassword"
                       type={showConfirmPassword ? 'text' : 'password'}
                       value={hrAdminInfo.confirmPassword}
                       onChange={(e) => setHRAdminInfo({ ...hrAdminInfo, confirmPassword: e.target.value })}
@@ -632,10 +655,12 @@ export function RegisterPage() {
               {/* T&C Checkboxes */}
               <div className="space-y-3 pt-2">
                 <h3 className="font-semibold text-neutral-900 dark:text-white text-sm">Before you continue</h3>
-                <label className={`flex items-start gap-3 p-4 rounded-xl border cursor-pointer transition-colors ${
+                <label htmlFor="acceptTerms" className={`flex items-start gap-3 p-4 rounded-xl border cursor-pointer transition-colors ${
                   errors.acceptTerms ? 'border-red-500 bg-red-50 dark:bg-red-900/10' : 'border-neutral-200 dark:border-slate-600 hover:border-primary-300 dark:hover:border-primary-700'
                 }`}>
                   <input
+                    id="acceptTerms"
+                    name="acceptTerms"
                     type="checkbox"
                     checked={agreementInfo.acceptTerms}
                     onChange={(e) => setAgreementInfo({ ...agreementInfo, acceptTerms: e.target.checked })}
@@ -652,10 +677,12 @@ export function RegisterPage() {
                 </label>
                 {errors.acceptTerms && <p className="text-red-500 text-sm">{errors.acceptTerms}</p>}
 
-                <label className={`flex items-start gap-3 p-4 rounded-xl border cursor-pointer transition-colors ${
+                <label htmlFor="acceptPrivacy" className={`flex items-start gap-3 p-4 rounded-xl border cursor-pointer transition-colors ${
                   errors.acceptPrivacy ? 'border-red-500 bg-red-50 dark:bg-red-900/10' : 'border-neutral-200 dark:border-slate-600 hover:border-primary-300 dark:hover:border-primary-700'
                 }`}>
                   <input
+                    id="acceptPrivacy"
+                    name="acceptPrivacy"
                     type="checkbox"
                     checked={agreementInfo.acceptPrivacy}
                     onChange={(e) => setAgreementInfo({ ...agreementInfo, acceptPrivacy: e.target.checked })}

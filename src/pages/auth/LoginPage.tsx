@@ -174,13 +174,15 @@ export function LoginPage() {
           {/* Login Form */}
           <form onSubmit={handleSubmit} className="space-y-5">
             <div className="space-y-1.5">
-              <label className="label flex items-center gap-2">
+              <label htmlFor="email" className="label flex items-center gap-2">
                 <Mail size={14} className="text-neutral-400" />
                 Email Address
               </label>
               <div className="relative">
                 <input
                   type="email"
+                  id="email"
+                  name="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="input pl-11 h-12 text-base"
@@ -193,13 +195,15 @@ export function LoginPage() {
             </div>
 
             <div className="space-y-1.5">
-              <label className="label flex items-center gap-2">
+              <label htmlFor="password" className="label flex items-center gap-2">
                 <Lock size={14} className="text-neutral-400" />
                 Password
               </label>
               <div className="relative">
                 <input
                   type={showPassword ? 'text' : 'password'}
+                  id="password"
+                  name="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="input pl-11 pr-12 h-12 text-base"
@@ -223,7 +227,9 @@ export function LoginPage() {
               <label className="flex items-center gap-2.5 cursor-pointer group">
                 <div className="relative">
                   <input 
-                    type="checkbox" 
+                    type="checkbox"
+                    id="remember-me"
+                    name="remember-me"
                     checked={rememberMe}
                     onChange={(e) => setRememberMe(e.target.checked)}
                     className="sr-only peer"

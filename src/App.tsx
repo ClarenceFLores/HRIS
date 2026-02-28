@@ -3,7 +3,7 @@
  * © 2026 DevSpot. All rights reserved.
  */
 
-import { useEffect } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { useRegistrationsStore } from '@/stores/useRegistrationsStore';import { useHRStore } from './stores/useHRStore';import { MainLayout } from '@/components/layout/MainLayout';
@@ -75,10 +75,20 @@ function RoleBasedDashboardRedirect() {
 
 function App() {
   const { user, initAuthListener } = useAuthStore();
-  const loadHrUsers = useRegistrationsStore((state) => state.loadHrUsers);
-  const loadFromFirestore = useRegistrationsStore((state) => state.loadFromFirestore);
-  const testFirestoreAccess = useRegistrationsStore((state) => state.testFirestoreAccess);
-  const loadHRData = useHRStore((state) => state.loadFromFirestore);
+  const [authInitialized, setAuthInitialized] = useState(false);
+
+  // Use useCallback to create stable references for Firestore operations
+  const loadHrUsers = useCallback(() => {
+    return useRegistrationsStore.getState().loadHrUsers();
+  }, []);
+
+  const loadFromFirestore = useCallback(() => {
+    return useRegistrationsStore.getState().loadFromFirestore();
+  }, []);
+
+  const loadHRData = useCallback(() => {
+    return useHRStore.getState().loadFromFirestore();
+  }, []);
 
   // Initialize Firebase auth listener and handle Remember Me session guard
   useEffect(() => {
@@ -98,23 +108,31 @@ function App() {
     // ────────────────────────────────────────────────────────────────────
 
     const unsubscribe = initAuthListener();
-    return () => unsubscribe();
+    
+    // Set auth as initialized after a brief moment
+    const timer = setTimeout(() => setAuthInitialized(true), 500);
+    
+    return () => {
+      unsubscribe();
+      clearTimeout(timer);
+    };
   }, [initAuthListener]);
 
-  // Load HR users from Firestore on app startup so they can log in
-  // This only reads the publicly-readable hrUsers collection
+  // Load HR users from Firestore ONLY when authentication is initialized
+  // This ensures we have valid auth state before accessing Firestore
   useEffect(() => {
-    // Test Firestore access first for debugging
-    testFirestoreAccess().then(() => {
-      console.log('🧪 Firestore access test completed, waiting 2 seconds then loading HR users...');
-      // Add a small delay to ensure test data is created
-      return new Promise(resolve => setTimeout(resolve, 2000));
-    }).then(() => {
-      return loadHrUsers();
-    }).catch(err => {
+    if (!authInitialized) {
+      console.log('⏳ Waiting for auth initialization...');
+      return;
+    }
+
+    console.log('🔐 Auth initialized, loading HR users...');
+    
+    // Load HR users (publicly readable for login)
+    loadHrUsers().catch(err => {
       console.warn('Could not load HR users on startup:', err);
     });
-  }, [loadHrUsers, testFirestoreAccess]);
+  }, [authInitialized, loadHrUsers]);
 
   // Also refresh HR user data when app becomes active (for updated credentials)
   useEffect(() => {
