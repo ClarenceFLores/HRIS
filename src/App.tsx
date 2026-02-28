@@ -106,7 +106,10 @@ function App() {
   useEffect(() => {
     // Test Firestore access first for debugging
     testFirestoreAccess().then(() => {
-      console.log('🧪 Firestore access test completed, now loading HR users...');
+      console.log('🧪 Firestore access test completed, waiting 2 seconds then loading HR users...');
+      // Add a small delay to ensure test data is created
+      return new Promise(resolve => setTimeout(resolve, 2000));
+    }).then(() => {
       return loadHrUsers();
     }).catch(err => {
       console.warn('Could not load HR users on startup:', err);

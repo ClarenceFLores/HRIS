@@ -340,13 +340,40 @@ export const useRegistrationsStore = create<RegistrationsState>()(
         try {
           console.log('🧪 Testing basic Firestore access...');
           
-          // Test 1: Try to list collections (this might fail in some environments)
-          console.log('📋 Test 1: Basic collection access');
+          // Test 1: Try to create a test document
+          console.log('📋 Test 1: Creating test document in hrUsers collection...');
+          try {
+            const testDoc = {
+              email: 'test@example.com',
+              password: 'testpass',
+              displayName: 'Test User',
+              role: 'hr_client',
+              companyId: 'TEST-COMP-001',
+              companyName: 'Test Company',
+              plan: 'starter',
+              approvedAt: new Date().toISOString(),
+              createdAt: new Date(),
+              isTestDocument: true
+            };
+            
+            await setDoc(doc(db, 'hrUsers', 'test@example.com'), testDoc);
+            console.log('✅ Test document created successfully');
+          } catch (createError) {
+            console.error('❌ Failed to create test document:', createError);
+          }
           
           // Test 2: Try to read hrUsers collection
           console.log('📋 Test 2: hrUsers collection access');
           const testSnapshot = await getDocs(collection(db, 'hrUsers'));
           console.log('✅ hrUsers read successful, doc count:', testSnapshot.size);
+          
+          if (testSnapshot.size > 0) {
+            console.log('📄 Found documents:');
+            testSnapshot.forEach((docSnapshot) => {
+              const data = docSnapshot.data();
+              console.log(`  - ${docSnapshot.id}: ${data.displayName || 'No name'} (${data.email || 'No email'})`);
+            });
+          }
           
           // Test 3: Try to read pendingRegistrations collection  
           console.log('📋 Test 3: pendingRegistrations collection access');

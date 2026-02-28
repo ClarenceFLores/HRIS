@@ -13,6 +13,7 @@ import {
 import { Link } from 'react-router-dom';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { useHRStore } from '@/stores/useHRStore';
+import { useRegistrationsStore } from '@/stores/useRegistrationsStore';
 
 // Mock data - In real app, this would come from your database/API
 const mockStats = {
@@ -123,6 +124,7 @@ const formatDate = (dateStr: string) => {
 export function DashboardPage() {
   const { user } = useAuthStore();
   const { getDashboardStats, employees, leaveRequests, attendance, payrollPeriods, approveLeave, rejectLeave, syncToFirestore } = useHRStore();
+  const { testFirestoreAccess, loadHrUsers } = useRegistrationsStore();
   const liveStats = getDashboardStats();
   const today = new Date().toISOString().split('T')[0];
 
@@ -186,6 +188,7 @@ export function DashboardPage() {
   const [mounted, setMounted] = useState(false);
   const [greeting, setGreeting] = useState('');
   const [syncing, setSyncing] = useState(false);
+  const [testing, setTesting] = useState(false);
 
   // Handle manual sync to Firestore
   const handleSyncToDatabase = async () => {
@@ -203,6 +206,21 @@ export function DashboardPage() {
       alert('❌ Failed to sync data to database');
     } finally {
       setSyncing(false);
+    }
+  };
+
+  // Handle Firestore access test
+  const handleTestFirestore = async () => {
+    setTesting(true);
+    try {
+      await testFirestoreAccess();
+      await loadHrUsers();
+      alert('✅ Firestore test completed! Check console for details.');
+    } catch (error) {
+      console.error('Test error:', error);
+      alert('❌ Firestore test failed! Check console for details.');
+    } finally {
+      setTesting(false);
     }
   };
 
@@ -239,6 +257,14 @@ export function DashboardPage() {
           </p>
         </div>
         <div className="flex gap-3">
+          <button 
+            onClick={handleTestFirestore}
+            disabled={testing}
+            className="btn btn-outline shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <Activity size={18} />
+            {testing ? 'Testing...' : 'Test Firestore'}
+          </button>
           <button 
             onClick={handleSyncToDatabase}
             disabled={syncing}
