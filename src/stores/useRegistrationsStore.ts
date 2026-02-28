@@ -93,6 +93,7 @@ interface RegistrationsState {
   removeRegistration: (id: string) => void;
   loadHrUsers: () => Promise<void>;
   loadFromFirestore: () => Promise<void>;
+  testFirestoreAccess: () => Promise<void>;
   
   // Getters
   getPendingCount: () => number;
@@ -269,24 +270,29 @@ export const useRegistrationsStore = create<RegistrationsState>()(
         try {
           console.log('🔍 Loading HR users from Firestore...');
           console.log('🔍 Current auth state:', auth.currentUser?.email || 'Not authenticated');
+          console.log('🔍 Firebase config:', { projectId: db.app.options.projectId });
           console.log('🔍 Attempting to read hrUsers collection...');
-          
-          // Test: Try to check if hrUsers collection exists by listing collections
-          // (This might fail but will give us better error info)
           
           const usersSnapshot = await getDocs(collection(db, 'hrUsers'));
           console.log('🔍 hrUsers collection snapshot received, doc count:', usersSnapshot.size);
           
           if (usersSnapshot.empty) {
-            console.log('⚠️ hrUsers collection is empty - creating a test document for debugging');
-            // For debugging: if collection is empty, set empty state and return
+            console.log('⚠️ hrUsers collection is empty');
             set({ approvedUsers: [] });
-            console.log('✅ Set empty HR users array');
             return;
           }
+          
           const users: ApprovedUser[] = [];
           usersSnapshot.forEach((doc) => {
+            console.log(`📄 Processing hrUser doc: ${doc.id}`);
             const data = doc.data();
+            console.log(`📄 Data:`, { 
+              email: data.email, 
+              companyId: data.companyId, 
+              displayName: data.displayName,
+              hasPassword: !!data.password 
+            });
+            
             users.push({
               email: data.email,
               password: data.password,
@@ -298,10 +304,59 @@ export const useRegistrationsStore = create<RegistrationsState>()(
               approvedAt: data.approvedAt,
             });
           });
+          
           set({ approvedUsers: users });
-          console.log('✅ Loaded HR users from Firebase:', users.length);
+          console.log('✅ Loaded HR users from Firebase:', users.map(u => ({ email: u.email, companyId: u.companyId })));
         } catch (error) {
           console.error('❌ Failed to load HR users from Firebase:', error);
+          console.error('🔍 Error details:', {
+            name: (error as Error).name,
+            message: (error as Error).message,
+            code: (error as any).code,
+            stack: (error as Error).stack?.split('\n').slice(0, 5).join('\n')
+          });
+          
+          // Set empty array as fallback so login can still work with localStorage
+          set({ approvedUsers: [] });
+          
+          // If this is a permission error, log additional debugging info
+          if ((error as any).code === 'permission-denied') {
+            console.error('🚫 Permission denied - possible causes:');
+            console.error('  1. Firestore rules not deployed correctly');
+            console.error('  2. Firebase project ID mismatch');
+            console.error('  3. Network connectivity issues');
+            console.error('  4. Firebase SDK not configured properly');
+            
+            console.log('🔍 Current Firebase config check:');
+            console.log('  - Auth current user:', auth.currentUser?.email || 'None');
+            console.log('  - DB project ID:', db.app.options.projectId);
+            console.log('  - Expected project ID: hris-2ea69');
+          }
+        }
+      },
+
+      // Test Firestore access - useful for debugging permission issues
+      testFirestoreAccess: async () => {
+        try {
+          console.log('🧪 Testing basic Firestore access...');
+          
+          // Test 1: Try to list collections (this might fail in some environments)
+          console.log('📋 Test 1: Basic collection access');
+          
+          // Test 2: Try to read hrUsers collection
+          console.log('📋 Test 2: hrUsers collection access');
+          const testSnapshot = await getDocs(collection(db, 'hrUsers'));
+          console.log('✅ hrUsers read successful, doc count:', testSnapshot.size);
+          
+          // Test 3: Try to read pendingRegistrations collection  
+          console.log('📋 Test 3: pendingRegistrations collection access');
+          const pendingSnapshot = await getDocs(collection(db, 'pendingRegistrations'));
+          console.log('✅ pendingRegistrations read successful, doc count:', pendingSnapshot.size);
+          
+          console.log('✅ All Firestore access tests passed');
+        } catch (error) {
+          console.error('❌ Firestore access test failed:', error);
+          console.error('🔍 This indicates permission or configuration issues');
         }
       },
 

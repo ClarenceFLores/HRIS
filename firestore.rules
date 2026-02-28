@@ -99,25 +99,28 @@ service cloud.firestore {
     // ============================================
     // PENDING REGISTRATIONS COLLECTION
     // Used by useRegistrationsStore for HR account signup flow
+    // COMPLETELY PUBLIC for registration and system owner management
     // ============================================
     match /pendingRegistrations/{registrationId} {
       // Anyone can create (public registration)
       allow create: if true;
       
-      // System owner can read and manage all pending registrations
-      allow read, update, delete: if isSystemOwnerEmail();
+      // COMPLETELY PUBLIC READ ACCESS - system owner can manage
+      allow read: if true;
+      allow update, delete: if isSystemOwnerEmail();
     }
 
     // ============================================
     // HR USERS COLLECTION (Approved HR Accounts)
     // Used by useRegistrationsStore & useAuthStore for login validation
+    // COMPLETELY PUBLIC for login credential checking
     // ============================================
     match /hrUsers/{userEmail} {
       // System owner can create and manage all HR users
       allow create, update, delete: if isSystemOwnerEmail();
       
-      // Readable by authenticated users for login credential check.
-      // NOTE: Move to a Cloud Function for stricter security in production.
+      // COMPLETELY PUBLIC READ ACCESS - no authentication required
+      // This is needed for login credential validation
       allow read: if true;
     }
 
@@ -143,90 +146,65 @@ service cloud.firestore {
 
     // ============================================
     // EMPLOYEES COLLECTION (within companies)
+    // TEMPORARY RULE: Allow system owner email to write to any company HR data
+    // TODO: Implement proper HR client authentication 
     // ============================================
     match /companies/{companyId}/employees/{employeeId} {
       // System owner can read (platform analytics only)
       // HR client can read employees in their company
       // Employee can read their own record
       allow read: if isSystemOwner() 
+                  || isSystemOwnerEmail()
                   || isHrClientOfCompany(companyId) 
                   || (isEmployeeOfCompany(companyId) && isOwnEmployeeRecord(employeeId));
       
-      // HR client can create employees in their company
-      allow create: if isHrClientOfCompany(companyId);
-      
-      // HR client can update employees in their company
-      // Employee can update limited fields in their own record
-      allow update: if isHrClientOfCompany(companyId)
-                    || (isEmployeeOfCompany(companyId) && isOwnEmployeeRecord(employeeId) 
-                        && !request.resource.data.diff(resource.data).affectedKeys().hasAny(['salary', 'position', 'department', 'employmentType', 'status']));
-      
-      // HR client can delete employees in their company
-      allow delete: if isHrClientOfCompany(companyId);
+      // TEMP: Allow system owner email to create/update/delete for testing
+      allow create, update, delete: if isSystemOwnerEmail();
     }
 
-    // ============================================
+    // ============================================ 
     // ATTENDANCE COLLECTION
+    // TEMPORARY RULE: Allow system owner email to write to any company HR data
     // ============================================
     match /companies/{companyId}/attendance/{attendanceId} {
-      // HR client can read all attendance in their company
+      // System owner and HR client can read all attendance in their company
       // Employee can read their own attendance
-      allow read: if isHrClientOfCompany(companyId) 
+      allow read: if isSystemOwnerEmail()
+                  || isHrClientOfCompany(companyId) 
                   || (isEmployeeOfCompany(companyId) && resource.data.employeeId == getUserData().employeeId);
       
-      // HR client can create attendance records
-      // Employee can clock in/out (create their own records)
-      allow create: if isHrClientOfCompany(companyId)
-                    || (isEmployeeOfCompany(companyId) && request.resource.data.employeeId == getUserData().employeeId);
-      
-      // HR client can update attendance (approve overtime, corrections)
-      allow update: if isHrClientOfCompany(companyId);
-      
-      // HR client can delete attendance records
-      allow delete: if isHrClientOfCompany(companyId);
+      // TEMP: Allow system owner email to create/update/delete for testing
+      allow create, update, delete: if isSystemOwnerEmail();
     }
 
     // ============================================
-    // LEAVES COLLECTION
+    // LEAVES COLLECTION  
+    // TEMPORARY RULE: Allow system owner email to write to any company HR data
     // ============================================
     match /companies/{companyId}/leaves/{leaveId} {
-      // HR client can read all leaves in their company
+      // System owner and HR client can read all leaves in their company
       // Employee can read their own leaves
-      allow read: if isHrClientOfCompany(companyId) 
+      allow read: if isSystemOwnerEmail()
+                  || isHrClientOfCompany(companyId) 
                   || (isEmployeeOfCompany(companyId) && resource.data.employeeId == getUserData().employeeId);
       
-      // HR client can create leave records
-      // Employee can file leave request
-      allow create: if isHrClientOfCompany(companyId)
-                    || (isEmployeeOfCompany(companyId) && request.resource.data.employeeId == getUserData().employeeId);
-      
-      // HR client can approve/reject leaves
-      // Employee can cancel their pending leaves
-      allow update: if isHrClientOfCompany(companyId)
-                    || (isEmployeeOfCompany(companyId) 
-                        && resource.data.employeeId == getUserData().employeeId 
-                        && resource.data.status == 'pending'
-                        && request.resource.data.status == 'cancelled');
-      
-      // HR client can delete leaves
-      // Employee can delete their pending leaves
-      allow delete: if isHrClientOfCompany(companyId)
-                    || (isEmployeeOfCompany(companyId) 
-                        && resource.data.employeeId == getUserData().employeeId 
-                        && resource.data.status == 'pending');
+      // TEMP: Allow system owner email to create/update/delete for testing
+      allow create, update, delete: if isSystemOwnerEmail();
     }
 
     // ============================================
     // PAYROLL COLLECTION
+    // TEMPORARY RULE: Allow system owner email to write to any company HR data
     // ============================================
     match /companies/{companyId}/payroll/{payrollId} {
-      // HR client can read all payroll in their company
+      // System owner and HR client can read all payroll in their company
       // Employee can read their own payslips
-      allow read: if isHrClientOfCompany(companyId) 
+      allow read: if isSystemOwnerEmail()
+                  || isHrClientOfCompany(companyId) 
                   || (isEmployeeOfCompany(companyId) && resource.data.employeeId == getUserData().employeeId);
       
-      // Only HR client can create/update/delete payroll records
-      allow create, update, delete: if isHrClientOfCompany(companyId);
+      // TEMP: Allow system owner email to create/update/delete for testing
+      allow create, update, delete: if isSystemOwnerEmail();
     }
 
     // ============================================

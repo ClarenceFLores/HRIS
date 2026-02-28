@@ -77,6 +77,7 @@ function App() {
   const { user, initAuthListener } = useAuthStore();
   const loadHrUsers = useRegistrationsStore((state) => state.loadHrUsers);
   const loadFromFirestore = useRegistrationsStore((state) => state.loadFromFirestore);
+  const testFirestoreAccess = useRegistrationsStore((state) => state.testFirestoreAccess);
   const loadHRData = useHRStore((state) => state.loadFromFirestore);
 
   // Initialize Firebase auth listener and handle Remember Me session guard
@@ -103,9 +104,24 @@ function App() {
   // Load HR users from Firestore on app startup so they can log in
   // This only reads the publicly-readable hrUsers collection
   useEffect(() => {
-    loadHrUsers().catch(err => {
+    // Test Firestore access first for debugging
+    testFirestoreAccess().then(() => {
+      console.log('🧪 Firestore access test completed, now loading HR users...');
+      return loadHrUsers();
+    }).catch(err => {
       console.warn('Could not load HR users on startup:', err);
     });
+  }, [loadHrUsers, testFirestoreAccess]);
+
+  // Also refresh HR user data when app becomes active (for updated credentials)
+  useEffect(() => {
+    const handleFocus = () => {
+      loadHrUsers().catch(err => {
+        console.warn('Could not refresh HR users data:', err);
+      });
+    };
+    window.addEventListener('focus', handleFocus);
+    return () => window.removeEventListener('focus', handleFocus);
   }, [loadHrUsers]);
 
   // Refresh Firestore data when system owner logs in for latest registrations

@@ -601,52 +601,105 @@ export const useHRStore = create<HRState>()(
 
       syncToFirestore: async () => {
         const { user } = useAuthStore.getState();
+        
+        console.log('🔄 Starting Firestore sync...');
+        console.log('👤 Current user:', user ? {
+          email: user.email,
+          role: user.role,
+          companyId: user.companyId,
+          id: user.id
+        } : 'No user');
+        
         if (!user?.companyId) {
-          console.warn('⚠️ Cannot sync to Firestore: No company ID');
+          console.warn('⚠️ Cannot sync to Firestore: No company ID found');
+          console.log('📋 User object:', user);
           return;
         }
 
         const { employees, attendance, leaveRequests, payrollPeriods, payrollRecords } = get();
         const companyId = user.companyId;
+        
+        console.log('📊 Data to sync:', {
+          employees: employees.length,
+          attendance: attendance.length,
+          leaves: leaveRequests.length,
+          payrollPeriods: payrollPeriods.length,
+          payrollRecords: payrollRecords.length,
+          companyId
+        });
 
         try {
           console.log('🔄 Syncing HR data to Firestore...');
 
-          // Sync employees
+          // Sync employees with detailed logging
+          console.log('📝 Syncing employees...');
           for (const emp of employees) {
-            await setDoc(doc(db, `companies/${companyId}/employees`, emp.id), {
-              ...emp,
-              updatedAt: new Date(),
-            });
+            try {
+              await setDoc(doc(db, `companies/${companyId}/employees`, emp.id), {
+                ...emp,
+                updatedAt: new Date(),
+              });
+              console.log(`✅ Employee ${emp.id} synced`);
+            } catch (empError) {
+              console.error(`❌ Failed to sync employee ${emp.id}:`, empError);
+              throw empError; // Re-throw to stop the process
+            }
           }
 
-          // Sync attendance
+          // Sync attendance with detailed logging
+          console.log('📝 Syncing attendance...');
           for (const att of attendance) {
-            await setDoc(doc(db, `companies/${companyId}/attendance`, att.id), {
-              ...att,
-              updatedAt: new Date(),
-            });
+            try {
+              await setDoc(doc(db, `companies/${companyId}/attendance`, att.id), {
+                ...att,
+                updatedAt: new Date(),
+              });
+              console.log(`✅ Attendance ${att.id} synced`);
+            } catch (attError) {
+              console.error(`❌ Failed to sync attendance ${att.id}:`, attError);
+              throw attError;
+            }
           }
 
-          // Sync leave requests
+          // Sync leave requests with detailed logging
+          console.log('📝 Syncing leave requests...');
           for (const leave of leaveRequests) {
-            await setDoc(doc(db, `companies/${companyId}/leaves`, leave.id), {
-              ...leave,
-              updatedAt: new Date(),
-            });
+            try {
+              await setDoc(doc(db, `companies/${companyId}/leaves`, leave.id), {
+                ...leave,
+                updatedAt: new Date(),
+              });
+              console.log(`✅ Leave ${leave.id} synced`);
+            } catch (leaveError) {
+              console.error(`❌ Failed to sync leave ${leave.id}:`, leaveError);
+              throw leaveError;
+            }
           }
 
-          // Sync payroll
+          // Sync payroll with detailed logging
+          console.log('📝 Syncing payroll records...');
           for (const payroll of payrollRecords) {
-            await setDoc(doc(db, `companies/${companyId}/payroll`, payroll.id), {
-              ...payroll,
-              updatedAt: new Date(),
-            });
+            try {
+              await setDoc(doc(db, `companies/${companyId}/payroll`, payroll.id), {
+                ...payroll,
+                updatedAt: new Date(),
+              });
+              console.log(`✅ Payroll ${payroll.id} synced`);
+            } catch (payrollError) {
+              console.error(`❌ Failed to sync payroll ${payroll.id}:`, payrollError);
+              throw payrollError;
+            }
           }
 
-          console.log('✅ HR data synced to Firestore successfully');
+          console.log('✅ All HR data synced to Firestore successfully');
         } catch (error) {
           console.error('❌ Failed to sync HR data to Firestore:', error);
+          console.error('📋 Error details:', {
+            name: (error as Error).name,
+            message: (error as Error).message,
+            code: (error as any).code,
+            stack: (error as Error).stack
+          });
         }
       },
 
