@@ -23,7 +23,7 @@ import {
   query,
   where 
 } from 'firebase/firestore';
-import { db } from '../lib/firebase/config';
+import { auth, db } from '../lib/firebase/config';
 
 
 export interface PendingRegistration {
@@ -91,6 +91,7 @@ interface RegistrationsState {
   approveRegistration: (id: string, approvedBy: string) => Promise<void>;
   rejectRegistration: (id: string, rejectedBy: string, reason: string) => void;
   removeRegistration: (id: string) => void;
+  loadHrUsers: () => Promise<void>;
   loadFromFirestore: () => Promise<void>;
   
   // Getters
@@ -263,8 +264,58 @@ export const useRegistrationsStore = create<RegistrationsState>()(
         }));
       },
       
+      // Load only hrUsers (publicly readable) – safe for any user / unauthenticated
+      loadHrUsers: async () => {
+        try {
+          console.log('🔍 Loading HR users from Firestore...');
+          console.log('🔍 Current auth state:', auth.currentUser?.email || 'Not authenticated');
+          console.log('🔍 Attempting to read hrUsers collection...');
+          
+          // Test: Try to check if hrUsers collection exists by listing collections
+          // (This might fail but will give us better error info)
+          
+          const usersSnapshot = await getDocs(collection(db, 'hrUsers'));
+          console.log('🔍 hrUsers collection snapshot received, doc count:', usersSnapshot.size);
+          
+          if (usersSnapshot.empty) {
+            console.log('⚠️ hrUsers collection is empty - creating a test document for debugging');
+            // For debugging: if collection is empty, set empty state and return
+            set({ approvedUsers: [] });
+            console.log('✅ Set empty HR users array');
+            return;
+          }
+          const users: ApprovedUser[] = [];
+          usersSnapshot.forEach((doc) => {
+            const data = doc.data();
+            users.push({
+              email: data.email,
+              password: data.password,
+              displayName: data.displayName,
+              role: 'hr_client',
+              companyId: data.companyId,
+              companyName: data.companyName,
+              plan: data.plan,
+              approvedAt: data.approvedAt,
+            });
+          });
+          set({ approvedUsers: users });
+          console.log('✅ Loaded HR users from Firebase:', users.length);
+        } catch (error) {
+          console.error('❌ Failed to load HR users from Firebase:', error);
+        }
+      },
+
+      // Full load (pendingRegistrations + companies + hrUsers) – system owner only
       loadFromFirestore: async () => {
         try {
+          // Double-check auth state before making restricted calls
+          const currentUser = auth.currentUser;
+          if (!currentUser || currentUser.email !== 'clarenceflores082001@gmail.com') {
+            console.warn('⚠️ loadFromFirestore skipped: not system owner or not authenticated');
+            return;
+          }
+          
+          console.log('🔍 Loading Firestore data for system owner...');
           // Load pending registrations
           const pendingSnapshot = await getDocs(collection(db, 'pendingRegistrations'));
           const pendingRegs: PendingRegistration[] = [];

@@ -14,7 +14,9 @@ service cloud.firestore {
     
     // System owner email - has full access
     function isSystemOwnerEmail() {
-      return request.auth != null && request.auth.token.email == 'clarenceflores082001@gmail.com';
+      return request.auth != null && 
+             request.auth.token.email != null &&
+             request.auth.token.email.lower() == 'clarenceflores082001@gmail.com';
     }
     
     // Helper functions
@@ -26,16 +28,23 @@ service cloud.firestore {
       return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
     }
     
+    // Safe version that doesn't fail if user doc doesn't exist
+    function getUserRole() {
+      return isAuthenticated() && exists(/databases/$(database)/documents/users/$(request.auth.uid)) 
+        ? getUserData().role 
+        : null;
+    }
+    
     function isSystemOwner() {
-      return isSystemOwnerEmail() || (isAuthenticated() && exists(/databases/$(database)/documents/users/$(request.auth.uid)) && getUserData().role == 'system_owner');
+      return isSystemOwnerEmail() || getUserRole() == 'system_owner';
     }
     
     function isHrClient() {
-      return isAuthenticated() && exists(/databases/$(database)/documents/users/$(request.auth.uid)) && getUserData().role == 'hr_client';
+      return getUserRole() == 'hr_client';
     }
     
     function isEmployee() {
-      return isAuthenticated() && exists(/databases/$(database)/documents/users/$(request.auth.uid)) && getUserData().role == 'employee';
+      return getUserRole() == 'employee';
     }
     
     // Check if user belongs to a specific company
@@ -55,7 +64,7 @@ service cloud.firestore {
     
     // Check if it's the user's own employee record
     function isOwnEmployeeRecord(employeeId) {
-      return getUserData().employeeId == employeeId;
+      return isAuthenticated() && exists(/databases/$(database)/documents/users/$(request.auth.uid)) && getUserData().employeeId == employeeId;
     }
 
     // ============================================

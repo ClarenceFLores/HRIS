@@ -3,11 +3,25 @@
  * © 2026 DevSpot. All rights reserved.
  *
  * Central HR data store — employees, attendance, leaves, payroll.
- * Persisted to localStorage under 'sahod-hr'.
+ * Persisted to localStorage AND synced to Firestore.
  */
 
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { 
+  collection, 
+  doc, 
+  setDoc, 
+  addDoc, 
+  updateDoc, 
+  deleteDoc, 
+  getDocs, 
+  query, 
+  where,
+  onSnapshot 
+} from 'firebase/firestore';
+import { db } from '../lib/firebase/config';
+import { useAuthStore } from './useAuthStore';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -311,6 +325,12 @@ interface HRState {
   runPayroll: (periodId: string) => void;
   addPayrollPeriod: (p: Omit<HRPayrollPeriod, 'id'>) => void;
 
+  // Firestore sync actions
+  syncToFirestore: () => Promise<void>;
+  loadFromFirestore: () => Promise<void>;
+  enableAutoSync: () => void;
+  disableAutoSync: () => void;
+
   // Computed helpers
   getDashboardStats: () => {
     totalEmployees: number;
@@ -389,6 +409,11 @@ export const useHRStore = create<HRState>()(
           netPay: Math.round(grossPay - totalDeductions),
         };
         set((s) => ({ payrollRecords: [...s.payrollRecords, rec] }));
+        
+        // Auto-sync to Firestore
+        get().syncToFirestore().catch(err => 
+          console.warn('Failed to auto-sync new employee to Firestore:', err)
+        );
       },
 
       updateEmployee: (id, data) => {
@@ -429,12 +454,22 @@ export const useHRStore = create<HRState>()(
             };
           }),
         }));
+        
+        // Auto-sync to Firestore
+        get().syncToFirestore().catch(err => 
+          console.warn('Failed to auto-sync employee update to Firestore:', err)
+        );
       },
 
       deleteEmployee: (id) => {
         set((s) => ({
           employees: s.employees.map(e => e.id === id ? { ...e, status: 'inactive' as const } : e),
         }));
+        
+        // Auto-sync to Firestore
+        get().syncToFirestore().catch(err => 
+          console.warn('Failed to auto-sync employee deletion to Firestore:', err)
+        );
       },
 
       getEmployee: (id) => get().employees.find(e => e.id === id),
@@ -447,6 +482,11 @@ export const useHRStore = create<HRState>()(
 
       markAttendance: (id, update) => {
         set((s) => ({ attendance: s.attendance.map(a => a.id === id ? { ...a, ...update } : a) }));
+        
+        // Auto-sync to Firestore
+        get().syncToFirestore().catch(err => 
+          console.warn('Failed to auto-sync attendance to Firestore:', err)
+        );
       },
 
       // ── Leave ───────────────────────────────────────────────
@@ -454,6 +494,11 @@ export const useHRStore = create<HRState>()(
       addLeaveRequest: (req) => {
         const newReq: HRLeaveRequest = { ...req, id: `L${genId()}` };
         set((s) => ({ leaveRequests: [newReq, ...s.leaveRequests] }));
+        
+        // Auto-sync to Firestore
+        get().syncToFirestore().catch(err => 
+          console.warn('Failed to auto-sync leave request to Firestore:', err)
+        );
       },
 
       approveLeave: (id) => {
@@ -462,6 +507,11 @@ export const useHRStore = create<HRState>()(
             r.id === id ? { ...r, status: 'approved' as const } : r
           ),
         }));
+        
+        // Auto-sync to Firestore
+        get().syncToFirestore().catch(err => 
+          console.warn('Failed to auto-sync leave approval to Firestore:', err)
+        );
       },
 
       rejectLeave: (id, reason) => {
@@ -470,6 +520,11 @@ export const useHRStore = create<HRState>()(
             r.id === id ? { ...r, status: 'rejected' as const, rejectionReason: reason } : r
           ),
         }));
+        
+        // Auto-sync to Firestore
+        get().syncToFirestore().catch(err => 
+          console.warn('Failed to auto-sync leave rejection to Firestore:', err)
+        );
       },
 
       // ── Payroll ─────────────────────────────────────────────
@@ -477,6 +532,11 @@ export const useHRStore = create<HRState>()(
       addPayrollPeriod: (p) => {
         const period: HRPayrollPeriod = { ...p, id: `PP-${genId()}` };
         set((s) => ({ payrollPeriods: [period, ...s.payrollPeriods] }));
+        
+        // Auto-sync to Firestore
+        get().syncToFirestore().catch(err => 
+          console.warn('Failed to auto-sync payroll period to Firestore:', err)
+        );
       },
 
       runPayroll: (periodId) => {
@@ -530,6 +590,124 @@ export const useHRStore = create<HRState>()(
               : p
           ),
         }));
+        
+        // Auto-sync to Firestore
+        get().syncToFirestore().catch(err => 
+          console.warn('Failed to auto-sync payroll run to Firestore:', err)
+        );
+      },
+
+      // ── Firestore Sync ──────────────────────────────────────
+
+      syncToFirestore: async () => {
+        const { user } = useAuthStore.getState();
+        if (!user?.companyId) {
+          console.warn('⚠️ Cannot sync to Firestore: No company ID');
+          return;
+        }
+
+        const { employees, attendance, leaveRequests, payrollPeriods, payrollRecords } = get();
+        const companyId = user.companyId;
+
+        try {
+          console.log('🔄 Syncing HR data to Firestore...');
+
+          // Sync employees
+          for (const emp of employees) {
+            await setDoc(doc(db, `companies/${companyId}/employees`, emp.id), {
+              ...emp,
+              updatedAt: new Date(),
+            });
+          }
+
+          // Sync attendance
+          for (const att of attendance) {
+            await setDoc(doc(db, `companies/${companyId}/attendance`, att.id), {
+              ...att,
+              updatedAt: new Date(),
+            });
+          }
+
+          // Sync leave requests
+          for (const leave of leaveRequests) {
+            await setDoc(doc(db, `companies/${companyId}/leaves`, leave.id), {
+              ...leave,
+              updatedAt: new Date(),
+            });
+          }
+
+          // Sync payroll
+          for (const payroll of payrollRecords) {
+            await setDoc(doc(db, `companies/${companyId}/payroll`, payroll.id), {
+              ...payroll,
+              updatedAt: new Date(),
+            });
+          }
+
+          console.log('✅ HR data synced to Firestore successfully');
+        } catch (error) {
+          console.error('❌ Failed to sync HR data to Firestore:', error);
+        }
+      },
+
+      loadFromFirestore: async () => {
+        const { user } = useAuthStore.getState();
+        if (!user?.companyId) {
+          console.warn('⚠️ Cannot load from Firestore: No company ID');
+          return;
+        }
+
+        try {
+          console.log('🔄 Loading HR data from Firestore...');
+          const companyId = user.companyId;
+
+          // Load employees
+          const employeesSnapshot = await getDocs(collection(db, `companies/${companyId}/employees`));
+          const employees: HREmployee[] = [];
+          employeesSnapshot.forEach(doc => employees.push(doc.data() as HREmployee));
+
+          // Load attendance
+          const attendanceSnapshot = await getDocs(collection(db, `companies/${companyId}/attendance`));
+          const attendance: HRAttendance[] = [];
+          attendanceSnapshot.forEach(doc => attendance.push(doc.data() as HRAttendance));
+
+          // Load leave requests
+          const leavesSnapshot = await getDocs(collection(db, `companies/${companyId}/leaves`));
+          const leaveRequests: HRLeaveRequest[] = [];
+          leavesSnapshot.forEach(doc => leaveRequests.push(doc.data() as HRLeaveRequest));
+
+          // Load payroll
+          const payrollSnapshot = await getDocs(collection(db, `companies/${companyId}/payroll`));
+          const payrollRecords: HRPayrollRecord[] = [];
+          payrollSnapshot.forEach(doc => payrollRecords.push(doc.data() as HRPayrollRecord));
+
+          // Update state
+          set({
+            employees: employees.length > 0 ? employees : get().employees,
+            attendance: attendance.length > 0 ? attendance : get().attendance,
+            leaveRequests: leaveRequests.length > 0 ? leaveRequests : get().leaveRequests,
+            payrollRecords: payrollRecords.length > 0 ? payrollRecords : get().payrollRecords,
+          });
+
+          console.log('✅ HR data loaded from Firestore:', {
+            employees: employees.length,
+            attendance: attendance.length,
+            leaves: leaveRequests.length,
+            payroll: payrollRecords.length,
+          });
+        } catch (error) {
+          console.error('❌ Failed to load HR data from Firestore:', error);
+        }
+      },
+
+      enableAutoSync: () => {
+        // TODO: Implement real-time sync with onSnapshot
+        console.log('🔄 Auto-sync enabled (placeholder)');
+      },
+
+      disableAutoSync: () => {
+        // TODO: Implement cleanup of listeners
+        console.log('⏹️ Auto-sync disabled (placeholder)');
       },
 
       // ── Dashboard ───────────────────────────────────────────

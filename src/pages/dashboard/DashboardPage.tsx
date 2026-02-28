@@ -8,7 +8,7 @@ import {
   Users, Clock, Calendar, Wallet, TrendingUp, TrendingDown, ArrowRight, 
   Plus, CheckCircle, XCircle, UserPlus, ClipboardList, Banknote,
   AlertTriangle, BarChart3, Activity, Sparkles, CalendarCheck, FileText,
-  UserX, Building2, PieChart, UserCheck
+  UserX, Building2, PieChart, UserCheck, Database
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAuthStore } from '@/stores/useAuthStore';
@@ -122,7 +122,7 @@ const formatDate = (dateStr: string) => {
 
 export function DashboardPage() {
   const { user } = useAuthStore();
-  const { getDashboardStats, employees, leaveRequests, attendance, payrollPeriods, approveLeave, rejectLeave } = useHRStore();
+  const { getDashboardStats, employees, leaveRequests, attendance, payrollPeriods, approveLeave, rejectLeave, syncToFirestore } = useHRStore();
   const liveStats = getDashboardStats();
   const today = new Date().toISOString().split('T')[0];
 
@@ -185,6 +185,26 @@ export function DashboardPage() {
 
   const [mounted, setMounted] = useState(false);
   const [greeting, setGreeting] = useState('');
+  const [syncing, setSyncing] = useState(false);
+
+  // Handle manual sync to Firestore
+  const handleSyncToDatabase = async () => {
+    if (!user?.companyId) {
+      alert('Cannot sync: No company ID found');
+      return;
+    }
+    
+    setSyncing(true);
+    try {
+      await syncToFirestore();
+      alert('✅ Data synced to database successfully!');
+    } catch (error) {
+      console.error('Sync error:', error);
+      alert('❌ Failed to sync data to database');
+    } finally {
+      setSyncing(false);
+    }
+  };
 
   useEffect(() => {
     setMounted(true);
@@ -219,6 +239,14 @@ export function DashboardPage() {
           </p>
         </div>
         <div className="flex gap-3">
+          <button 
+            onClick={handleSyncToDatabase}
+            disabled={syncing}
+            className="btn btn-secondary shadow-lg shadow-secondary-500/25 hover:shadow-xl hover:shadow-secondary-500/30 hover:-translate-y-0.5 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <Database size={18} />
+            {syncing ? 'Syncing...' : 'Sync to Database'}
+          </button>
           <Link 
             to="/app/employees/new" 
             className="btn btn-primary shadow-lg shadow-primary-500/25 hover:shadow-xl hover:shadow-primary-500/30 hover:-translate-y-0.5 transition-all"
@@ -618,19 +646,19 @@ export function DashboardPage() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           <div className="text-center p-4 bg-neutral-50 dark:bg-slate-800 rounded-xl">
             <p className="text-3xl font-bold text-emerald-600 dark:text-emerald-400">98%</p>
-            <p className="text-sm text-neutral-600 dark:text-slate-400 dark:text-slate-300 mt-1">Avg. Attendance</p>
+            <p className="text-sm text-neutral-600 dark:text-slate-300 mt-1">Avg. Attendance</p>
           </div>
           <div className="text-center p-4 bg-neutral-50 dark:bg-slate-800 rounded-xl">
             <p className="text-3xl font-bold text-blue-600 dark:text-blue-400">12</p>
-            <p className="text-sm text-neutral-600 dark:text-slate-400 dark:text-slate-300 mt-1">New Hires</p>
+            <p className="text-sm text-neutral-600 dark:text-slate-300 mt-1">New Hires</p>
           </div>
           <div className="text-center p-4 bg-neutral-50 dark:bg-slate-800 rounded-xl">
             <p className="text-3xl font-bold text-amber-600 dark:text-amber-400">45</p>
-            <p className="text-sm text-neutral-600 dark:text-slate-400 dark:text-slate-300 mt-1">Leaves Approved</p>
+            <p className="text-sm text-neutral-600 dark:text-slate-300 mt-1">Leaves Approved</p>
           </div>
           <div className="text-center p-4 bg-neutral-50 dark:bg-slate-800 rounded-xl">
             <p className="text-3xl font-bold text-purple-600 dark:text-purple-400">₱2.4M</p>
-            <p className="text-sm text-neutral-600 dark:text-slate-400 dark:text-slate-300 mt-1">Total Payroll</p>
+            <p className="text-sm text-neutral-600 dark:text-slate-300 mt-1">Total Payroll</p>
           </div>
         </div>
       </div>

@@ -6,8 +6,7 @@
 import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuthStore } from '@/stores/useAuthStore';
-import { useRegistrationsStore } from '@/stores/useRegistrationsStore';
-import { MainLayout } from '@/components/layout/MainLayout';
+import { useRegistrationsStore } from '@/stores/useRegistrationsStore';import { useHRStore } from './stores/useHRStore';import { MainLayout } from '@/components/layout/MainLayout';
 import { ToastProvider } from '@/components/common/Toast';
 import { LandingPage } from '@/pages/LandingPage';
 import { LoginPage } from '@/pages/auth/LoginPage';
@@ -76,7 +75,9 @@ function RoleBasedDashboardRedirect() {
 
 function App() {
   const { user, initAuthListener } = useAuthStore();
+  const loadHrUsers = useRegistrationsStore((state) => state.loadHrUsers);
   const loadFromFirestore = useRegistrationsStore((state) => state.loadFromFirestore);
+  const loadHRData = useHRStore((state) => state.loadFromFirestore);
 
   // Initialize Firebase auth listener and handle Remember Me session guard
   useEffect(() => {
@@ -100,21 +101,37 @@ function App() {
   }, [initAuthListener]);
 
   // Load HR users from Firestore on app startup so they can log in
-  // This runs once on app initialization, regardless of auth state
+  // This only reads the publicly-readable hrUsers collection
   useEffect(() => {
-    loadFromFirestore().catch(err => {
-      console.warn('Could not load Firestore data on startup:', err);
+    loadHrUsers().catch(err => {
+      console.warn('Could not load HR users on startup:', err);
     });
-  }, [loadFromFirestore]);
+  }, [loadHrUsers]);
 
   // Refresh Firestore data when system owner logs in for latest registrations
   useEffect(() => {
-    if (user?.role === 'system_owner') {
-      loadFromFirestore().catch(err => {
-        console.warn('Could not refresh Firestore data:', err);
-      });
+    if (user?.role === 'system_owner' && user?.email === 'clarenceflores082001@gmail.com') {
+      // Add a small delay to ensure Firebase auth token is fully propagated
+      const timer = setTimeout(() => {
+        loadFromFirestore().catch(err => {
+          console.warn('Could not refresh Firestore data:', err);
+        });
+      }, 1000);
+      return () => clearTimeout(timer);
     }
-  }, [user?.role, loadFromFirestore]);
+  }, [user?.role, user?.email, loadFromFirestore]);
+
+  // Load HR data when HR client logs in
+  useEffect(() => {
+    if (user?.role === 'hr_client' && user?.companyId) {
+      const timer = setTimeout(() => {
+        loadHRData().catch(err => {
+          console.warn('Could not load HR data from Firestore:', err);
+        });
+      }, 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [user?.role, user?.companyId, loadHRData]);
 
   return (
     <ToastProvider>
