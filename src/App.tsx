@@ -29,6 +29,10 @@ import { SubscriptionsPage } from '@/pages/system-owner/SubscriptionsPage';
 import { SystemConfigPage } from '@/pages/system-owner/SystemConfigPage';
 import { AnalyticsPage } from '@/pages/system-owner/AnalyticsPage';
 
+// Admin pages
+import { UserRegistrationPage } from '@/pages/admin/UserRegistrationPage';
+import { OwnerRegistrationPage } from '@/pages/admin/OwnerRegistrationPage';
+
 // Role Guards
 import {
   EmployeeManagementGuard,
@@ -117,6 +121,14 @@ function App() {
       clearTimeout(timer);
     };
   }, [initAuthListener]);
+
+  // Enable auto-sync for authenticated users after auth initialization
+  useEffect(() => {
+    if (authInitialized && user?.role === 'hr_client' && user.companyId) {
+      // Enable real-time sync for HR users with company data
+      useHRStore.getState().enableAutoSync();
+    }
+  }, [authInitialized, user?.role, user?.companyId]);
 
   // Load HR users from Firestore ONLY when authentication is initialized
   // This ensures we have valid auth state before accessing Firestore
@@ -219,6 +231,10 @@ function App() {
           <Route path="subscriptions" element={<SystemOwnerGuard><SubscriptionsPage /></SystemOwnerGuard>} />
           <Route path="system-config" element={<SystemOwnerGuard><SystemConfigPage /></SystemOwnerGuard>} />
           <Route path="platform-analytics" element={<SystemOwnerGuard><AnalyticsPage /></SystemOwnerGuard>} />
+          
+          {/* Admin Registration Routes - System Owner Only */}
+          <Route path="admin/register-user" element={<SystemOwnerGuard><UserRegistrationPage /></SystemOwnerGuard>} />
+          <Route path="admin/register-owner" element={<SystemOwnerGuard><OwnerRegistrationPage /></SystemOwnerGuard>} />
         </Route>
         
         {/* Redirect old routes to new /app prefix */}

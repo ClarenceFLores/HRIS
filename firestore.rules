@@ -2,9 +2,39 @@ rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
-    // TEMPORARILY COMPLETELY OPEN FOR DEBUGGING
+    // Allow public registration - anyone can create pending registrations
+    match /pendingRegistrations/{registrationId} {
+      allow create: if true;
+      allow read, write: if request.auth != null;
+    }
+    
+    // HR Users and system data require authentication
+    match /hrUsers/{email} {
+      allow read, write: if request.auth != null;
+    }
+    
+    // Companies data require authentication
+    match /companies/{companyId} {
+      allow read, write: if request.auth != null;
+    }
+    
+    // Regular users collection - for employee/user management
+    match /users/{userId} {
+      allow create: if request.auth != null;
+      allow read, update, delete: if request.auth != null && 
+        (request.auth.uid == userId || 
+         request.auth.token.email == 'clarenceflores082001@gmail.com');
+    }
+
+    // Business owners collection - system owner only
+    match /owners/{ownerId} {
+      allow create, read, update, delete: if request.auth != null && 
+        request.auth.token.email == 'clarenceflores082001@gmail.com';
+    }
+    
+    // All other documents require authentication
     match /{document=**} {
-      allow read, write: if true;
+      allow read, write: if request.auth != null;
     }
   }
 }

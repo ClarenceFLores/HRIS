@@ -18,7 +18,8 @@ import {
   getDocs, 
   query, 
   where,
-  onSnapshot 
+  onSnapshot,
+  Unsubscribe
 } from 'firebase/firestore';
 import { db } from '../lib/firebase/config';
 import { useAuthStore } from './useAuthStore';
@@ -306,6 +307,11 @@ interface HRState {
   payrollPeriods: HRPayrollPeriod[];
   payrollRecords: HRPayrollRecord[];
 
+  // Real-time sync
+  syncListeners: Unsubscribe[];
+  isAutoSyncEnabled: boolean;
+  lastSyncTime: string | null;
+
   // Employee actions
   addEmployee: (data: Omit<HREmployee, 'id' | 'employeeNumber' | 'createdAt' | 'status'>) => void;
   updateEmployee: (id: string, data: Partial<HREmployee>) => void;
@@ -327,9 +333,11 @@ interface HRState {
 
   // Firestore sync actions
   syncToFirestore: () => Promise<void>;
-  loadFromFirestore: () => Promise<void>;
+  loadFromFirestore: () => Promise<void>;  
   enableAutoSync: () => void;
   disableAutoSync: () => void;
+  setupRealtimeSync: (companyId: string) => void;
+  cleanupRealtimeSync: () => void;
 
   // Computed helpers
   getDashboardStats: () => {
@@ -356,6 +364,11 @@ export const useHRStore = create<HRState>()(
       payrollPeriods: seedPeriods,
       payrollRecords: seedRecords,
       _seeded: true,
+      
+      // Real-time sync state
+      syncListeners: [],
+      isAutoSyncEnabled: false,
+      lastSyncTime: null,
 
       // ── Employee ────────────────────────────────────────────
 
@@ -754,13 +767,132 @@ export const useHRStore = create<HRState>()(
       },
 
       enableAutoSync: () => {
-        // TODO: Implement real-time sync with onSnapshot
-        console.log('🔄 Auto-sync enabled (placeholder)');
+        const { user } = useAuthStore.getState();
+        if (!user?.companyId) {
+          console.warn('⚠️ Cannot enable auto-sync: No company ID');
+          return;
+        }
+        
+        console.log('🔄 Enabling real-time sync for company:', user.companyId);
+        get().disableAutoSync(); // Clean up any existing listeners
+        get().setupRealtimeSync(user.companyId);
+        set({ isAutoSyncEnabled: true });
       },
 
       disableAutoSync: () => {
-        // TODO: Implement cleanup of listeners
-        console.log('⏹️ Auto-sync disabled (placeholder)');
+        console.log('⏹️ Disabling real-time sync');
+        get().cleanupRealtimeSync();
+        set({ isAutoSyncEnabled: false });
+      },
+      
+      setupRealtimeSync: (companyId: string) => {
+        const listeners: Unsubscribe[] = [];
+        
+        try {
+          // Employee sync
+          const employeeListener = onSnapshot(
+            collection(db, `companies/${companyId}/employees`),
+            (snapshot) => {
+              const employees: HREmployee[] = [];
+              snapshot.forEach(doc => {
+                const data = doc.data() as HREmployee;
+                employees.push({ ...data, id: doc.id });
+              });
+              set({ 
+                employees,
+                lastSyncTime: new Date().toISOString()
+              });
+              console.log('👥 Synced employees:', employees.length);
+            },
+            (error) => {
+              console.error('❌ Employee sync error:', error);
+            }
+          );
+          listeners.push(employeeListener);
+          
+          // Attendance sync
+          const attendanceListener = onSnapshot(
+            collection(db, `companies/${companyId}/attendance`),
+            (snapshot) => {
+              const attendance: HRAttendance[] = [];
+              snapshot.forEach(doc => {
+                const data = doc.data() as HRAttendance;
+                attendance.push({ ...data, id: doc.id });
+              });
+              set({ 
+                attendance,
+                lastSyncTime: new Date().toISOString()
+              });
+              console.log('🗓️ Synced attendance:', attendance.length);
+            },
+            (error) => {
+              console.error('❌ Attendance sync error:', error);
+            }
+          );
+          listeners.push(attendanceListener);
+          
+          // Leave requests sync
+          const leavesListener = onSnapshot(
+            collection(db, `companies/${companyId}/leaves`),
+            (snapshot) => {
+              const leaveRequests: HRLeaveRequest[] = [];
+              snapshot.forEach(doc => {
+                const data = doc.data() as HRLeaveRequest;
+                leaveRequests.push({ ...data, id: doc.id });
+              });
+              set({ 
+                leaveRequests,
+                lastSyncTime: new Date().toISOString()
+              });
+              console.log('🏖️ Synced leave requests:', leaveRequests.length);
+            },
+            (error) => {
+              console.error('❌ Leave requests sync error:', error);
+            }
+          );
+          listeners.push(leavesListener);
+          
+          // Payroll sync
+          const payrollListener = onSnapshot(
+            collection(db, `companies/${companyId}/payroll`),
+            (snapshot) => {
+              const payrollRecords: HRPayrollRecord[] = [];
+              snapshot.forEach(doc => {
+                const data = doc.data() as HRPayrollRecord;
+                payrollRecords.push({ ...data, id: doc.id });
+              });
+              set({ 
+                payrollRecords,
+                lastSyncTime: new Date().toISOString()
+              });
+              console.log('💰 Synced payroll records:', payrollRecords.length);
+            },
+            (error) => {
+              console.error('❌ Payroll sync error:', error);
+            }
+          );
+          listeners.push(payrollListener);
+          
+          // Store all listeners for cleanup
+          set({ syncListeners: listeners });
+          console.log('🎧 Real-time sync listeners established:', listeners.length);
+          
+        } catch (error) {
+          console.error('❌ Failed to setup real-time sync:', error);
+        }
+      },
+      
+      cleanupRealtimeSync: () => {
+        const { syncListeners } = get();
+        syncListeners.forEach(unsubscribe => {
+          try {
+            unsubscribe();
+          } catch (error) {
+            console.error('❌ Error unsubscribing from sync listener:', error);
+          }
+        });
+        set({ syncListeners: [] });
+        console.log('🧹 Cleaned up real-time sync listeners');
       },
 
       // ── Dashboard ───────────────────────────────────────────

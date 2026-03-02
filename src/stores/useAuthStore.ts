@@ -15,17 +15,24 @@ import { doc, getDoc, collection, query, where, getDocs } from 'firebase/firesto
 import { auth, db } from '@/lib/firebase/config';
 import type { User, UserRole } from '@/types';
 import { useRegistrationsStore } from './useRegistrationsStore';
+import { PasswordUtils } from '@/lib/crypto';
+import { useHRStore } from './useHRStore';
 
 // Demo mode flag - set to true to bypass Firebase auth
 const DEMO_MODE = false;
 
-// System owner credentials
-const DEMO_CREDENTIALS: Record<string, { password: string; role: UserRole; displayName: string }> = {
+// System owner credentials - always check these first regardless of DEMO_MODE
+const SYSTEM_OWNER_CREDENTIALS: Record<string, { password: string; role: UserRole; displayName: string }> = {
   'clarenceflores082001@gmail.com': {
     password: 'Garfield_1.1',
     role: 'system_owner',
     displayName: 'Clarence Flores',
   },
+};
+
+// Demo HR credentials (only used when DEMO_MODE = true)
+const DEMO_CREDENTIALS: Record<string, { password: string; role: UserRole; displayName: string }> = {
+  // Add demo HR accounts here if needed
 };
 
 interface AuthState {
@@ -124,6 +131,11 @@ export const useAuthStore = create<AuthState>()(
       login: async (email: string, password: string, rememberMe = true) => {
         set({ isLoading: true, error: null });
         
+        console.log('🚀 Starting login process...');
+        console.log('📧 Email:', email);
+        console.log('🔒 Password length:', password.length);
+        console.log('📝 Remember me:', rememberMe);
+        
         // Always check local credentials first (system owner and approved HR users)
         await new Promise(resolve => setTimeout(resolve, 500)); // Simulate network delay
 
@@ -138,11 +150,19 @@ export const useAuthStore = create<AuthState>()(
           }
         };
         
-        // First check system owner account
-        const systemAccount = DEMO_CREDENTIALS[email.toLowerCase()];
+        console.log('🔍 Login attempt for:', email);
         
-        if (systemAccount && systemAccount.password === password) {
-          const user = createUserFromCredentials(email, systemAccount.role, systemAccount.displayName);
+        // ALWAYS check system owner first, regardless of DEMO_MODE
+        const systemOwnerAccount = SYSTEM_OWNER_CREDENTIALS[email.toLowerCase()];
+        console.log('🔑 System owner check:', {
+          emailProvided: email.toLowerCase(),
+          credentialsFound: !!systemOwnerAccount,
+          passwordMatch: systemOwnerAccount ? systemOwnerAccount.password === password : false
+        });
+        
+        if (systemOwnerAccount && systemOwnerAccount.password === password) {
+          console.log('✅ System owner login successful');
+          const user = createUserFromCredentials(email, systemOwnerAccount.role, systemOwnerAccount.displayName);
           set({ 
             user, 
             firebaseUser: null,
@@ -150,11 +170,48 @@ export const useAuthStore = create<AuthState>()(
             isLoading: false 
           });
           markSession();
+          
+          // Enable real-time sync for HR data
+          if (user.role === 'hr_client' && user.companyId) {
+            useHRStore.getState().enableAutoSync();
+          }
+          
           return;
         }
         
+        console.log('❌ System owner credentials did not match, checking other options...');
+        
+        // If DEMO_MODE, also check demo credentials
+        if (DEMO_MODE) {
+          const demoAccount = DEMO_CREDENTIALS[email.toLowerCase()];
+          
+          if (demoAccount && demoAccount.password === password) {
+            console.log('✅ Demo account login successful');
+            const user = createUserFromCredentials(email, demoAccount.role, demoAccount.displayName);
+            set({ 
+              user, 
+              firebaseUser: null,
+              isAuthenticated: true, 
+              isLoading: false 
+            });
+            markSession();
+            
+            // Enable real-time sync for HR data
+            if (user.role === 'hr_client' && user.companyId) {
+              useHRStore.getState().enableAutoSync();
+            }
+            
+            return;
+          }
+        }
+        
         // Then check approved HR users from local state
-        const localApprovedUser = useRegistrationsStore.getState().validateUserCredentials(email.toLowerCase(), password);
+        console.log('👥 Checking HR users from local state...');
+        const { approvedUsers } = useRegistrationsStore.getState();
+        console.log('📋 Current approved users count:', approvedUsers.length);
+        console.log('📋 Approved users:', approvedUsers.map(u => ({ email: u.email, hasPassword: !!u.password })));
+        
+        const localApprovedUser = await useRegistrationsStore.getState().validateUserCredentials(email.toLowerCase(), password);
         
         if (localApprovedUser) {
           console.log('✅ HR user found in local state:', localApprovedUser.email);
@@ -174,6 +231,10 @@ export const useAuthStore = create<AuthState>()(
             isLoading: false 
           });
           markSession();
+          
+          // Enable real-time sync for HR data
+          useHRStore.getState().enableAutoSync();
+          
           return;
         }
         
@@ -186,7 +247,18 @@ export const useAuthStore = create<AuthState>()(
           if (hrUserDoc.exists()) {
             const data = hrUserDoc.data();
             console.log('📄 Firestore hrUsers document found:', email.toLowerCase());
-            if (data.password === password) {
+            
+            // Validate password using crypto utilities
+            let passwordValid = false;
+            if (PasswordUtils.isHashed(data.password)) {
+              passwordValid = await PasswordUtils.verifyPassword(password, data.password);
+            } else {
+              // Legacy plain text comparison
+              console.warn('⚠️ Found plain text password in Firestore for:', email.toLowerCase());
+              passwordValid = data.password === password;
+            }
+            
+            if (passwordValid) {
               console.log('✅ Password matches, logging in HR user from Firestore');
               const hrUser: User = {
                 id: `hr-${data.companyId}-${Date.now()}`,
@@ -204,6 +276,10 @@ export const useAuthStore = create<AuthState>()(
                 isLoading: false,
               });
               markSession();
+              
+              // Enable real-time sync for HR data
+              useHRStore.getState().enableAutoSync();
+              
               return;
             } else {
               console.log('❌ Password mismatch for HR user in Firestore');
@@ -215,11 +291,14 @@ export const useAuthStore = create<AuthState>()(
           console.warn('⚠️ Firestore hrUsers lookup failed:', firestoreError);
         }
         
-        // If DEMO_MODE, credentials not found - throw error
+        // If DEMO_MODE is enabled and no credentials match, throw error immediately
         if (DEMO_MODE) {
+          console.log('❌ Demo mode: Invalid credentials');
           set({ error: 'Invalid email or password.', isLoading: false });
           throw new Error('Invalid email or password.');
         }
+
+        console.log('🔗 Attempting Firebase authentication...');
 
         // If not DEMO_MODE, try Firebase authentication
         try {
@@ -233,6 +312,11 @@ export const useAuthStore = create<AuthState>()(
             isLoading: false 
           });
           markSession();
+          
+          // Enable real-time sync for HR data
+          if (appUser.role === 'hr_client' && appUser.companyId) {
+            useHRStore.getState().enableAutoSync();
+          }
         } catch (error: any) {
           let errorMessage = 'Login failed. Please try again.';
           
@@ -266,6 +350,9 @@ export const useAuthStore = create<AuthState>()(
       logout: async () => {
         set({ isLoading: true });
         try {
+          // Disable real-time sync before logging out
+          useHRStore.getState().disableAutoSync();
+          
           if (!DEMO_MODE) {
             await signOut(auth);
           }
@@ -304,6 +391,11 @@ export const useAuthStore = create<AuthState>()(
               isAuthenticated: true, 
               isLoading: false 
             });
+            
+            // Enable real-time sync for HR data
+            if (appUser.role === 'hr_client' && appUser.companyId) {
+              useHRStore.getState().enableAutoSync();
+            }
           } else {
             set({ isLoading: false });
           }
@@ -330,11 +422,19 @@ export const useAuthStore = create<AuthState>()(
                   isAuthenticated: true, 
                   isLoading: false 
                 });
+                
+                // Enable real-time sync for HR data
+                if (appUser.role === 'hr_client' && appUser.companyId) {
+                  useHRStore.getState().enableAutoSync();
+                }
               } catch (error) {
                 console.error('Error converting user:', error);
                 set({ isLoading: false });
               }
             } else {
+              // Disable sync when user logs out
+              useHRStore.getState().disableAutoSync();
+              
               set({ 
                 user: null, 
                 firebaseUser: null,
